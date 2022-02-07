@@ -1,0 +1,4 @@
+flask
+Flask-Markdown
+
+# git+git://github.com/kakawait/pygments-darcula@master # Source for highlight.css

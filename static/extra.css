@@ -1,0 +1,28 @@
+body, .button {
+    transition-duration: 0.3s;
+    transition-property: color, background, border-color;
+}
+
+.button {
+    transition: background 0.2s;
+}
+
+.button:hover:not(.slider) {
+    background: var(--hover);
+}
+
+.button:active:not(.slider) {
+    background: var(--active);
+}
+
+.slider {
+    transition: background 0.4s;
+}
+
+.slider:after {
+    transition: left 0.4s, background 0.2s;
+}
+
+.slider:hover:after {
+    background: var(--slider-hover);
+}

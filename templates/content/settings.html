@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} Settings {% endblock %}
+
+
+{% block content %}
+
+<div class="theme-panel">
+    {% for theme in THEME_NAMES %}
+    <div class="{{ theme }}">
+        {% for type in THEME_TYPES[::-1] %}
+        {{ m.set_theme_button(theme, type) }}
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+<span class="switch-block"> {{ m.switch("use_js") }} 
+    Javascript <br>
+    (when this option is disabled, all buttons turn into links
+    and reload the page with the functionality preserved).
+</span>
+
+<span class="switch-block"> {{ m.switch("use_hl") }} 
+    Code highlighting.
+</span>
+
+<span class="switch-block"> {{ m.switch("fonts") }}
+    External fonts <br>
+    (Connects fonts from third-party resources instead of standard browser fonts).
+</span>
+
+<span class="switch-block"> {{ m.switch("extra_css") }}
+    Extra CSS animations <br>
+    (Connects an additional stylesheet with animations).
+</span>
+
+<div class="centered">
+    {{ m.link_button("Apply changes (reloads the page)", "/settings") }}
+</div>
+
+{% endblock %}

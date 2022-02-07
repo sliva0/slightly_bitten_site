@@ -1,0 +1,1 @@
+ssh ubuntu@132.145.63.203 -i "D:\secured\oracle_private.key"

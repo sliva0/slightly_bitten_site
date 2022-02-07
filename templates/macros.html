@@ -1,0 +1,94 @@
+{% macro link_button(name, link) -%}
+<a class="button" href="{{ link }}">{{ name }}</a>
+{%- endmacro %}
+
+
+
+{% macro highlight(language=None) -%}
+{% set content = caller() %}
+
+{% if g.use_hl %}
+<div class="highlight-block">
+    <pre>{{ get_linenos(content) }}</pre>
+    <div class="highlight">
+        <pre>{{ highlight_code(content, language) }}</pre>
+    </div>
+</div>
+
+{% else %}
+<pre>{{ content }}</pre>
+
+{% endif %}
+{%- endmacro %}
+
+
+
+{% macro invert_theme_button(name, link) -%}
+{% set theme_type = get_theme_type(inverted=True) %}
+{% set class = "button use-theme " + get_theme_type(inverted=True) %}
+
+{% if g.use_js %}
+<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
+{% else %}
+<a class="{{ class }}" href="{{ request.path }}?type_light={{ invert_bool(g.type_light) }}">Aa</a>
+{% endif %}
+
+{%- endmacro %}
+
+
+
+{% macro set_theme_button(theme, type) -%}
+{% set class = " ".join(("button", "use-theme", theme, type)) %}
+{% set type_light = invert_bool(type != "type-light") %}
+
+{% if g.use_js %}
+<div class="{{ class }}" onclick="setTheme('{{ theme }}', '{{ type }}')">Aa</div>
+{% else %}
+<a
+    class="{{ class }}"
+    href="{{ request.path }}?theme={{ theme }}&type_light={{ type_light }}"
+>Aa</a>
+{% endif %}
+
+{%- endmacro %}
+
+
+
+{% macro switch(option) %}
+{% set checked = "checked" if g[option] else "" %}
+
+<label class="switch">
+{% if g.use_js %}
+    <input type="checkbox" {{ checked }}
+        onchange="switchOption(event, '{{ option }}')"
+    >
+    <div class="button slider"></div>
+
+{% else %}
+    <input type="checkbox" {{ checked }}>
+    <a
+        class="button slider"
+        href="{{ request.path }}?{{ option }}={{ invert_bool(g[option]) }}"
+    ></a>
+
+{% endif %}
+</label>
+{%- endmacro %}
+
+
+
+{% macro breadcrumbs() %}
+
+<div class="breadcrumbs">
+    {% for name, link in g.bc.links %}
+        {% if not loop.last %}
+            / <a href="{{ link }}">{{ name }}</a>
+        {% elif g.bc.is_not_found %}
+            / <s>{{ name }}</s>
+        {% else %}
+            / {{ name }}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{%- endmacro %}

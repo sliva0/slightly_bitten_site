@@ -1,0 +1,166 @@
+* {
+    border-color: inherit;
+}
+
+html {
+    /* fix for gradient background */
+    min-height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 40rem;
+    font-family: "Roboto", Helvetica, sans-serif;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    padding: 0.2rem;
+    margin: 0.5rem;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+
+    display: flex;
+    align-items: center;
+}
+
+article {
+    margin: 0 1rem;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+article>p, article>pre {
+    margin: 0.5rem 0;
+}
+
+footer {
+    justify-content: space-between;
+}
+
+pre {
+    padding: 0 1rem;
+}
+
+pre, code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+}
+
+code {
+    font-size: 0.9rem;
+}
+
+a {
+    color: var(--active);
+}
+
+.use-theme, .use-theme.button {
+    /* second selector for priority over .button */
+    color: var(--fg);
+    background: var(--bg);
+    border-color: var(--border);
+}
+
+
+/* ADDITIONAL BLOCK PROPERTIES */
+
+.text-block, .button {
+    display: block;
+    margin: 0.2rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.centered {
+    /* class for dog.mp4 */
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.breadcrumbs {
+    font-size: 1.1rem;
+}
+
+
+.theme-panel {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-around;
+}
+
+
+.push-right {
+    margin-left: auto;
+}
+
+
+ /* BUTTTON CSS */
+
+.button {
+    color: inherit;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    border-width: 0.15rem;
+    border-style: solid;
+    text-decoration: none;
+
+    cursor: default;
+    user-select: none;
+}
+
+
+.switch-block {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+
+.switch {
+    margin: 0.2rem;
+    border-radius: 0.3rem;
+    font-size: 1.25rem;
+    display: inline-block;
+}
+
+.switch input {
+    display: none;
+}
+
+
+.slider {
+    background: var(--inactive);
+    display: flex;
+    padding: 0;
+    width: 2em;
+}
+
+.slider:after {
+    content: "";
+    height: 1em;
+    width: 1em;
+    border-radius: 0.3rem;
+    background: var(--slider);
+    position: relative;
+    left: 0em;
+}
+
+
+input:checked+.slider {
+    background: var(--active);
+}
+
+input:checked+.slider:after {
+    left: 1em;
+}
