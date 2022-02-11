@@ -8,7 +8,7 @@
     --slider: #444;
     --slider-hover: #555;
     --inactive: #888;
-    --active: #9df;
+    --active: #abf;
 }
 
 .theme-common .type-dark, .button.theme-common.type-dark {
@@ -28,10 +28,10 @@
     --bg: linear-gradient(hsl(220, 50%, 65%), hsl(273, 35%, 70%));
     --border: hsl(253, 29%, 30%);
     --hover: hsl(220, 43%, 60%);
-    --slider: hsl(220, 40%, 50%);
-    --slider-hover: hsl(220, 40%, 40%);
-    --inactive: hsl(220, 50%, 65%);
-    --active: hsl(273, 29%, 65%);
+    --slider: hsl(220, 40%, 60%);
+    --slider-hover: hsl(220, 70%, 60%);
+    --inactive: hsl(220, 50%, 50%);
+    --active: hsl(273, 29%, 50%);
 }
 
 .theme-plum .type-dark, .button.theme-plum.type-dark {
@@ -39,10 +39,10 @@
     --bg: linear-gradient(hsl(220, 40%, 40%), hsl(273, 25%, 40%));
     --border: hsl(253, 50%, 70%);
     --hover: hsl(220, 43%, 45%);
-    --slider: hsl(220, 30%, 70%);
-    --slider-hover: hsl(220, 50%, 70%);
-    --inactive: hsl(220, 50%, 50%);
-    --active: hsl(273, 29%, 50%);
+    --slider: hsl(220, 30%, 55%);
+    --slider-hover: hsl(220, 50%, 60%);
+    --inactive: hsl(220, 50%, 70%);
+    --active: hsl(273, 29%, 70%);
 }
 
 
@@ -54,7 +54,7 @@
     --slider: #9c7ab8;
     --slider-hover: #b59cc9;
     --inactive: #bbc4c4;
-    --active: #c3df9f;
+    --active: #5cd693;
 }
 
 .theme-darcula .type-dark, .button.theme-darcula.type-dark {

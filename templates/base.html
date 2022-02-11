@@ -23,11 +23,12 @@
     {% if g.use_js %}
     <script src="/static/script.js"></script> {% endif %}
 
+    {% block head %}{% endblock %}
 </head>
 
 <body class="use-theme {{ get_theme_type() }}">
     <header>
-        {{ m.link_button("Index", "/") }}
+        {{ m.link_button("Home", "/") }}
         {{ m.breadcrumbs() }}
         <div class="push-right"></div>
         {{ m.link_button("Settings", "/settings") }}

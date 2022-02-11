@@ -62,6 +62,11 @@ a {
     color: var(--active);
 }
 
+hr {
+    margin-inline: 0;
+    align-self: stretch;
+}
+
 .use-theme, .use-theme.button {
     /* second selector for priority over .button */
     color: var(--fg);

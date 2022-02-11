@@ -1,4 +1,6 @@
-from app import app
+import flask
 
-if __name__ == '__main__':
-    app.run(debug=False)
+from src.main import init
+
+app = flask.Flask(__name__)
+init(app)
