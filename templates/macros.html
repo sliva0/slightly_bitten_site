@@ -1,13 +1,13 @@
-{% macro link_button(name, link) -%}
+{%- macro link_button(name, link) -%}
 <a class="button" href="{{ link }}">{{ name }}</a>
-{%- endmacro %}
+{%- endmacro -%}
 
 
 
-{% macro highlight(language=None) -%}
-{% set content = caller() %}
+{%- macro highlight(language=None) -%}
+{%- set content = caller() -%}
 
-{% if g.use_hl %}
+{%- if g.use_hl -%}
 <div class="highlight-block">
     <pre>{{ get_linenos(content) }}</pre>
     <div class="highlight">
@@ -15,80 +15,106 @@
     </div>
 </div>
 
-{% else %}
+{%- else -%}
 <pre>{{ content }}</pre>
 
-{% endif %}
-{%- endmacro %}
+{%- endif -%}
+{%- endmacro -%}
 
 
 
-{% macro invert_theme_button(name, link) -%}
-{% set theme_type = get_theme_type(inverted=True) %}
-{% set class = "button use-theme " + get_theme_type(inverted=True) %}
+{%- macro invert_theme_button(name, link) -%}
+{%- set theme_type = get_theme_type(inverted=True) -%}
+{%- set class = "button use-theme " + get_theme_type(inverted=True) -%}
 
-{% if g.use_js %}
+{%- if g.use_js -%}
 <div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
-{% else %}
+{%- else -%}
 <a class="{{ class }}" href="{{ request.path }}?type_light={{ invert_bool(g.type_light) }}">Aa</a>
-{% endif %}
+{%- endif -%}
 
-{%- endmacro %}
+{%- endmacro -%}
 
 
 
-{% macro set_theme_button(theme, type) -%}
-{% set class = " ".join(("button", "use-theme", theme, type)) %}
-{% set type_light = invert_bool(type != "type-light") %}
+{%- macro set_theme_button(theme, type) -%}
+{%- set class = " ".join(("button", "use-theme", theme, type)) -%}
+{%- set type_light = invert_bool(type != "type-light") -%}
 
-{% if g.use_js %}
+{%- if g.use_js -%}
 <div class="{{ class }}" onclick="setTheme('{{ theme }}', '{{ type }}')">Aa</div>
-{% else %}
+{%- else -%}
 <a
     class="{{ class }}"
     href="{{ request.path }}?theme={{ theme }}&type_light={{ type_light }}"
 >Aa</a>
-{% endif %}
+{%- endif -%}
 
-{%- endmacro %}
+{%- endmacro -%}
 
 
 
-{% macro switch(option) %}
-{% set checked = "checked" if g[option] else "" %}
+{%- macro switch(option) -%}
+{%- set checked = "checked" if g[option] else "" -%}
 
 <label class="switch">
-{% if g.use_js %}
+{%- if g.use_js -%}
     <input type="checkbox" {{ checked }}
         onchange="switchOption(event, '{{ option }}')"
     >
     <div class="button slider"></div>
 
-{% else %}
+{%- else -%}
     <input type="checkbox" {{ checked }}>
     <a
         class="button slider"
         href="{{ request.path }}?{{ option }}={{ invert_bool(g[option]) }}"
     ></a>
 
-{% endif %}
+{%- endif -%}
 </label>
-{%- endmacro %}
+{%- endmacro -%}
 
 
 
-{% macro breadcrumbs() %}
+{%- macro breadcrumbs() -%}
 
 <div class="breadcrumbs">
-    {% for name, link in g.breadcrumbs.links %}
-        {% if not loop.last %}
+    {%- for name, link in g.breadcrumbs.links -%}
+        {%- if not loop.last -%}
             / <a href="{{ link }}">{{ name }}</a>
-        {% elif g.breadcrumbs.is_not_found %}
+        {%- elif g.breadcrumbs.is_not_found -%}
             / <s>{{ name }}</s>
-        {% else %}
+        {%- else -%}
             / {{ name }}
-        {% endif %}
-    {% endfor %}
+        {%- endif -%}
+    {%- endfor -%}
 </div>
 
-{%- endmacro %}
+{%- endmacro -%}
+
+
+
+{%- macro theme_panel() -%}
+
+<div class="theme-panel">
+    {%- for theme in THEME_NAMES -%}
+    <div class="{{ theme }}">
+        {%- for type in THEME_TYPES[::-1] -%}
+            {{ set_theme_button(theme, type) }}
+        {%- endfor -%}
+    </div>
+    {%- endfor -%}
+</div>
+
+{%- endmacro -%}
+
+
+
+{%- macro settings_option(option_name) -%}
+
+<span class="switch-block"> {{ switch(option_name) }}
+    {{ caller() }}
+</span>
+
+{%- endmacro -%}

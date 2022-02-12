@@ -1,29 +1,26 @@
-{% import 'macros.html' as m %}
+{%- import 'macros.html' as m -%}
+
+{%- macro o(option) -%}
+    id="{{ option + "-related" }}"{{ "" if g[option] else " disabled" }}
+{%- endmacro -%}
 
 <!DOCTYPE html>
 <html class="{{ g.theme }}">
 
 <head>
-    <title> sliva0.tk - {% block title %}{% endblock %} </title>
+    <title> sliva0.tk - {%- block title -%}{%- endblock -%} </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.3, minimum-scale=0.7 user-scalable=yes">
 
     <link rel="stylesheet" type="text/css" href="/static/base.css">
     <link rel="stylesheet" type="text/css" href="/static/themes.css">
     <link rel="icon" type="image/vnd.microsoft.icon" href="/static/favicon.ico" />
 
-    {% if g.fonts %}
-    <link rel="stylesheet" type="text/css" href="/static/fonts.css"> {% endif %}
+    <link {{ o('fonts') }} rel="stylesheet" type="text/css" href="/static/fonts.css">
+    <link {{ o('use_hl') }} rel="stylesheet" type="text/css" href="/static/highlight.css">
+    <link {{ o('extra_css') }} rel="stylesheet" type="text/css" href="/static/extra.css">
 
-    {% if g.use_hl %}
-    <link rel="stylesheet" type="text/css" href="/static/highlight.css"> {% endif %}
-
-    {% if g.extra_css %}
-    <link rel="stylesheet" type="text/css" href="/static/extra.css"> {% endif %}
-
-    {% if g.use_js %}
-    <script src="/static/script.js"></script> {% endif %}
-
-    {% block head %}{% endblock %}
+    {%- if g.use_js -%} <script src="/static/script.js"></script> {%- endif -%}
+    {%- block head -%}{%- endblock -%}
 </head>
 
 <body class="use-theme {{ get_theme_type() }}">
@@ -35,8 +32,8 @@
         {{ m.invert_theme_button() }}
     </header>
     <article>
-        {% block content %}
-        {% endblock %}
+        {%- block content -%}
+        {%- endblock -%}
     </article>
     <footer>
         <div class="text-block">Powered by Flask</div>

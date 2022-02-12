@@ -8,7 +8,7 @@ FORMATTER = HtmlFormatter(nowrap=True)
 
 
 def get_linenos(code: str):
-    return Markup("\n".join(map(str, range(1, code.rstrip().count("\n") + 1))))
+    return Markup("\n".join(map(str, range(1, code.rstrip().count("\n") + 2))))
 
 
 def highlight_code(code: str, language=None):

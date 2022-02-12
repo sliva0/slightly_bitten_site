@@ -20,7 +20,9 @@
 .highlight-block pre {
     margin: 0;
     padding: 0.5rem 0.15rem 0.5rem 0;
-    
+}
+
+.highlight-block>pre {
     cursor: default;
     user-select: none;
 }

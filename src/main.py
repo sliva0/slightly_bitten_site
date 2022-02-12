@@ -95,6 +95,9 @@ def init(app: flask.Flask):
     cookie_parser.init(app)
     Markdown(app)
 
+    app.jinja_env.trim_blocks = True
+    app.jinja_env.lstrip_blocks = True
+
     app.before_request(Breadcrumbs.set_breadcrumbs)
 
     app.add_url_rule('/', view_func=lambda: file_finder())

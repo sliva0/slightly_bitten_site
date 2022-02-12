@@ -52,6 +52,21 @@ function setTheme(themeName, themeType) {
     if (!body.contains(themeType)) { invertTheme(); }
 }
 
+/**
+ * apply setting option change
+ * @param {string} optionName 
+ */
+function applyOptionChange(optionName) {
+    if (optionName == "use_js") {
+        window.location = window.location.pathname;
+    }
+
+    let tag = document.getElementById(optionName + "-related");
+    if (tag !== null) {
+        tag.disabled = !tag.disabled;
+    }
+}
+
 
 /**
  * "onchange" function for settings checkbox
@@ -60,4 +75,5 @@ function setTheme(themeName, themeType) {
  */
 function switchOption(event, optionName) {
     setBooleanCookie(optionName, event.target.checked);
+    applyOptionChange(optionName);
 }

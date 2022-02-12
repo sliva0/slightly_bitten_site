@@ -1,11 +1,17 @@
-{% extends "base.html" %}
-{% block title %} Index {% endblock %}
+{%- extends "base.html" -%}
+{%- block title -%} Index {%- endblock -%}
 
 
-{% block content %}
-{% filter markdown %}
+{%- block content -%}
+{%- filter markdown -%}
 
 _Some main page text_
 
-{% endfilter %}
-{% endblock %}
+{%- call m.highlight("python") -%}
+@app.route('/')
+def index():
+    return render_template("index.html")
+{%- endcall -%}
+
+{%- endfilter -%}
+{%- endblock -%}
