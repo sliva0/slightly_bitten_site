@@ -53,7 +53,7 @@ function setTheme(themeName, themeType) {
 }
 
 /**
- * apply setting option change
+ * Apply setting option change
  * @param {string} optionName 
  */
 function applyOptionChange(optionName) {
@@ -77,3 +77,16 @@ function switchOption(event, optionName) {
     setBooleanCookie(optionName, event.target.checked);
     applyOptionChange(optionName);
 }
+
+/*
+
+function copy_data(containerid) {
+    var range = document.createRange();
+    range.selectNode(//NODE);
+    window.getSelection().removeAllRanges(); 
+    window.getSelection().addRange(range); 
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    alert("data copied");
+}
+*/

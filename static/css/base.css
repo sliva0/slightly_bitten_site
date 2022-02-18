@@ -92,11 +92,9 @@ hr {
     align-items: center;
 }
 
-
 .breadcrumbs {
     font-size: 1.1rem;
 }
-
 
 .theme-panel {
     display: flex;
@@ -104,13 +102,31 @@ hr {
     justify-content: space-around;
 }
 
-
 .push-right {
     margin-left: auto;
 }
 
+.icon {
+    font-family: 'Material Icons Round';
+    font-size: 1.5rem;
 
- /* BUTTTON CSS */
+    display: block;
+    user-select: none;
+    text-transform: none;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    color: var(--fg);
+}
+
+.line-block {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+/* BUTTTON CSS */
 
 .button {
     color: inherit;
@@ -118,17 +134,9 @@ hr {
     border-radius: 0.5rem;
     border-width: 0.15rem;
     border-style: solid;
-    text-decoration: none;
 
     cursor: default;
     user-select: none;
-}
-
-
-.switch-block {
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
 }
 
 
