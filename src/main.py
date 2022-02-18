@@ -16,18 +16,22 @@ PROJECT_PATH = Path(__file__).parent.parent
 
 @dataclass
 class Breadcrumbs:
-    path: List[str] = field(default_factory=list)
+    _path: List[str] = field(default_factory=list)
     is_not_found: bool = False
 
     @property
     def links(self):
         current_path = [""]
-        for name in self.path:
+        for name in self._path:
             current_path.append(name)
             yield name, "/".join(current_path)
 
+    @property
+    def path(self):
+        return "/".join(self._path)
+
     def add(self, name):
-        self.path.append(name)
+        self._path.append(name)
 
     @staticmethod
     def set_breadcrumbs():
@@ -58,23 +62,48 @@ def index():
     return file_finder("")
 
 
-def file_finder(subpath: str = ""):
-    path = PROJECT_PATH / "content"
-    subpath = filter(bool, subpath.split("/"))
+def walk_subpath(path: Path, subpath: str):
+    subpath_names = filter(bool, subpath.split("/"))
 
-    for name in subpath:
+    for name in subpath_names:
         flask.g.breadcrumbs.add(name)
 
         if name.startswith("."):
             flask.abort(404)
-
+            
         if not (path := test_all_suffixes(path / name)):
             flask.abort(404)
+    
+    return path
+
+
+def add_folder_files_in_global(path: Path):
+    files = []
+    for file in path.iterdir():
+        if not file.name.startswith(".") and file.suffix in POSSIBLE_SUFFIXES:
+            files.append(file)
+    
+    flask.g.files = files
+
+
+def file_finder(subpath: str = ""):
+    path = walk_subpath(PROJECT_PATH / "content", subpath)
 
     if path.is_dir():
         path /= ".about.html"
         if not path.exists():
             flask.abort(404)
+        add_folder_files_in_global(path.parent)
+
+    return load_file_template(path)
+
+
+def source_file_finder(subpath: str = ""):
+    flask.g.breadcrumbs.add("source")
+    path = walk_subpath(PROJECT_PATH, subpath)
+
+    if path.is_dir():
+        add_folder_files_in_global(path)
 
     return load_file_template(path)
 
@@ -95,6 +124,11 @@ def init(app: flask.Flask):
     cookie_parser.init(app)
     Markdown(app)
 
+    app.jinja_env.globals.update(
+        FOLDER_EMOJI='\U0001f4c2',
+        FILE_EMOJI='\U0001f4c4',
+    )
+
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
@@ -102,5 +136,7 @@ def init(app: flask.Flask):
 
     app.add_url_rule('/', view_func=lambda: file_finder())
     app.add_url_rule('/<path:subpath>', view_func=file_finder)
+    app.add_url_rule('/source/<path:subpath>', view_func=source_file_finder)
+
     app.register_error_handler(404, error404_handler)
     app.register_error_handler(HTTPException, error_handler)

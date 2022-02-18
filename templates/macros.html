@@ -4,21 +4,21 @@
 
 
 
-{%- macro highlight(language=None) -%}
+{%- macro highlight(language=None, filename=None) -%}
 {%- set content = caller() -%}
 
 {%- if g.use_hl -%}
 <div class="highlight-block">
     <pre>{{ get_linenos(content) }}</pre>
     <div class="highlight">
-        <pre>{{ highlight_code(content, language) }}</pre>
+        <pre>{{ highlight_code(content, language, filename) }}</pre>
     </div>
 </div>
 
 {%- else -%}
 <pre>{{ content }}</pre>
-
 {%- endif -%}
+
 {%- endmacro -%}
 
 
@@ -30,7 +30,10 @@
 {%- if g.use_js -%}
 <div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
 {%- else -%}
-<a class="{{ class }}" href="{{ request.path }}?type_light={{ invert_bool(g.type_light) }}">Aa</a>
+<a 
+    class="{{ class }}"
+    href="{{ g.breadcrumbs.path }}?type_light={{ invert_bool(g.type_light) }}"
+>Aa</a>
 {%- endif -%}
 
 {%- endmacro -%}
@@ -46,7 +49,7 @@
 {%- else -%}
 <a
     class="{{ class }}"
-    href="{{ request.path }}?theme={{ theme }}&type_light={{ type_light }}"
+    href="{{ g.breadcrumbs.path }}?theme={{ theme }}&type_light={{ type_light }}"
 >Aa</a>
 {%- endif -%}
 
@@ -68,11 +71,12 @@
     <input type="checkbox" {{ checked }}>
     <a
         class="button slider"
-        href="{{ request.path }}?{{ option }}={{ invert_bool(g[option]) }}"
+        href="{{ g.breadcrumbs.path }}?{{ option }}={{ invert_bool(g[option]) }}"
     ></a>
 
 {%- endif -%}
 </label>
+
 {%- endmacro -%}
 
 
@@ -81,12 +85,13 @@
 
 <div class="breadcrumbs">
     {%- for name, link in g.breadcrumbs.links -%}
+        {{- " / " -}}
         {%- if not loop.last -%}
-            / <a href="{{ link }}">{{ name }}</a>
+            <a href="{{ link }}">{{ name }}</a>
         {%- elif g.breadcrumbs.is_not_found -%}
-            / <s>{{ name }}</s>
+            <s>{{ name }}</s>
         {%- else -%}
-            / {{ name }}
+            {{ name }}
         {%- endif -%}
     {%- endfor -%}
 </div>
@@ -112,9 +117,35 @@
 
 
 {%- macro settings_option(option_name) -%}
+<span class="line-block"> {{ switch(option_name) }} {{ caller() }} </span>
+{%- endmacro -%}
 
-<span class="switch-block"> {{ switch(option_name) }}
-    {{ caller() }}
-</span>
+
+
+{%- macro icon(name, replacer=">") -%}
+<span class="icon"> {{ name if g.fonts else replacer }} </span>
+{%- endmacro -%}
+
+
+
+{%- macro folder_file_list(display_suffixes=False) -%}
+
+<div class="centered">
+    <div>
+    {%- for file in g.files -%}
+        {%- set name = file.name if display_suffixes else file.stem -%}
+
+        <div class="line-block">
+            {%- if file.is_dir() -%}
+                {{ icon("folder", FOLDER_EMOJI) }}
+            {%- else -%}
+                {{ icon("description", FILE_EMOJI) }}
+            {%- endif -%}
+
+            <a href="{{ g.breadcrumbs.path }}/{{ name }}"> {{- name -}} </a>
+        </div>
+    {%- endfor -%}
+</div>
+</div>
 
 {%- endmacro -%}

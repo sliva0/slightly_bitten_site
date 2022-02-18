@@ -1,5 +1,5 @@
 {%- extends "base.html" -%}
-{%- block title -%} Index {%- endblock -%}
+{%- block title -%} Home {%- endblock -%}
 
 
 {%- block content -%}
@@ -12,6 +12,8 @@ _Some main page text_
 def index():
     return "some code piece for highlight testing"
 {%- endcall -%}
+
+{{ m.folder_file_list() }}
 
 {%- endfilter -%}
 {%- endblock -%}

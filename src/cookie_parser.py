@@ -4,7 +4,7 @@ import flask as f
 
 
 def get_theme_names():
-    with open("./static/themes.css") as file:
+    with open("./static/css/themes.css") as file:
         css_file = file.read()
 
     themes = re.findall(r"\n\.(theme-[a-z\-]+)", css_file)

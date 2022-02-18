@@ -8,20 +8,20 @@
 <html class="{{ g.theme }}">
 
 <head>
-    <title> sliva0.tk - {%- block title -%}{%- endblock -%} </title>
+    <title> sliva0.tk - {% block title -%}{%- endblock -%} </title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.3, minimum-scale=0.7 user-scalable=yes">
 
-    <link rel="stylesheet" type="text/css" href="/static/base.css">
-    <link rel="stylesheet" type="text/css" href="/static/themes.css">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/themes.css">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/static/media/favicon.ico" />
 
-    <link {{ o('fonts') }} rel="stylesheet" type="text/css" href="/static/fonts.css">
-    <link {{ o('use_hl') }} rel="stylesheet" type="text/css" href="/static/highlight.css">
-    <link {{ o('extra_css') }} rel="stylesheet" type="text/css" href="/static/extra.css">
+    <link {{ o('fonts') }} rel="stylesheet" type="text/css" href="/static/css/fonts.css">
+    <link {{ o('use_hl') }} rel="stylesheet" type="text/css" href="/static/css/highlight.css">
+    <link {{ o('extra_css') }} rel="stylesheet" type="text/css" href="/static/css/extra.css">
 
     {%- if g.use_js -%} 
-        <script src="/static/script.js"></script>
+        <script src="/static/js/script.js"></script>
     {%- endif -%}
 
     {%- block head -%} {%- endblock -%}
