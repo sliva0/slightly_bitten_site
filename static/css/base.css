@@ -1,5 +1,6 @@
 * {
     border-color: inherit;
+    --body-width: 40rem;
 }
 
 html {
@@ -9,7 +10,7 @@ html {
 
 body {
     margin: 0 auto;
-    max-width: 40rem;
+    max-width: var(--body-width);
     font-family: "Roboto", Helvetica, sans-serif;
 
     min-height: 100vh;
