@@ -28,6 +28,10 @@ header, footer {
     align-items: center;
 }
 
+header>*, footer>* {
+    flex-grow: 0;
+}
+
 article {
     margin: 0 1rem;
     flex-grow: 1;
@@ -93,7 +97,10 @@ hr {
 }
 
 .breadcrumbs {
-    font-size: 1.1rem;
+    font-size: calc();
+    flex-grow: 1;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .theme-panel {
@@ -102,12 +109,8 @@ hr {
     justify-content: space-around;
 }
 
-.push-right {
-    margin-left: auto;
-}
-
 .icon {
-    font-family: 'Material Icons Round';
+    font-family: 'Material Icons';
     font-size: 1.5rem;
 
     display: block;

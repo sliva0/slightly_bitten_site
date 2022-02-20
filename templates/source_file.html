@@ -1,0 +1,26 @@
+{%- extends "base.html" -%}
+
+{%- block head -%}
+<style>
+    body {
+        max-width: max-content;
+        min-width: min(40rem, 100%);
+    }
+
+    .highlight-block {
+        max-width: none;
+    }
+
+    .highlight {
+        width: 100%;
+    }
+</style>
+{%- endblock -%}
+
+{%- block content -%}
+
+{%- call m.highlight(filename=filename) -%}
+{{ source }}
+{%- endcall -%}
+
+{%- endblock -%}
