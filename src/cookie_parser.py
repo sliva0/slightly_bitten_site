@@ -1,6 +1,6 @@
 import re
 
-import flask as f
+import flask
 
 
 def get_theme_names():
@@ -13,7 +13,7 @@ def get_theme_names():
 
 
 def get_theme_type(inverted: bool = False):
-    return THEME_TYPES[bool(f.g.type_light) ^ inverted]
+    return THEME_TYPES[bool(flask.g.type_light) ^ inverted]
 
 
 def invert_cookie_bool(value: str):
@@ -25,7 +25,7 @@ def is_valid_value(value, possible_values: list):
 
 
 def set_cookie_value_after_this_request(name: str, value: str):
-    @f.after_this_request
+    @flask.after_this_request
     def set_cookie_value(response):
         response.set_cookie(name, value)
         return response
@@ -34,12 +34,12 @@ def set_cookie_value_after_this_request(name: str, value: str):
 def get_cookie_value(name: str, possible_values: list):
     """first possible value - default"""
 
-    value = f.request.args.get(name) # try to get cookie value from link args
+    value = flask.request.args.get(name) # try to get cookie value from link args
     if is_valid_value(value, possible_values):
         set_cookie_value_after_this_request(name, value)
         return value
 
-    value = f.request.cookies.get(name)
+    value = flask.request.cookies.get(name)
     if is_valid_value(value, possible_values):
         return value
     else:
@@ -48,10 +48,10 @@ def get_cookie_value(name: str, possible_values: list):
 
 
 def process_cookies():
-    f.g.theme = get_cookie_value("theme", THEME_NAMES)
+    flask.g.theme = get_cookie_value("theme", THEME_NAMES)
 
     for cookie_name in BOOL_COOKIE_LIST:
-        f.g.setdefault(cookie_name, get_cookie_value(cookie_name, BOOL_SET))
+        flask.g.setdefault(cookie_name, get_cookie_value(cookie_name, BOOL_SET))
 
 
 THEME_NAMES = get_theme_names()
@@ -60,7 +60,7 @@ BOOL_SET = ("1", "")  # (True, False)
 BOOL_COOKIE_LIST = ("type_light", "use_js", "use_hl", "fonts", "extra_css")
 
 
-def init(app: f.Flask):
+def init(app: flask.Flask):
     app.before_request(process_cookies)
 
     app.jinja_env.globals.update(
