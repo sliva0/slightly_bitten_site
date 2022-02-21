@@ -26,3 +26,8 @@ body, .button {
 .slider:hover:after {
     background: var(--slider-hover);
 }
+
+.copy-button {
+    transition-duration: 0.1s;
+    transition-property: background;
+}

@@ -78,15 +78,18 @@ function switchOption(event, optionName) {
     applyOptionChange(optionName);
 }
 
-/*
+/**
+ * Copy code blocks content
+ * @param {PointerEvent} event 
+ */
+function CopyCode(event) {
+    console.log(event.target.parentElement.lastChild.lastChild);
 
-function copy_data(containerid) {
     var range = document.createRange();
-    range.selectNode(//NODE);
+    range.selectNode(event.target.parentElement.lastChild.lastChild);
+
     window.getSelection().removeAllRanges(); 
     window.getSelection().addRange(range); 
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
-    alert("data copied");
 }
-*/

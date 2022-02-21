@@ -29,10 +29,6 @@ header, footer {
     align-items: center;
 }
 
-header>*, footer>* {
-    flex-grow: 0;
-}
-
 article {
     margin: 0 1rem;
     flex-grow: 1;
@@ -80,6 +76,11 @@ hr {
 }
 
 
+/* SCROOLBAR */
+
+
+
+
 /* ADDITIONAL BLOCK PROPERTIES */
 
 .text-block, .button {
@@ -87,10 +88,13 @@ hr {
     margin: 0.2rem;
     text-align: center;
     text-decoration: none;
+    
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .centered {
-    /* class for dog.mp4 */
     display: flex;
     align-self: stretch;
     flex-direction: column;
@@ -98,7 +102,6 @@ hr {
 }
 
 .breadcrumbs {
-    font-size: calc();
     flex-grow: 1;
     overflow-x: auto;
     white-space: nowrap;
@@ -114,19 +117,32 @@ hr {
     font-family: 'Material Icons';
     font-size: 1.5rem;
 
-    display: block;
+    display: inline-block;
     user-select: none;
     text-transform: none;
     text-decoration: none;
-    margin: 0 0.5rem;
-    color: var(--fg);
+    line-height: 1;
+    white-space: nowrap;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
 }
 
 .line-block {
-    margin: 0.5rem 0;
     display: flex;
     align-items: center;
-    text-decoration: none;
+}
+
+.file-list {
+    align-self: center;
+    min-width: 25%;
+}
+
+#invert-theme-button::before {
+    font-family: 'Material Icons';
+    display: block;
+    content: "Aa";
+    font-size: 1rem;
 }
 
 
@@ -139,7 +155,7 @@ hr {
     border-width: 0.15rem;
     border-style: solid;
 
-    cursor: default;
+    cursor: pointer;
     user-select: none;
 }
 

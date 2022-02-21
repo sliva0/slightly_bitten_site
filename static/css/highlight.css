@@ -9,6 +9,7 @@
     display: flex;
     max-width: fit-content;
     align-self: stretch;
+    position: relative;
 }
 
 .highlight-block * {
@@ -30,6 +31,7 @@
 .highlight {
     padding: 0 0.5rem;
     overflow-x: auto;
+    scrollbar-width: thin;
 }
 
 .highlight pre {
@@ -41,8 +43,50 @@
     padding: 0.5rem 0.3rem;
 }
 
+.copy-button {
+    background: #ddd0;
+    color: #A9B7C6;
 
-/* Source: https://github.com/kakawait/pygments-darcula */
+    font-family: 'Material Icons', monospace;
+    font-size: 18px;
+    user-select: none;
+    cursor: pointer;
+    
+    margin: 0.3rem;
+    padding: 0.1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.copy-button:hover {
+    background: #ddd6;
+}
+
+.copy-button:active {
+    background: #ddd2;
+}
+
+
+.highlight::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-track {
+    margin-inline: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: #def;
+}
+
+.highlight::-webkit-scrollbar-thumb:hover {
+    background: #abc; 
+}
+
+
+/* Source: https://github.com/kakawait/pygments-darcula/blob/master/darcula.css */
 
 /* ----[ BASE ]---- */
 

@@ -4,15 +4,30 @@
 
 
 
+{%- macro copy_button(name, link) -%}
+
+{%- if g.use_js -%}
+<div class="copy-button" title="Copy code sample" onclick="CopyCode(event)">
+    {{ "content_copy" if g.fonts else "Copy" }}
+</div>
+{%- endif -%}
+
+{%- endmacro -%}
+
+
+
 {%- macro highlight(language=None, filename=None) -%}
 {%- set content = caller() -%}
 
 {%- if g.use_hl -%}
 <div class="highlight-block">
     <pre>{{ get_linenos(content) }}</pre>
+    {{- copy_button() -}}
     <div class="highlight">
         <pre>{{ highlight_code(content, language, filename) }}</pre>
+        {{- "" -}}
     </div>
+    {{- "" -}}
 </div>
 
 {%- else -%}
@@ -25,15 +40,16 @@
 
 {%- macro invert_theme_button(name, link) -%}
 {%- set theme_type = get_theme_type(inverted=True) -%}
-{%- set class = "button use-theme " + get_theme_type(inverted=True) -%}
+{%- set class = "button use-theme icon " + get_theme_type(inverted=True) -%}
 
 {%- if g.use_js -%}
-<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
+<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)"></div>
 {%- else -%}
 <a 
+    id="invert-theme-button"
     class="{{ class }}"
     href="{{ g.rpath.path }}?type_light={{ invert_bool(g.type_light) }}"
->Aa</a>
+></a>
 {%- endif -%}
 
 {%- endmacro -%}
@@ -117,7 +133,7 @@
 
 
 {%- macro settings_option(option_name) -%}
-<span class="line-block"> {{ switch(option_name) }} {{ caller() }} </span>
+<hr><span class="line-block"> {{ switch(option_name) }} {{ caller() }} </span>
 {%- endmacro -%}
 
 
@@ -130,29 +146,27 @@
 
 {%- macro folder_file_list(source_mode=False) -%}
 
-<div class="centered">
-    <div>
+
+<div class="file-list">
     {%- if source_mode -%}
-        <div class="line-block">
-            {{- icon("drive_file_move_rtl", FOLDER_EMOJI) -}}
-            <a href="{{ g.rpath.parent }}"> .. </a>
-        </div>
+        <a class="button" href="{{ g.rpath.parent or '/' }}">
+            {{- icon("drive_file_move_rtl", FOLDER_EMOJI) -}} ..
+        </a>
     {%- endif -%}
 
     {%- for file in g.files -%}
         {%- set name = file.name if source_mode else file.stem -%}
 
-        <div class="line-block">
+        <a class="button" href="{{ g.rpath.path }}/{{ name }}">
             {%- if file.is_dir() -%}
                 {{ icon("folder", FOLDER_EMOJI) }}
             {%- else -%}
                 {{ icon("description", FILE_EMOJI) }}
             {%- endif -%}
 
-            <a href="{{ g.rpath.path }}/{{ name }}">{{ name }}</a>
-        </div>
+            {{- name -}}
+        </a>
     {%- endfor -%}
-    </div>
 </div>
 
 {%- endmacro -%}

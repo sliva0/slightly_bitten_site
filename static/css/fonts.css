@@ -39,10 +39,22 @@
 
 
 /* Source: https://fonts.google.com/icons */
-/* Specific css: https://fonts.googleapis.com/icon?family=Material+Icons */
+/* Specific css: https://fonts.googleapis.com/icon?family=Material+Icons+Outlined */
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/materialicons/v125/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+    src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v100/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2');
+}
+
+#invert-theme-button::before {
+    font-size: 18px;
+}
+
+#invert-theme-button.type-light::before {
+    content: "light_mode";
+}
+
+#invert-theme-button.type-dark::before {
+    content: "dark_mode";
 }
