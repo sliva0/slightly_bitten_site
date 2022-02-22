@@ -78,7 +78,15 @@ hr {
 
 /* SCROOLBAR */
 
+::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+}
 
+::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: var(--fg);
+}
 
 
 /* ADDITIONAL BLOCK PROPERTIES */
@@ -88,7 +96,7 @@ hr {
     margin: 0.2rem;
     text-align: center;
     text-decoration: none;
-    
+
     display: flex;
     align-items: center;
     gap: 0.2rem;
