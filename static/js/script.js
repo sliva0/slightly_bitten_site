@@ -83,8 +83,6 @@ function switchOption(event, optionName) {
  * @param {PointerEvent} event 
  */
 function CopyCode(event) {
-    console.log(event.target.parentElement.lastChild.lastChild);
-
     var range = document.createRange();
     range.selectNode(event.target.parentElement.lastChild.lastChild);
 
