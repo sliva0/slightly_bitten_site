@@ -16,10 +16,15 @@ PROJECT_PATH = Path(__file__).parent.parent
 
 
 def test_all_suffixes(path: Path, suffixes: tuple[str]):
-    if path.suffix in ("", *suffixes) and path.exists():
+    if path.suffix:  # if suffix is present
+        if path.suffix in suffixes and path.exists():  # check its validity
+            return path
+        return None
+
+    if path.exists(): # if suffix not present and file exists
         return path
 
-    for suffix in suffixes:
+    for suffix in suffixes: # trying to find a suffix by brute force
         if (spath := path.with_suffix(suffix)).exists():
             return spath
 
@@ -94,7 +99,7 @@ def source_file_finder(subpath: str = ""):
 
     if path.is_dir():
         add_folder_files_in_global(path, suffixes)
-        
+
         if (about_path := path / ".about.html").exists():
             return load_file_template(about_path)
 
