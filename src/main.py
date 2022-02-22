@@ -136,7 +136,7 @@ def init(app: flask.Flask):
     app.add_url_rule('/', view_func=file_finder)
     app.add_url_rule('/<path:subpath>', view_func=file_finder)
 
-    app.add_url_rule('/source', view_func=source_file_finder)
+    app.add_url_rule('/source/', view_func=source_file_finder)
     app.add_url_rule('/source/<path:subpath>', view_func=source_file_finder)
 
     app.register_error_handler(404, error404_handler)

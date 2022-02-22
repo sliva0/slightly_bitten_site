@@ -60,7 +60,7 @@ code {
 }
 
 a {
-    color: var(--active);
+    color: var(--fg-hl);
 }
 
 hr {

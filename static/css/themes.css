@@ -2,17 +2,19 @@
 
 .theme-common .type-light, .button.theme-common.type-light {
     --fg: #222;
+    --fg-hl: #48f;
     --bg: #eee;
     --border: #aaa;
     --hover: #ccc;
     --slider: #444;
     --slider-hover: #555;
     --inactive: #888;
-    --active: #abf;
+    --active: #9df;
 }
 
 .theme-common .type-dark, .button.theme-common.type-dark {
     --fg: #ddd;
+    --fg-hl: #88d;
     --bg: #333;
     --border: #666;
     --hover: #555;
@@ -25,17 +27,19 @@
 
 .theme-plum .type-light, .button.theme-plum.type-light {
     --fg: hsl(232, 27%, 30%);
+    --fg-hl: hsl(273, 40%, 50%);
     --bg: linear-gradient(hsl(220, 50%, 65%), hsl(273, 35%, 70%));
     --border: hsl(253, 29%, 30%);
     --hover: hsl(220, 43%, 60%);
-    --slider: hsl(220, 40%, 60%);
-    --slider-hover: hsl(220, 70%, 60%);
-    --inactive: hsl(220, 50%, 50%);
-    --active: hsl(273, 29%, 50%);
+    --slider: hsl(220, 40%, 50%);
+    --slider-hover: hsl(220, 40%, 40%);
+    --inactive: hsl(220, 50%, 65%);
+    --active: hsl(273, 29%, 65%);
 }
 
 .theme-plum .type-dark, .button.theme-plum.type-dark {
     --fg: hsl(232, 30%, 80%);
+    --fg-hl: hsl(228, 100%, 83%);
     --bg: linear-gradient(hsl(220, 40%, 40%), hsl(273, 25%, 40%));
     --border: hsl(253, 50%, 70%);
     --hover: hsl(220, 43%, 45%);
@@ -47,18 +51,20 @@
 
 
 .theme-darcula .type-light, .button.theme-darcula.type-light {
-    --fg: #7b22c3;
-    --bg: #FAF8E4;
-    --border: #D3CBB7;
+    --fg: #40a1dd;
+    --fg-hl: #7b22c3;
+    --bg: #faf8e4;
+    --border: #d3cbb7;
     --hover: #ece8c6;
-    --slider: #9c7ab8;
-    --slider-hover: #b59cc9;
+    --slider: hsl(240, 40%, 70%);
+    --slider-hover: hsl(240, 40%, 75%);
     --inactive: #bbc4c4;
-    --active: #5cd693;
+    --active: #b9e085;
 }
 
 .theme-darcula .type-dark, .button.theme-darcula.type-dark {
     --fg: #A9B7C6;
+    --fg-hl: #88d;
     --bg: #2B2B2B;
     --border: #777;
     --hover: #555;
@@ -70,6 +76,7 @@
 
 .theme-mono .type-light, .button.theme-mono.type-light {
     --fg: #000;
+    --fg-hl: #888;
     --bg: #fff;
     --border: #888;
     --hover: #bbb;
@@ -81,6 +88,7 @@
 
 .theme-mono .type-dark, .button.theme-mono.type-dark {
     --fg: #fff;
+    --fg-hl: #aaa;
     --bg: #000;
     --border: #888;
     --hover: #444;
