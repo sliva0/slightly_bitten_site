@@ -17,14 +17,6 @@ body, .button, .copy-tooltip {
     transition: background 0.2s;
 }
 
-.button:hover:not(.slider) {
-    background: var(--hover);
-}
-
-.button:active:not(.slider) {
-    background: var(--active);
-}
-
 .slider {
     transition: background 0.4s;
 }
@@ -45,10 +37,6 @@ body, .button, .copy-tooltip {
 .copy-tooltip {
     transition-duration: 0.2s;
     transition-property: opacity;
-}
-
-.copy-animation::before {
-    animation: copy-code 2s ease-in-out;
 }
 
 @keyframes copy-code {

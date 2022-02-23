@@ -167,6 +167,14 @@ hr {
     user-select: none;
 }
 
+.button:hover:not(.slider) {
+    background: var(--hover);
+}
+
+.button:active:not(.slider) {
+    background: var(--active);
+}
+
 
 .switch {
     margin: 0.2rem;
@@ -357,6 +365,15 @@ input:checked+.slider:after {
     border-color: transparent;
 }
 
+.copy-animation::before {
+    animation: copy-code 2s ease-in-out;
+}
+
+@keyframes copy-code {
+    0% {
+        content: "Copied";
+    }
+}
 
 .highlight::-webkit-scrollbar {
     height: 0.4rem;
