@@ -138,6 +138,37 @@
 
 
 
+{%- macro body_width_setting() -%}
+
+<hr>
+<div class="range-block">
+    <form action="" method="get" class="line-block">
+        {%- if g.use_js -%}
+            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
+        {%- else -%}
+            <input type="submit" value="Apply" class="button">
+        {%- endif -%}
+
+        <input
+            id="body-width-range" class="button" type="range" name="body_width"
+            min="20" max="100" value="{{ g.body_width }}" step="10"
+        >
+    </form>
+    Max site body width <br>
+    (Determines the maximum width of the space occupied by the site on the screen)
+
+    <script>
+        let input = document.getElementById('body-width-range');
+        input.addEventListener("mouseup", ChangeBodyWidth);
+        input.addEventListener("touchend", ChangeBodyWidth);
+        input.addEventListener("input", ChangeRangeLabel);
+    </script>
+</div>
+
+{%- endmacro -%}
+
+
+
 {%- macro icon(name, replacer=">") -%}
 <span class="icon"> {{ name if g.fonts else replacer }} </span>
 {%- endmacro -%}

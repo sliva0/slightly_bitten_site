@@ -1,7 +1,6 @@
 {%- extends "base.html" -%}
 {%- block title -%} Settings {%- endblock -%}
 
-
 {%- block content -%}
 
 {{ m.theme_panel() }}
@@ -25,5 +24,7 @@
     Extra CSS animations <br>
     (Connects an additional stylesheet with animations).
 {%- endcall -%}
+
+{{ m.body_width_setting() }}
 
 {%- endblock -%}

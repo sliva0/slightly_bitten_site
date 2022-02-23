@@ -1,6 +1,5 @@
 * {
     border-color: inherit;
-    --body-width: 40rem;
 }
 
 html {
@@ -79,7 +78,7 @@ hr {
 /* SCROOLBAR */
 
 ::-webkit-scrollbar {
-    width: 0.4rem;
+    width: 0.6rem;
     height: 0.4rem;
 }
 
@@ -158,10 +157,12 @@ hr {
 
 .button {
     color: inherit;
+    background: inherit;
     padding: 0.2rem;
     border-radius: 0.5rem;
     border-width: 0.15rem;
     border-style: solid;
+    font-size: 1em;
 
     cursor: pointer;
     user-select: none;
@@ -204,4 +205,61 @@ input:checked+.slider {
 
 input:checked+.slider:after {
     left: 1em;
+}
+
+.frame {
+    border-width: 0.15rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
+
+
+/* RANGE CSS */
+
+.range-block {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    margin: 0.4rem;
+}
+
+#body-width-range {
+    font-size: 1.25rem;
+    flex-grow: 1;
+    padding: 0;
+
+    -webkit-appearance: none;
+    height: max-content;
+    border-radius: 0.5rem;  
+    background: var(--inactive);
+}
+
+#body-width-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 0.3rem;
+    background: var(--slider);
+    cursor: pointer;
+}
+
+#body-width-range::-webkit-slider-thumb:hover {
+    background: var(--slider-hover);
+}
+
+#body-width-range::-moz-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 0.3rem;
+    background: var(--slider);
+    cursor: pointer;
+}
+
+#body-width-range::-moz-slider-thumb:hover {
+    background: var(--slider-hover);
 }

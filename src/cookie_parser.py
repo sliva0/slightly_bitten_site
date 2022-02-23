@@ -1,6 +1,15 @@
 import re
+from aiohttp import request
 
 import flask
+
+
+def get_unique_elements(i):
+    """get unique elements of iterable without changing order"""
+    return list(dict.fromkeys(i))
+
+
+BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 10))])
 
 
 def get_theme_names():
@@ -9,7 +18,7 @@ def get_theme_names():
 
     themes = re.findall(r"\n\.(theme-[a-z\-]+)", css_file)
     
-    return list(dict.fromkeys(themes))
+    return get_unique_elements(themes)
 
 
 def get_theme_type(inverted: bool = False):
@@ -34,7 +43,10 @@ def set_cookie_value_after_this_request(name: str, value: str):
 def get_cookie_value(name: str, possible_values: list):
     """first possible value - default"""
 
-    value = flask.request.args.get(name) # try to get cookie value from link args
+    value = flask.request.args.get(name) # try to get cookie value from link args or form data
+    if value is None:
+        value = flask.request.form.get(name)
+
     if is_valid_value(value, possible_values):
         set_cookie_value_after_this_request(name, value)
         return value
@@ -49,6 +61,7 @@ def get_cookie_value(name: str, possible_values: list):
 
 def process_cookies():
     flask.g.theme = get_cookie_value("theme", THEME_NAMES)
+    flask.g.body_width = get_cookie_value("body_width", BODY_WIDTHS)
 
     for cookie_name in BOOL_COOKIE_LIST:
         flask.g.setdefault(cookie_name, get_cookie_value(cookie_name, BOOL_SET))

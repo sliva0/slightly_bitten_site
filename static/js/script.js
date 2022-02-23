@@ -53,10 +53,10 @@ function setTheme(themeName, themeType) {
 }
 
 /**
- * Apply setting option change
+ * Apply boolean setting option change
  * @param {string} optionName 
  */
-function applyOptionChange(optionName) {
+function applyBooleanOptionChange(optionName) {
     if (optionName == "use_js") {
         window.location = window.location.pathname;
     }
@@ -75,7 +75,7 @@ function applyOptionChange(optionName) {
  */
 function switchOption(event, optionName) {
     setBooleanCookie(optionName, event.target.checked);
-    applyOptionChange(optionName);
+    applyBooleanOptionChange(optionName);
 }
 
 /**
@@ -83,11 +83,29 @@ function switchOption(event, optionName) {
  * @param {PointerEvent} event 
  */
 function CopyCode(event) {
-    var range = document.createRange();
+    let range = document.createRange();
     range.selectNode(event.target.parentElement.lastChild.lastChild);
 
     window.getSelection().removeAllRanges(); 
     window.getSelection().addRange(range); 
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
+}
+
+/**
+ * change body width setting on mouseup range event
+ * @param {MouseEvent} event 
+ */
+function ChangeBodyWidth(event) {
+    let value = event.target.value;
+    setCookie("body_width", value);
+    document.body.style.setProperty("--body-width", value + "rem");
+}
+
+/**
+ * 
+ * @param {*} event 
+ */
+function ChangeRangeLabel(event) {
+    event.target.labels.forEach(i => i.innerHTML = event.target.value);
 }

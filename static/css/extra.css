@@ -1,5 +1,15 @@
 body, .button {
     transition-duration: 0.3s;
+    transition-property: color, background, border-color, max-width;
+}
+
+#body-width-range::-webkit-slider-thumb {
+    transition-duration: 0.3s;
+    transition-property: color, background, border-color;
+}
+
+#body-width-range::-moz-slider-thumb {
+    transition-duration: 0.3s;
     transition-property: color, background, border-color;
 }
 

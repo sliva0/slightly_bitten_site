@@ -29,7 +29,7 @@
     {%- block head -%} {%- endblock -%}
 </head>
 
-<body class="use-theme {{ get_theme_type() }}">
+<body class="use-theme {{ get_theme_type() }}" style="--body-width: {{ g.body_width }}rem">
     <header>
         {{ m.link_button("Home", "/") }}
         {{ m.breadcrumbs() }}
