@@ -59,10 +59,10 @@ def guess_type_and_load_media(path: Path, file_link: str):
     _type = mime_type.split("/")[0]
 
     if _type == "image":
-        return flask.render_template("image.html", file_link=file_link)
+        return flask.render_template("files/image.html", file_link=file_link)
 
     return flask.render_template(
-        "object.html",
+        "files/media.html",
         tag=_type,
         file_link=file_link,
         mime_type=mime_type,
@@ -82,7 +82,7 @@ def load_source_file_template(path: Path):
         with open(path) as file:
             source = file.read()
 
-        return flask.render_template("source_file.html", source=source, filename=path.name)
+        return flask.render_template("files/source_file.html", source=source, filename=path.name)
 
     file_link = "/" + str(path.relative_to(PROJECT_PATH))
     return guess_type_and_load_media(path, file_link)
@@ -125,7 +125,7 @@ def source_file_finder(subpath: str = ""):
         if (about_path := path / ".about.html").exists():
             return load_file_template(about_path)
 
-        return flask.render_template("source_folder.html")
+        return flask.render_template("files/source_folder.html")
     else:
         return load_source_file_template(path)
 
@@ -134,11 +134,11 @@ def error404_handler(_):
     if rp := flask.g.get("rpath"):
         rp.is_not_found = True
 
-    return flask.render_template("not_found_error.html"), 404
+    return flask.render_template("errors/not_found.html"), 404
 
 
 def error_handler(error):
-    return flask.render_template("error.html", error=error), error.code
+    return flask.render_template("errors/error.html", error=error), error.code
 
 
 def init(app: flask.Flask):
