@@ -78,6 +78,7 @@ function switchOption(event, optionName) {
     applyBooleanOptionChange(optionName);
 }
 
+
 /**
  * Copy code blocks content
  * @param {PointerEvent} event 
@@ -90,7 +91,13 @@ function CopyCode(event) {
     window.getSelection().addRange(range); 
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
+
+    let tooltip = event.target.lastChild;
+    tooltip.classList.remove("copy-animation");
+    tooltip.offsetWidth;
+    tooltip.classList.add("copy-animation");
 }
+
 
 /**
  * change body width setting on mouseup range event
@@ -101,6 +108,7 @@ function ChangeBodyWidth(event) {
     setCookie("body_width", value);
     document.body.style.setProperty("--body-width", value + "rem");
 }
+
 
 /**
  * 

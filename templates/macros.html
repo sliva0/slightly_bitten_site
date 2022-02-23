@@ -7,8 +7,8 @@
 {%- macro copy_button(name, link) -%}
 
 {%- if g.use_js -%}
-<div class="copy-button" title="Copy code sample" onclick="CopyCode(event)">
-    {{ "content_copy" if g.fonts else "Copy" }}
+<div class="copy-button" onclick="CopyCode(event)">
+    {{- "content_copy" if g.fonts else "Copy" -}} <span class="copy-tooltip"></span> {{- "" -}}
 </div>
 {%- endif -%}
 

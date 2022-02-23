@@ -47,6 +47,10 @@
     src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v100/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2');
 }
 
+.copy-button {
+    font-size: 18px;
+}
+
 #invert-theme-button::before {
     font-size: 18px;
 }

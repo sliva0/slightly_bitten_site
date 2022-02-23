@@ -1,5 +1,6 @@
 * {
     border-color: inherit;
+    --common-font: "Roboto", Helvetica, sans-serif;
 }
 
 html {
@@ -10,7 +11,7 @@ html {
 body {
     margin: 0 auto;
     max-width: var(--body-width);
-    font-family: "Roboto", Helvetica, sans-serif;
+    font-family: var(--common-font);
 
     min-height: 100vh;
     display: flex;
@@ -146,10 +147,8 @@ hr {
 }
 
 #invert-theme-button::before {
-    font-family: 'Material Icons';
-    display: block;
+    font-family: 'Material Icons'var(--common-font);
     content: "Aa";
-    font-size: 1rem;
 }
 
 
@@ -232,7 +231,7 @@ input:checked+.slider:after {
 
     -webkit-appearance: none;
     height: max-content;
-    border-radius: 0.5rem;  
+    border-radius: 0.5rem;
     background: var(--inactive);
 }
 
@@ -262,4 +261,111 @@ input:checked+.slider:after {
 
 #body-width-range::-moz-slider-thumb:hover {
     background: var(--slider-hover);
+}
+
+
+/* HIGHLIGHT CSS */
+
+.highlight-block {
+    border-radius: 0.4rem;
+    padding: 0.2rem;
+    margin: 0 1rem;
+
+    display: flex;
+    max-width: fit-content;
+    align-self: stretch;
+    position: relative;
+}
+
+.highlight-block * {
+    color: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+}
+
+.highlight-block pre {
+    margin: 0;
+    padding: 0.5rem 0.15rem 0.5rem 0;
+}
+
+.highlight-block>pre {
+    cursor: default;
+    user-select: none;
+}
+
+.highlight {
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.highlight pre {
+    border-radius: 0;
+    border-left-width: 0.1rem;
+    border-left-style: solid;
+
+    padding: 0.5rem 0.3rem;
+}
+
+.copy-button {
+    font-family: 'Material Icons', monospace;
+    font-size: 0.75rem;
+    user-select: none;
+    cursor: pointer;
+
+    margin: 0.3rem;
+    padding: 0.1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.copy-tooltip {
+    font-family: var(--common-font);
+    font-size: 0.8rem;
+
+    width: max-content;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 0.2rem;
+    border: 0.1rem;
+    border-style: solid;
+    cursor: default;
+    opacity: 0;
+}
+
+.copy-tooltip::before {
+    content: "Copy";
+}
+
+.copy-button:hover>.copy-tooltip {
+    opacity: 1;
+}
+
+.copy-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -0.3rem;
+
+    border-width: 0.3rem;
+    border-style: solid;
+    border-color: transparent;
+}
+
+
+.highlight::-webkit-scrollbar {
+    height: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-track {
+    margin-inline: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
 }

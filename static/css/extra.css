@@ -1,4 +1,4 @@
-body, .button {
+body, .button, .copy-tooltip {
     transition-duration: 0.3s;
     transition-property: color, background, border-color, max-width;
 }
@@ -40,4 +40,24 @@ body, .button {
 .copy-button {
     transition-duration: 0.1s;
     transition-property: background;
+}
+
+.copy-tooltip {
+    transition-duration: 0.2s;
+    transition-property: opacity;
+}
+
+.copy-animation::before {
+    animation: copy-code 2s ease-in-out;
+}
+
+@keyframes copy-code {
+    2% {
+        font-size: 1.1em;
+        content: "Copied";
+    }
+
+    4% {
+        font-size: 1.0em;
+    }
 }
