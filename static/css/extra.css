@@ -40,9 +40,12 @@ body, .button, .copy-tooltip {
 }
 
 @keyframes copy-code {
+    0% {
+        content: "Copied";
+    }
+
     2% {
         font-size: 1.1em;
-        content: "Copied";
     }
 
     4% {
