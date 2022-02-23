@@ -1,4 +1,5 @@
 from pathlib import Path
+from mimetypes import guess_type
 
 import flask
 from werkzeug.exceptions import HTTPException
@@ -10,7 +11,8 @@ from src import highlight, cookie_parser, request_path
 DIRECTORY_DESCRIPTION_FILE_NAME = ".about.html"
 
 CONTENT_SUFFIXES = (".html", )
-SOURCE_SUFFIXES = (".html", ".css", ".js", ".py", ".webm", ".png", ".svg", ".txt")
+TEXT_SOURCE_SUFFIXES = (".html", ".css", ".js", ".py", ".txt")
+SOURCE_SUFFIXES = TEXT_SOURCE_SUFFIXES + (".webm", ".png", ".svg")
 
 PROJECT_PATH = Path(__file__).parent.parent
 
@@ -21,10 +23,10 @@ def test_all_suffixes(path: Path, suffixes: tuple[str]):
             return path
         return None
 
-    if path.exists(): # if suffix not present and file exists
+    if path.exists():  # if suffix not present and file exists
         return path
 
-    for suffix in suffixes: # trying to find a suffix by brute force
+    for suffix in suffixes:  # trying to find a suffix by brute force
         if (spath := path.with_suffix(suffix)).exists():
             return spath
 
@@ -52,18 +54,38 @@ def walk_subpath(path: Path, subpath: str, suffixes: tuple[str]):
     return path
 
 
+def guess_type_and_load_media(path: Path, file_link: str):
+    mime_type, _ = guess_type(path)
+    _type = mime_type.split("/")[0]
+
+    if _type == "image":
+        return flask.render_template("image.html", file_link=file_link)
+
+    return flask.render_template(
+        "object.html",
+        tag=_type,
+        file_link=file_link,
+        mime_type=mime_type,
+    )
+
+
 def load_file_template(path: Path):
     with open(path) as file:
         source = file.read()
 
+    # Place for the code for processing content files other than HTML
     return flask.render_template_string(source)
 
 
 def load_source_file_template(path: Path):
-    with open(path) as file:
-        source = file.read()
+    if path.suffix in TEXT_SOURCE_SUFFIXES:
+        with open(path) as file:
+            source = file.read()
 
-    return flask.render_template("source_file.html", source=source, filename=path.name)
+        return flask.render_template("source_file.html", source=source, filename=path.name)
+
+    file_link = "/" + str(path.relative_to(PROJECT_PATH))
+    return guess_type_and_load_media(path, file_link)
 
 
 def add_folder_files_in_global(path: Path, suffixes: tuple[str]):
