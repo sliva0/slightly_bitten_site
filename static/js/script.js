@@ -85,14 +85,14 @@ function switchOption(event, optionName) {
  */
 function CopyCode(event) {
     let range = document.createRange();
-    range.selectNode(event.target.parentElement.lastChild.lastChild);
+    range.selectNode(event.target.parentElement.lastElementChild.lastElementChild);
 
     window.getSelection().removeAllRanges(); 
     window.getSelection().addRange(range); 
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
 
-    let tooltip = event.target.lastChild.lastChild;
+    let tooltip = event.target.lastElementChild.lastElementChild;
     tooltip.classList.remove("copy-animation");
     tooltip.offsetWidth;
     tooltip.classList.add("copy-animation");

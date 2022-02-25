@@ -14,7 +14,6 @@
 <div class="copy-button" onclick="CopyCode(event)">
     {{- "content_copy" if g.fonts else "Copy" -}}
     <span class="copy-tooltip"><span></span></span>
-    {{- "" -}}
 </div>
 {%- endif -%}
 
@@ -31,9 +30,7 @@
     {{- copy_button() -}}
     <div class="highlight">
         <pre>{{ highlight_code(content, language, filename) }}</pre>
-        {{- "" -}}
     </div>
-    {{- "" -}}
 </div>
 
 {%- else -%}
