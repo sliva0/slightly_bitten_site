@@ -91,17 +91,6 @@ hr {
 
 /* ADDITIONAL BLOCK PROPERTIES */
 
-.text-block, .button {
-    display: block;
-    margin: 0.2rem;
-    text-align: center;
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
 .centered {
     display: flex;
     align-self: stretch;
@@ -122,8 +111,7 @@ hr {
 }
 
 .icon {
-    font-family: 'Material Icons';
-    font-size: 1.5rem;
+    font-family: 'Material Icons', var(--common-font);
 
     display: inline-block;
     user-select: none;
@@ -147,20 +135,35 @@ hr {
 }
 
 #invert-theme-button::before {
-    font-family: 'Material Icons'var(--common-font);
+    font-family: 'Material Icons', var(--common-font);
     content: "Aa";
 }
 
 
-/* BUTTTON CSS */
+/* BUTTON */
+
+.text-block, .button {
+    display: block;
+    margin: 0.2rem;
+    text-align: center;
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.frame, .button {
+    border-style: solid;
+    border-width: 0.15rem;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
 
 .button {
     color: inherit;
     background: inherit;
-    padding: 0.2rem;
-    border-radius: 0.5rem;
-    border-width: 0.15rem;
-    border-style: solid;
     font-size: 1em;
 
     cursor: pointer;
@@ -176,6 +179,8 @@ hr {
 }
 
 
+/* SWITCH */
+
 .switch {
     margin: 0.2rem;
     border-radius: 0.3rem;
@@ -187,7 +192,6 @@ hr {
     display: none;
 }
 
-
 .slider {
     background: var(--inactive);
     display: flex;
@@ -195,7 +199,7 @@ hr {
     width: 2em;
 }
 
-.slider:after {
+.slider::after {
     content: "";
     height: 1em;
     width: 1em;
@@ -205,25 +209,16 @@ hr {
     left: 0em;
 }
 
-
 input:checked+.slider {
     background: var(--active);
 }
 
-input:checked+.slider:after {
+input:checked+.slider::after {
     left: 1em;
 }
 
-.frame {
-    border-width: 0.15rem;
-    border-style: solid;
-    border-radius: 0.5rem;
-    padding: 0.2rem;
-    margin: 0.2rem;
-}
 
-
-/* RANGE CSS */
+/* RANGE */
 
 .range-block {
     display: flex;
@@ -272,7 +267,7 @@ input:checked+.slider:after {
 }
 
 
-/* HIGHLIGHT CSS */
+/* HIGHLIGHT */
 
 .highlight-block {
     border-radius: 0.4rem;
@@ -315,6 +310,18 @@ input:checked+.slider:after {
     padding: 0.5rem 0.3rem;
 }
 
+.highlight::-webkit-scrollbar {
+    height: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-track {
+    margin-inline: 0.4rem;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+}
+
 .copy-button {
     font-family: 'Material Icons', monospace;
     font-size: 0.75rem;
@@ -331,7 +338,7 @@ input:checked+.slider:after {
 .copy-tooltip {
     font-family: var(--common-font);
     font-size: 0.8rem;
-
+    
     width: max-content;
     position: absolute;
     bottom: 125%;
@@ -343,14 +350,6 @@ input:checked+.slider:after {
     border-style: solid;
     cursor: default;
     opacity: 0;
-}
-
-.copy-tooltip::before {
-    content: "Copy";
-}
-
-.copy-button:hover>.copy-tooltip {
-    opacity: 1;
 }
 
 .copy-tooltip::after {
@@ -365,24 +364,20 @@ input:checked+.slider:after {
     border-color: transparent;
 }
 
-.copy-animation::before {
+.copy-tooltip>::after {
+    content: "Copy";
+}
+
+:hover>.copy-tooltip {
+    opacity: 1;
+}
+
+.copy-animation::after {
     animation: copy-code 2s ease-in-out;
 }
 
 @keyframes copy-code {
-    0% {
+    from, to {
         content: "Copied";
     }
-}
-
-.highlight::-webkit-scrollbar {
-    height: 0.4rem;
-}
-
-.highlight::-webkit-scrollbar-track {
-    margin-inline: 0.4rem;
-}
-
-.highlight::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
 }

@@ -4,11 +4,17 @@
 
 
 
+<!-- 
+    second span in copy-tooltip is fix for firefox animation font bug
+    https://bugzilla.mozilla.org/show_bug.cgi?id=1757017
+-->
 {%- macro copy_button(name, link) -%}
 
 {%- if g.use_js -%}
 <div class="copy-button" onclick="CopyCode(event)">
-    {{- "content_copy" if g.fonts else "Copy" -}} <span class="copy-tooltip"></span> {{- "" -}}
+    {{- "content_copy" if g.fonts else "Copy" -}}
+    <span class="copy-tooltip"><span></span></span>
+    {{- "" -}}
 </div>
 {%- endif -%}
 
@@ -133,7 +139,7 @@
 
 
 {%- macro settings_option(option_name) -%}
-<hr><span class="line-block"> {{ switch(option_name) }} {{ caller() }} </span>
+<hr><span class="line-block">{{ switch(option_name) }}{{ caller() }}</span>
 {%- endmacro -%}
 
 
@@ -151,7 +157,7 @@
 
         <input
             id="body-width-range" class="button" type="range" name="body_width"
-            min="20" max="100" value="{{ g.body_width }}" step="10"
+            min="20" max="100" value="{{ g.body_width }}" step="5"
         >
     </form>
     Max site body width <br>

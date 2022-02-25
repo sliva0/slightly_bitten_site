@@ -21,11 +21,11 @@ body, .button, .copy-tooltip {
     transition: background 0.4s;
 }
 
-.slider:after {
+.slider::after {
     transition: left 0.4s, background 0.2s;
 }
 
-.slider:hover:after {
+.slider:hover::after {
     background: var(--slider-hover);
 }
 
@@ -40,15 +40,12 @@ body, .button, .copy-tooltip {
 }
 
 @keyframes copy-code {
-    0% {
+    0%, 4% {
         content: "Copied";
+        font-size: 1em;
     }
 
     2% {
         font-size: 1.1em;
-    }
-
-    4% {
-        font-size: 1.0em;
     }
 }

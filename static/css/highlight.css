@@ -28,7 +28,7 @@
     border-color: #888;
 }
 
-span.copy-tooltip::after {
+.copy-tooltip::after {
     border-top-color: #444;
 }
 
