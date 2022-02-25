@@ -1,11 +1,18 @@
 {%- extends "base.html" -%}
 
+{%- block head -%}
+<style>
+    img {
+        image-rendering: pixelated;
+    }
+</style>
+{%- endblock -%}
+
 {%- block content -%}
 
 <div class="centered">
     <img 
-        style="width: 75%; image-rendering: pixelated"
-        src="{{ file_link }}"
+        src="{{ file_link }}" class="big-block"
         alt="This image type is not supported by your browser or by site file display mechanism."
     >    
 </div>

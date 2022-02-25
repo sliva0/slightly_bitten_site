@@ -98,6 +98,10 @@ hr {
     align-items: center;
 }
 
+.big-block {
+    width: 75%
+}
+
 .breadcrumbs {
     flex-grow: 1;
     overflow-x: auto;
