@@ -9,7 +9,7 @@ def get_unique_elements(i):
     return list(dict.fromkeys(i))
 
 
-BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 10))])
+BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 5))])
 
 
 def get_theme_names():
