@@ -160,12 +160,14 @@
     Max site body width <br>
     (Determines the maximum width of the space occupied by the site on the screen)
 
-    <script>
-        let input = document.getElementById('body-width-range');
-        input.addEventListener("mouseup", ChangeBodyWidth);
-        input.addEventListener("touchend", ChangeBodyWidth);
-        input.addEventListener("input", ChangeRangeLabel);
-    </script>
+    {%- if g.use_js -%}
+        <script>
+            let input = document.getElementById('body-width-range');
+            input.addEventListener("mouseup", ChangeBodyWidth);
+            input.addEventListener("touchend", ChangeBodyWidth);
+            input.addEventListener("input", ChangeRangeLabel);
+        </script>
+    {%- endif -%}
 </div>
 
 {%- endmacro -%}
