@@ -14,7 +14,6 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
     <link rel="stylesheet" type="text/css" href="/static/css/themes.css">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="/static/media/favicon.ico" />
     <link rel="alternate icon" type="image/png" href="/static/media/favicon.png">
     <link rel="icon" type="image/svg+xml" href="/static/media/favicon.svg">
 
@@ -22,14 +21,16 @@
     <link {{ o('use_hl') }} rel="stylesheet" type="text/css" href="/static/css/highlight.css">
     <link {{ o('extra_css') }} rel="stylesheet" type="text/css" href="/static/css/extra.css">
 
-    {%- if g.use_js -%} 
-        <script src="/static/js/script.js"></script>
-    {%- endif -%}
+    <style id="body_width-related">
+        body {
+            --body-width: {{ g.body_width }}rem; /**/
+        }
+    </style>
 
     {%- block head -%} {%- endblock -%}
 </head>
 
-<body class="use-theme {{ get_theme_type() }}" style="--body-width: {{ g.body_width }}rem">
+<body class="use-theme {{ get_theme_type() }}">
     <header>
         {{ m.link_button("Home", "/") }}
         {{ m.breadcrumbs() }}
@@ -44,6 +45,10 @@
         <div class="text-block">Powered by Flask</div>
         {{ m.link_button('sliva0', '/about') }}
     </footer>
+    
+    {%- if g.use_js -%} 
+        <script src="/static/js/script.js"></script>
+    {%- endif -%}
 </body>
 
 </html>

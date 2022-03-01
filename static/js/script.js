@@ -1,5 +1,9 @@
 const THEME_TYPES = ["type-dark", "type-light"];
 
+const BODY_CLASSES = document.body.classList;
+const HTML_CLASSES = document.documentElement.classList;
+const INV_THEME_BUTTON_CLASSES = document.getElementById("invert-theme-button").classList;
+const CSS_RULES = document.getElementById("body_width-related").sheet.cssRules;
 
 /**
  * Set some cookie value
@@ -22,14 +26,11 @@ function setBooleanCookie(name, value) {
 
 
 function invertTheme() {
-    let body = document.body.classList;
-    let button = document.getElementById("invert-theme-button").classList;
-
-    setBooleanCookie("type_light", body.contains(THEME_TYPES[0]));
+    setBooleanCookie("type_light", BODY_CLASSES.contains(THEME_TYPES[0]));
 
     THEME_TYPES.forEach(i => {
-        body.toggle(i);
-        button.toggle(i);
+        BODY_CLASSES.toggle(i);
+        INV_THEME_BUTTON_CLASSES.toggle(i);
     })
 }
 
@@ -40,16 +41,13 @@ function invertTheme() {
  * @param {string} themeType
  */
 function setTheme(themeName, themeType) {
-    let html = document.documentElement.classList;
-    let body = document.body.classList;
-
-    html.forEach(i => {
-        if (i.startsWith("theme-")) { html.remove(i); }
+    HTML_CLASSES.forEach(i => {
+        if (i.startsWith("theme-")) { HTML_CLASSES.remove(i); }
     });
-    html.add(themeName);
+    HTML_CLASSES.add(themeName);
     setCookie("theme", themeName);
 
-    if (!body.contains(themeType)) { invertTheme(); }
+    if (!BODY_CLASSES.contains(themeType)) { invertTheme(); }
 }
 
 /**
@@ -88,8 +86,8 @@ function CopyCode(event) {
     let node = event.target.parentElement.lastElementChild.lastElementChild;
     range.selectNode(node);
 
-    window.getSelection().removeAllRanges(); 
-    window.getSelection().addRange(range); 
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
 
@@ -107,14 +105,23 @@ function CopyCode(event) {
 function ChangeBodyWidth(event) {
     let value = event.target.value;
     setCookie("body_width", value);
-    document.body.style.setProperty("--body-width", value + "rem");
+    CSS_RULES[0].style.setProperty("--body-width", value + "rem");
 }
 
 
 /**
- * 
- * @param {*} event 
+ * edit number in range label
+ * @param {Event} event 
  */
 function ChangeRangeLabel(event) {
     event.target.labels.forEach(i => i.innerHTML = event.target.value);
+}
+
+
+
+let range = document.getElementById('body-width-range');
+if (range !== null) {
+    range.addEventListener("mouseup", ChangeBodyWidth);
+    range.addEventListener("touchend", ChangeBodyWidth);
+    range.addEventListener("input", ChangeRangeLabel);
 }
