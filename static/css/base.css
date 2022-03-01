@@ -114,6 +114,24 @@ hr {
     justify-content: space-around;
 }
 
+.line-block {
+    display: flex;
+    align-items: center;
+}
+
+.file-list {
+    align-self: center;
+    min-width: 25%;
+}
+
+#invert-theme-button::after {
+    font-family: 'Material Icons', var(--common-font);
+    content: "Aa";
+}
+
+
+/* ICON */
+
 .icon {
     font-family: 'Material Icons', var(--common-font);
 
@@ -128,19 +146,8 @@ hr {
     -webkit-font-smoothing: antialiased;
 }
 
-.line-block {
-    display: flex;
-    align-items: center;
-}
-
-.file-list {
-    align-self: center;
-    min-width: 25%;
-}
-
-#invert-theme-button::before {
-    font-family: 'Material Icons', var(--common-font);
-    content: "Aa";
+.icon[data-fb]::after {
+    content: attr(data-fb);
 }
 
 

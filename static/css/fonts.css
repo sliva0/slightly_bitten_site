@@ -51,18 +51,22 @@
     font-size: 1.5rem;
 }
 
+.icon[data-icon]::after {
+    content: attr(data-icon);
+}
+
 .copy-button {
     font-size: 18px;
 }
 
-#invert-theme-button::before {
+#invert-theme-button::after {
     font-size: 18px;
 }
 
-#invert-theme-button.type-light::before {
+#invert-theme-button.type-light::after {
     content: "light_mode";
 }
 
-#invert-theme-button.type-dark::before {
+#invert-theme-button.type-dark::after {
     content: "dark_mode";
 }

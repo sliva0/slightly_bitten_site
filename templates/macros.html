@@ -5,14 +5,13 @@
 
 
 <!-- 
-    second span in copy-tooltip is fix for firefox animation font bug
+    Second span in copy-tooltip is fix for firefox animation font bug
     https://bugzilla.mozilla.org/show_bug.cgi?id=1757017
 -->
 {%- macro copy_button(name, link) -%}
 
 {%- if g.use_js -%}
-<div class="copy-button" onclick="CopyCode(event)">
-    {{- "content_copy" if g.fonts else "Copy" -}}
+<div class="copy-button icon" onclick="CopyCode(event)" data-icon="content_copy" data-fb="Copy">
     <span class="copy-tooltip"><span></span></span>
 </div>
 {%- endif -%}
@@ -165,8 +164,8 @@
 
 
 
-{%- macro icon(name, replacer=">") -%}
-<span class="icon"> {{ name if g.fonts else replacer }} </span>
+{%- macro icon(name, fallback="+") -%}
+<span class="icon" data-icon="{{ name }}" data-fb="{{ fallback }}"></span>
 {%- endmacro -%}
 
 
