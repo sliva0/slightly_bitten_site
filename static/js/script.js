@@ -119,7 +119,7 @@ function ChangeRangeLabel(event) {
 
 
 
-let range = document.getElementById('body-width-range');
+const range = document.getElementById('body-width-range');
 if (range !== null) {
     range.addEventListener("mouseup", ChangeBodyWidth);
     range.addEventListener("touchend", ChangeBodyWidth);
