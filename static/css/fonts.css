@@ -70,3 +70,9 @@
 #invert-theme-button.type-dark::after {
     content: "dark_mode";
 }
+
+@keyframes copy-button-icon {
+    from, to {
+        content: "done";
+    }
+}

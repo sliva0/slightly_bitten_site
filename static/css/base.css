@@ -378,7 +378,7 @@ input:checked+.slider::after {
 
     width: max-content;
     position: absolute;
-    bottom: 125%;
+    top: -1.85rem;
     left: 50%;
     transform: translateX(-50%);
 
@@ -438,11 +438,5 @@ input:checked+.slider::after {
 @keyframes copy-tooltip {
     from, to {
         content: "Copied";
-    }
-}
-
-@keyframes copy-button-icon {
-    from, to {
-        content: "done";
     }
 }
