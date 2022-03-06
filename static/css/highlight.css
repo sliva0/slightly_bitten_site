@@ -1,45 +1,18 @@
-/* COLORS OF OTHER HIGHLIGHT ELEMENTS */
-
+/* COLORS OF HIGHLIGHT ELEMENTS */
 .highlight-block {
-    color: #def;
-    background-color: #777;
-}
+    --hl-fg: #def;
+    --hl-fg-hover: #abc;
+    --text: #A9B7C6;
 
-.highlight pre {
-    border-left-color: #666;
-}
+    --frame: #777;
+    --string-start: #666;
+    --tooltip-bg: #444;
+    --tooltip-border: #888;
 
-.copy-button {
-    background: #ddd0;
-    color: #A9B7C6;
+    --button: #ddd0;
+    --button-hover: #ddd2;
+    --button-active: #ddd1;
 }
-
-.copy-button:hover {
-    background: #ddd4;
-}
-
-.copy-button:active {
-    background: #ddd2;
-}
-
-.copy-tooltip {
-    background-color: #444;
-    color: #def;
-    border-color: #888;
-}
-
-.copy-tooltip::after {
-    border-top-color: #444;
-}
-
-.highlight::-webkit-scrollbar-thumb {
-    background: #def;
-}
-
-.highlight::-webkit-scrollbar-thumb:hover {
-    background: #abc; 
-}
-
 
 /* Source of the rest of the file: https://github.com/kakawait/pygments-darcula/blob/master/darcula.css */
 

@@ -289,11 +289,13 @@ input:checked+.slider::after {
     max-width: fit-content;
     align-self: stretch;
     position: relative;
+    
+    color: var(--hl-fg);
+    background-color: var(--frame);
 }
 
 .highlight-block * {
     color: inherit;
-    border-radius: inherit;
     background-color: inherit;
 }
 
@@ -308,17 +310,18 @@ input:checked+.slider::after {
 }
 
 .highlight {
+    border-radius: 0.2rem;
     padding: 0 0.5rem;
     overflow-x: auto;
-    scrollbar-width: thin;
 }
 
 .highlight pre {
-    border-radius: 0;
     border-left-width: 0.1rem;
     border-left-style: solid;
 
     padding: 0.5rem 0.3rem;
+
+    border-left-color: var(--string-start);
 }
 
 .highlight::-webkit-scrollbar {
@@ -331,6 +334,11 @@ input:checked+.slider::after {
 
 .highlight::-webkit-scrollbar-thumb {
     border-radius: 1rem;
+    background: var(--hl-fg);
+}
+
+.highlight::-webkit-scrollbar-thumb:hover {
+    background: var(--hl-fg-hover); 
 }
 
 .copy-button {
@@ -339,17 +347,35 @@ input:checked+.slider::after {
     user-select: none;
     cursor: pointer;
 
-    margin: 0.3rem;
-    padding: 0.1rem;
     position: absolute;
     top: 0;
     right: 0;
+
+    margin: 0.4rem;
+    padding: 0.1rem;
+    border-radius: 0.1rem;
+    box-shadow: 0 0 0 0;
+
+    background: var(--button);
+    color: var(--text);
 }
+
+.copy-button:hover {
+    box-shadow: 0 0 0 0.1rem;
+    
+    background: var(--button-hover);
+    border-color: var(--hl-fg);
+}
+
+.copy-button:active {
+    background: var(--button-active);
+}
+
 
 .copy-tooltip {
     font-family: var(--common-font);
     font-size: 0.8rem;
-    
+
     width: max-content;
     position: absolute;
     bottom: 125%;
@@ -359,8 +385,15 @@ input:checked+.slider::after {
     padding: 0.2rem;
     border: 0.1rem;
     border-style: solid;
+    border-radius: 0.4rem;
+
     cursor: default;
     opacity: 0;
+    pointer-events: none;
+    
+    background-color: var(--tooltip-bg);
+    color: var(--text);
+    border-color: var(--tooltip-border);
 }
 
 .copy-tooltip::after {
@@ -373,6 +406,7 @@ input:checked+.slider::after {
     border-width: 0.3rem;
     border-style: solid;
     border-color: transparent;
+    border-top-color: var(--tooltip-bg);
 }
 
 .copy-tooltip>::after {
@@ -383,12 +417,32 @@ input:checked+.slider::after {
     opacity: 1;
 }
 
-.copy-animation::after {
-    animation: copy-code 2s ease-in-out;
+.copy-animation>.copy-tooltip>::after {
+    animation: copy-tooltip 1.5s;
 }
 
-@keyframes copy-code {
+.copy-animation {
+    animation: copy-button 1.5s;
+}
+
+.copy-animation::after {
+    animation: copy-button-icon 1.5s;
+}
+
+@keyframes copy-button {
+    from, to {
+        color: #88be05;
+    }
+}
+
+@keyframes copy-tooltip {
     from, to {
         content: "Copied";
+    }
+}
+
+@keyframes copy-button-icon {
+    from, to {
+        content: "done";
     }
 }

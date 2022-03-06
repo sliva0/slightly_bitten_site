@@ -91,10 +91,10 @@ function CopyCode(event) {
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
 
-    let tooltip = event.target.lastElementChild.lastElementChild;
-    tooltip.classList.remove("copy-animation");
-    tooltip.offsetWidth;
-    tooltip.classList.add("copy-animation");
+    let copyButton = event.target.classList;
+    copyButton.remove("copy-animation");
+    event.target.offsetWidth;
+    copyButton.add("copy-animation");
 }
 
 
