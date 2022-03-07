@@ -32,9 +32,9 @@
 
 <body class="use-theme {{ get_theme_type() }}">
     <header>
-        {{ m.link_button("Home", "/") }}
+        {{ m.icon_link_button("home", "Home", "/") }}
         {{ m.breadcrumbs() }}
-        {{ m.link_button("Settings", "/settings") }}
+        {{ m.icon_link_button("settings", "Settings", "/settings") }}
         {{ m.invert_theme_button() }}
     </header>
     <article>
@@ -42,7 +42,7 @@
         {%- endblock -%}
     </article>
     <footer>
-        {{ m.link_button('License', '/license') }}
+        {{ m.icon_text_link_button('gavel', 'License', '/license') }}
         {{ m.link_button('Author', '/about') }}
     </footer>
     

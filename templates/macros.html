@@ -1,8 +1,23 @@
 <!-- BUTTONS -->
 
 
-{%- macro link_button(name, link) -%}
-<a class="button" href="{{ link }}">{{ name }}</a>
+{%- macro link_button(text, link) -%}
+<a class="button" href="{{ link }}">{{ text }}</a>
+{%- endmacro -%}
+
+
+
+{%- macro icon_link_button(icon, fb_text, link) -%}
+<a class="icon button" href="{{ link }}" data-icon="{{ icon }}" data-fb="{{ fb_text }}"></a>
+{%- endmacro -%}
+
+
+
+{%- macro icon_text_link_button(icon, text, link) -%}
+<a class="button" href="{{ link }}">
+    <span class="icon" data-icon="{{ icon }}"></span>
+    {{ text }}
+</a>
 {%- endmacro -%}
 
 

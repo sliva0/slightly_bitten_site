@@ -51,15 +51,19 @@
     font-size: 1.5rem;
 }
 
+header .icon, footer .icon {
+    font-size: 18px;
+}
+
 .icon[data-icon]::after {
     content: attr(data-icon);
 }
 
-.copy-button {
-    font-size: 18px;
+.button>.icon {
+    margin-right: 0.2rem;
 }
 
-#invert-theme-button::after {
+.copy-button {
     font-size: 18px;
 }
 

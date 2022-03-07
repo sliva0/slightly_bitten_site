@@ -150,6 +150,10 @@ hr {
     content: attr(data-fb);
 }
 
+.button>.icon[data-fb] {
+    margin-right: 0.2rem;
+}
+
 
 /* BUTTON */
 
@@ -161,7 +165,6 @@ hr {
 
     display: flex;
     align-items: center;
-    gap: 0.2rem;
 }
 
 .frame, .button {
