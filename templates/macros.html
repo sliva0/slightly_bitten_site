@@ -1,3 +1,6 @@
+<!-- BUTTONS -->
+
+
 {%- macro link_button(name, link) -%}
 <a class="button" href="{{ link }}">{{ name }}</a>
 {%- endmacro -%}
@@ -20,22 +23,14 @@
 
 
 
-{%- macro highlight(language=None, filename=None) -%}
-{%- set content = caller() -%}
+{%- macro settings_option(option_name) -%}
+<hr><span class="line-block">{{ switch(option_name) }}{{ caller() }}</span>
+{%- endmacro -%}
 
-{%- if g.use_hl -%}
-<div class="highlight-block">
-    <pre>{{ get_linenos(content) }}</pre>
-    {{- copy_button() -}}
-    <div class="highlight">
-        <pre>{{ highlight_code(content, language, filename) }}</pre>
-    </div>
-</div>
 
-{%- else -%}
-<pre>{{ content }}</pre>
-{%- endif -%}
 
+{%- macro icon(name, fallback="+") -%}
+<span class="icon" data-icon="{{ name }}" data-fb="{{ fallback }}"></span>
 {%- endmacro -%}
 
 
@@ -75,6 +70,9 @@
 
 
 
+<!-- SWITCHES AND SLIDERS -->
+
+
 {%- macro switch(option) -%}
 {%- set checked = "checked" if g[option] else "" -%}
 
@@ -94,6 +92,54 @@
 
 {%- endif -%}
 </label>
+
+{%- endmacro -%}
+
+
+
+{%- macro body_width_setting() -%}
+
+<hr>
+<div class="range-block">
+    <form action="" method="get" class="line-block">
+        {%- if g.use_js -%}
+            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
+        {%- else -%}
+            <input type="submit" value="Apply" class="button">
+        {%- endif -%}
+
+        <input
+            id="body-width-range" class="button" type="range" name="body_width"
+            min="20" max="100" value="{{ g.body_width }}" step="5"
+        >
+    </form>
+    Max site body width <br>
+    (Determines the maximum width of the space occupied by the site on the screen)
+</div>
+
+{%- endmacro -%}
+
+
+
+
+<!-- COMPLEX PAGE ELEMENTS -->
+
+
+{%- macro highlight(language=None, filename=None) -%}
+{%- set content = caller() -%}
+
+{%- if g.use_hl -%}
+<div class="highlight-block">
+    <pre>{{ get_linenos(content) }}</pre>
+    {{- copy_button() -}}
+    <div class="highlight">
+        <pre>{{ highlight_code(content, language, filename) }}</pre>
+    </div>
+</div>
+
+{%- else -%}
+<pre>{{ content }}</pre>
+{%- endif -%}
 
 {%- endmacro -%}
 
@@ -130,42 +176,6 @@
     {%- endfor -%}
 </div>
 
-{%- endmacro -%}
-
-
-
-{%- macro settings_option(option_name) -%}
-<hr><span class="line-block">{{ switch(option_name) }}{{ caller() }}</span>
-{%- endmacro -%}
-
-
-
-{%- macro body_width_setting() -%}
-
-<hr>
-<div class="range-block">
-    <form action="" method="get" class="line-block">
-        {%- if g.use_js -%}
-            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
-        {%- else -%}
-            <input type="submit" value="Apply" class="button">
-        {%- endif -%}
-
-        <input
-            id="body-width-range" class="button" type="range" name="body_width"
-            min="20" max="100" value="{{ g.body_width }}" step="5"
-        >
-    </form>
-    Max site body width <br>
-    (Determines the maximum width of the space occupied by the site on the screen)
-</div>
-
-{%- endmacro -%}
-
-
-
-{%- macro icon(name, fallback="+") -%}
-<span class="icon" data-icon="{{ name }}" data-fb="{{ fallback }}"></span>
 {%- endmacro -%}
 
 
