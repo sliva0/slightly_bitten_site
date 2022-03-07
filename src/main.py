@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from mimetypes import guess_type
 
@@ -56,7 +57,11 @@ def walk_subpath(path: Path, subpath: str, suffixes: tuple[str]):
 
 def guess_type_and_load_media(path: Path, file_link: str):
     mime_type, _ = guess_type(path)
-    _type = mime_type.split("/")[0]
+
+    if not mime_type:
+        mime_type = "invalid/invalid"
+
+    _type, _ = mime_type.split("/")
 
     if _type == "image":
         return flask.render_template("content/image.html", file_link=file_link)
@@ -141,6 +146,11 @@ def error_handler(error):
     return flask.render_template("errors/error.html", error=error), error.code
 
 
+def load_license_text():
+    with (PROJECT_PATH / "LICENSE.txt").open() as file:
+        return re.sub("(.)\n(.)", r"\1 \2", file.read())
+
+
 def init(app: flask.Flask):
     highlight.init(app)
     cookie_parser.init(app)
@@ -150,6 +160,7 @@ def init(app: flask.Flask):
     app.jinja_env.globals.update(
         FOLDER_EMOJI='\U0001f4c2',
         FILE_EMOJI='\U0001f4c4',
+        LICENSE_TEXT=load_license_text(),
     )
 
     app.jinja_env.trim_blocks = True

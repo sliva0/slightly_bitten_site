@@ -1,0 +1,26 @@
+{%- extends "base.html" -%}
+{%- block title -%} License {%- endblock -%}
+
+{%- block head -%}
+<style>
+    .license {
+        white-space: pre-wrap;
+    }
+</style>
+{%- endblock -%}
+
+{%- block content -%}
+
+<div class="centered">
+    In short, you can do anything with the content of this site,
+    just please leave a link to the author.
+
+    <span>
+        <br> Full license text:
+    </span>
+    <pre class="license">
+        {{- LICENSE_TEXT -}}
+    </pre>
+</div>
+
+{%- endblock -%}
