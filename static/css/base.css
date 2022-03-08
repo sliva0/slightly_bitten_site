@@ -171,6 +171,11 @@ hr {
     -webkit-mask-image: url(/static/media/license_icon.svg);
 }
 
+.github-icon {
+    mask-image: url(/static/media/github_icon.svg);
+    -webkit-mask-image: url(/static/media/github_icon.svg);
+}
+
 
 /* BUTTON */
 

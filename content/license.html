@@ -3,7 +3,7 @@
 
 {%- block head -%}
 <style>
-    .license {
+    pre.license {
         white-space: pre-wrap;
     }
 </style>
@@ -15,12 +15,24 @@
     In short, you can do anything with the content of this site,
     just please leave a link to the author.
 
-    <span>
-        <br> Full license text:
-    </span>
+    <hr>
+    <span>Full license text:</span>
     <pre class="license">
         {{- LICENSE_TEXT -}}
     </pre>
+    <hr>
+
+    <div class="line-block">
+        <a href="https://github.com/google/material-design-icons/blob/master/LICENSE" class="button">
+            <span class="icon" data-icon="category"></span>
+            Material icons license
+        </a>
+        <a href="https://github.com/primer/octicons/blob/main/LICENSE" class="button">
+            <span class="svg-icon github-icon"></span>
+            Octicons license
+        </a>
+    </div>
 </div>
+
 
 {%- endblock -%}
