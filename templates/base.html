@@ -17,9 +17,9 @@
     <link rel="alternate icon" type="image/png" href="/static/media/favicon.png">
     <link rel="icon" type="image/svg+xml" href="/static/media/favicon.svg">
 
-    <link {{ o('fonts') }} rel="stylesheet" type="text/css" href="/static/css/fonts.css">
-    <link {{ o('use_hl') }} rel="stylesheet" type="text/css" href="/static/css/highlight.css">
-    <link {{ o('extra_css') }} rel="stylesheet" type="text/css" href="/static/css/extra.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/fonts.css" {{ o('fonts') }}>
+    <link rel="stylesheet" type="text/css" href="/static/css/highlight.css" {{ o('use_hl') }}>
+    <link rel="stylesheet" type="text/css" href="/static/css/extra.css" {{ o('extra_css') }}>
 
     <style id="body_width-related">
         body {
@@ -42,7 +42,9 @@
         {%- endblock -%}
     </article>
     <footer>
-        {{ m.icon_text_link_button('gavel', 'License', '/license') }}
+        <a class="button" href="/license">
+            <span class="svg-icon license-icon"></span> MIT License
+        </a>
         {{ m.link_button('Author', '/about') }}
     </footer>
     
