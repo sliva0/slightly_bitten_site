@@ -53,18 +53,12 @@ def walk_subpath(path: Path, subpath: str, suffixes: tuple[str]) -> Path:
 
 def guess_type_and_load_media(path: Path, file_link: str) -> str:
     mime_type, _ = guess_type(path)
-
     if not mime_type:
         mime_type = "invalid/invalid"
 
-    _type, _ = mime_type.split("/")
-
-    if _type == "image":
-        return flask.render_template("content/image.html", file_link=file_link)
-
     return flask.render_template(
         "content/media.html",
-        tag=_type,
+        tag=mime_type.split("/")[0],
         file_link=file_link,
         mime_type=mime_type,
     )

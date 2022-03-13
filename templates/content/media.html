@@ -1,14 +1,28 @@
 {%- extends "base.html" -%}
 
+{%- if tag == "image" -%}
+    {%- block head -%}
+    <style> 
+        img { 
+            image-rendering: pixelated;
+        }
+    </style>
+    {%- endblock -%}
+{%- endif -%}
+
+
 {%- block content -%}
+{%- set err = "This image type is not supported by your browser or by site file display mechanism." -%}
 
 <div class="centered">
-    <{{ tag }} class="big-block" controls>
-        <source src="{{ file_link }}" type="{{ mime_type }}">
-        <h3 class="text-block">
-            This media type is not supported by your browser <br> or by site file display mechanism.
-        </h3>
-    </{{ tag }}>
+    {%- if tag == "image" -%}
+        <img src="{{ file_link }}" class="big-block" alt="{{ err }}">
+    {%- else -%}
+        <{{ tag }} class="big-block" controls>
+            <source src="{{ file_link }}" type="{{ mime_type }}">
+            <h3 class="text-block"> {{ err }} </h3>
+        </{{ tag }}>
+    {%- endif -%}
 </div>
 
 {%- endblock -%}
