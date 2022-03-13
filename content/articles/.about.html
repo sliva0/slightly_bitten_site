@@ -3,11 +3,5 @@
 
 
 {%- block content -%}
-{%- filter markdown -%}
-
-Articles on various topics
-
-{{ m.folder_file_list() }}
-
-{%- endfilter -%}
+{{ m.article_preview_block() }}
 {%- endblock -%}

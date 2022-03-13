@@ -1,4 +1,6 @@
 from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Callable
 
 import flask
 
@@ -6,6 +8,7 @@ import flask
 @dataclass
 class RequestPath:
     _path: list[str] = field(default_factory=list)
+    files: list[Path] = field(default_factory=list)
     is_not_found: bool = False
 
     @staticmethod
@@ -34,9 +37,12 @@ class RequestPath:
     def add(self, name):
         self._path.append(name)
 
-    @staticmethod
-    def set_request_path():
-        flask.g.rpath = RequestPath()
+    def scan_dir(self, dir_path: Path, filter_func: Callable[[Path], bool]):
+        self.files += filter(filter_func, dir_path.iterdir())
+
+    @classmethod
+    def set_request_path(cls):
+        flask.g.rpath = cls()
 
 
 def init(app: flask.Flask):

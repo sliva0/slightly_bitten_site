@@ -3,17 +3,15 @@
 
 
 {%- block content -%}
+
+<h3>Articles (on russian):</h3>
+{{ m.article_preview_block() }}
+
 {%- filter markdown -%}
 
-_Some main page text_
-
-{%- call m.highlight("python") -%}
-@app.route('/')
-def index():
-    return "some code piece for highlight testing"
-{%- endcall -%}
-
-{{- m.link_button("Source", "/source") -}}
+<span class="icon" data-icon="code"></span> Sources of this site:
+[on this site](/source), 
+[on github](https://github.com/sliva0/slightly_bitten_site).
 
 {%- endfilter -%}
 {%- endblock -%}

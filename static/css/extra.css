@@ -13,7 +13,7 @@ body {
     transition-property: color, background, border-color;
 }
 
-.button {
+.button, .preview {
     transition: background 0.2s;
 }
 

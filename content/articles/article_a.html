@@ -1,0 +1,35 @@
+{%- extends "article/base.html" -%}
+
+{%- block meta -%}
+{
+    "date": "2022.03.08",
+    "number": 1
+}
+{%- endblock -%}
+
+
+{%- block title -%}
+Title of article A
+{%- endblock -%}
+
+
+{%- block description -%}
+short summary of article A, short summary of article A, short summary of article A.
+{%- endblock -%}
+
+
+{%- block article -%} 
+
+Текст статьи, текст статьи. 
+
+1 2 3
+
+Апельсин.
+
+{%- call m.highlight("python") -%}
+@app.route('/')
+def index():
+    return "some code piece for highlight testing"
+{%- endcall -%}
+
+{%- endblock -%}

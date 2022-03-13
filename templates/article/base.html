@@ -1,0 +1,15 @@
+{%- if article_mode -%}
+    {%- set parent = "article/{}.html".format(article_mode) -%}
+{%- else -%}
+    {%- set parent = "base.html" -%}
+{%- endif -%}
+
+{%- extends parent -%}
+
+
+{%- block content -%}
+    <h1>{%- block title -%}{%- endblock -%}</h1>
+
+    {%- block article -%}
+    {%- endblock -%}
+{%- endblock -%}

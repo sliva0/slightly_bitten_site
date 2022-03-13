@@ -35,7 +35,7 @@
 
 
 
-{%- macro icon(name, fallback="+") -%}
+{%- macro icon(name, fallback) -%}
 <span class="icon" data-icon="{{ name }}" data-fb="{{ fallback }}"></span>
 {%- endmacro -%}
 
@@ -195,7 +195,7 @@
         </a>
     {%- endif -%}
 
-    {%- for file in g.files -%}
+    {%- for file in g.rpath.files -%}
         {%- set name = file.name if source_mode else file.stem -%}
 
         <a class="button" href="{{ g.rpath.path }}/{{ name }}">
@@ -207,6 +207,18 @@
 
             {{- name -}}
         </a>
+    {%- endfor -%}
+</div>
+
+{%- endmacro -%}
+
+
+
+{%- macro article_preview_block(articles_path="articles") -%}
+
+<div class="preview-block">
+    {%- for article in get_articles(articles_path) -%}
+        {{ article.include(article_mode="preview") }}
     {%- endfor -%}
 </div>
 

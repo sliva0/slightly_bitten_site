@@ -130,6 +130,25 @@ hr {
 }
 
 
+/* ARTICLE PREVIEW */
+
+.preview-block {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.preview {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.preview>* {
+    margin: 0;
+}
+
 /* ICON */
 
 .icon {
@@ -197,20 +216,21 @@ hr {
     margin: 0.2rem;
 }
 
-.button {
+.preview, .button {
     color: inherit;
     background: inherit;
     font-size: 1em;
 
-    cursor: pointer;
+    cursor: default;
     user-select: none;
+    text-decoration: none;
 }
 
-.button:hover:not(.slider) {
+.preview:hover, .button:hover:not(.slider) {
     background: var(--hover);
 }
 
-.button:active:not(.slider) {
+.preview:active, .button:active:not(.slider) {
     background: var(--active);
 }
 
@@ -314,7 +334,7 @@ input:checked+.slider::after {
     max-width: fit-content;
     align-self: stretch;
     position: relative;
-    
+
     color: var(--hl-fg);
     background-color: var(--frame);
 }
@@ -363,7 +383,7 @@ input:checked+.slider::after {
 }
 
 .highlight::-webkit-scrollbar-thumb:hover {
-    background: var(--hl-fg-hover); 
+    background: var(--hl-fg-hover);
 }
 
 .copy-button {
@@ -387,7 +407,7 @@ input:checked+.slider::after {
 
 .copy-button:hover {
     box-shadow: 0 0 0 0.1rem;
-    
+
     background: var(--button-hover);
     border-color: var(--hl-fg);
 }
@@ -415,7 +435,7 @@ input:checked+.slider::after {
     cursor: default;
     opacity: 0;
     pointer-events: none;
-    
+
     background-color: var(--tooltip-bg);
     color: var(--text);
     border-color: var(--tooltip-border);
