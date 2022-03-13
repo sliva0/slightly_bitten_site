@@ -15,11 +15,11 @@ def error404_handler(_):
     if rp := flask.g.get("rpath"):
         rp.is_not_found = True
 
-    return flask.render_template("errors/not_found.html"), 404
+    return flask.render_template("error/not_found.html"), 404
 
 
 def error_handler(error):
-    return flask.render_template("errors/error.html", error=error), error.code
+    return flask.render_template("error/base.html", error=error), error.code
 
 
 def load_license_text():
