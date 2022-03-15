@@ -1,4 +1,4 @@
 <a class="preview" href="{{ link }}">
     <h3>{%- block title -%}{%- endblock -%}</h3>
-    {%- block description -%}{%- endblock -%}
+    {{ self.description() }}
 </a>

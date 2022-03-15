@@ -35,7 +35,7 @@ def is_hidden(file: Path) -> bool:
     return file.name.startswith("__") or file.name.startswith(".")
 
 
-def walk_subpath(path: Path, subpath: str, suffixes: tuple[str], hidden_func) -> Path:
+def walk_subpath(path: Path, subpath: str, suffixes: tuple[str], hidden_func=is_hidden) -> Path:
     subpath_names = filter(bool, subpath.split("/"))
 
     for name in subpath_names:
