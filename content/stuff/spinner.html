@@ -87,8 +87,7 @@
 
 <div class="stretched line-block">
     <div class="frame" style="min-width: 8rem; text-align: center">
-        {{ name }}:
-        <label for="{{ var_name }}">{{ value }}</label>
+        {{ name }}: <label for="{{ var_name }}"> {{- value -}} </label>
     </div>
 
     <input
@@ -99,8 +98,8 @@
 
 <script>
     document.getElementById("{{ var_name }}").addEventListener(
-            "input",
-            event => SetCssVar(event, "{{ var_name }}", "{{ unit }}"),
+        "input",
+        event => SetCssVar(event, "{{ var_name }}", "{{ unit }}"),
     );
 </script>
 
