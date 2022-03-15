@@ -1,0 +1,140 @@
+{%- extends "base.html" -%}
+{%- block title -%} Spinner {%- endblock -%}
+
+{%- block head -%}
+<style id="vars">
+    :root {
+        --dot: 16em;
+        --size: 80em;
+        --time: 2s;
+        --amount: 6;
+        --color: lightsalmon;
+    }
+</style>
+
+<style>
+    .centered, .spinner-block {
+        flex-grow: 1;
+    }
+
+    .spinner-block {
+        align-self: stretch;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .spinner {
+        height: 0px;
+        font-size: 1px;
+        align-self: center;
+        animation: rotation var(--time) linear infinite;
+    }
+
+    .spinner *, .spinner *::after {
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+    }
+
+    .spinner, .spinner>div {
+        width: 0;
+        height: 0;
+    }
+
+    .spinner>div {
+        transform: rotate(calc(360deg / var(--amount) * var(--t)));
+    }
+
+    .spinner>div>div {
+        position: relative;
+        height: var(--size);
+        transition-property: height;
+    }
+
+    .spinner>div>div::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        transform: translate(-50%);
+
+        width: 2px;
+        height: 2px;
+        color: var(--color);
+        background: var(--color);
+        border-radius: var(--dot);
+        box-shadow: 0 0 0 var(--dot);
+        animation: color calc(var(--time) / 2) infinite;
+        animation-delay: calc(var(--time) / var(--amount) * var(--t) * -0.5);
+
+        transition-property: color, background, box-shadow, border-radius;
+    }
+
+    @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @keyframes color {
+        from { filter: hue-rotate(0deg); }
+        to { filter: hue-rotate(360deg); }
+    }
+</style>
+{%- endblock -%}
+
+
+
+{%- macro var_setting(name, var_name, unit, min, max, step, value) -%}
+
+<div class="stretched line-block">
+    <div class="frame" style="min-width: 8rem; text-align: center">
+        {{ name }}:
+        <label for="{{ var_name }}">{{ value }}</label>
+    </div>
+
+    <input
+        id="{{ var_name }}" class="button range" type="range"
+        min="{{ min }}" max="{{ max }}" step="{{ step }}" value="{{ value }}"
+    >
+</div>
+
+<script>
+    document.getElementById("{{ var_name }}").addEventListener(
+            "input",
+            event => SetCssVar(event, "{{ var_name }}", "{{ unit }}"),
+    );
+</script>
+
+{%- endmacro -%}
+
+
+{%- block content -%}
+
+<script>
+    const VARS = document.getElementById("vars").sheet.cssRules[0].style;
+    
+    function SetCssVar(event, var_name, unit) {
+        event.target.labels.forEach(i => i.innerHTML = event.target.value);
+        VARS.setProperty("--" + var_name, event.target.value + unit);
+    }
+</script>
+
+<div class="centered">
+    <h1> CSS only spinner: </h1>
+
+    <div class="spinner-block">
+        <div class="spinner">
+            {%- for i in range(10) -%}
+                <div style="--t: {{ i }}"><div></div></div>
+            {%- endfor -%}
+        </div>
+    </div>
+
+    <hr>
+
+    <h3> CSS --vars: </h3>
+    {{ var_setting("Spinner size", "size", "em", 0, 200, 20, 80) }}
+    {{ var_setting("Circle size", "dot", "em", 0, 50, 5, 16) }}
+    {{ var_setting("Loop time", "time", "s", 0.5, 5, 0.5, 2) }}
+    {{ var_setting("Circle amount", "amount", "", 1, 10, 1, 6) }}
+</div>
+{%- endblock -%}

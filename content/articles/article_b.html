@@ -18,7 +18,8 @@ short summary of article B, short summary of article B, short summary of article
 {%- endblock -%}
 
 
-{%- block article -%} 
+{%- block article -%}
+{%- filter markdown -%}
 
 Текст статьи Б, текст статьи Б. 
 
@@ -26,4 +27,5 @@ short summary of article B, short summary of article B, short summary of article
 
 Баранка.
 
+{%- endfilter -%}
 {%- endblock -%}

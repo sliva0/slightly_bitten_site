@@ -4,14 +4,25 @@
 
 {%- block content -%}
 
-<h3>Articles (on russian):</h3>
+<h3 class="centered">Articles (on russian):</h3>
 {{ m.article_preview_block() }}
 
-{%- filter markdown -%}
+<hr>
 
-<span class="icon" data-icon="code"></span> Sources of this site:
-[on this site](/source), 
-[on github](https://github.com/sliva0/slightly_bitten_site).
+<div class="centered-line-block">
+    <a href="/stuff" class="button">
+        <span class="icon" data-icon="category"></span>
+        Random web stuff
+    </a>
 
-{%- endfilter -%}
+    <a href="/source" class="button">
+        <span class="icon" data-icon="code"></span>
+        Source code viewer
+    </a>
+    <a href="https://github.com/sliva0/slightly_bitten_site" class="button">
+        <span class="svg-icon github-icon"></span>
+        Source code on github
+    </a>
+</div>
+
 {%- endblock -%}

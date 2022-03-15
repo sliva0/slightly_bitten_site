@@ -19,6 +19,7 @@ short summary of article A, short summary of article A, short summary of article
 
 
 {%- block article -%} 
+{%- filter markdown -%}
 
 Текст статьи, текст статьи. 
 
@@ -32,4 +33,5 @@ def index():
     return "some code piece for highlight testing"
 {%- endcall -%}
 
+{%- endfilter -%}
 {%- endblock -%}

@@ -39,6 +39,7 @@ class RequestPath:
 
     def scan_dir(self, dir_path: Path, filter_func: Callable[[Path], bool]):
         self.files += filter(filter_func, dir_path.iterdir())
+        self.files.sort(key=lambda p: (p.is_file(), p.name))
 
     @classmethod
     def set_request_path(cls):

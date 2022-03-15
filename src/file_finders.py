@@ -87,6 +87,10 @@ def is_hidden_source(file: Path) -> bool:
     return file.name.startswith("__") or (file.name.startswith(".") and file.is_dir())
 
 
+def content_filter(file: Path) -> bool:
+    return not is_hidden(file) and file.suffix in CONTENT_SUFFIXES
+
+
 def source_filter(file: Path) -> bool:
     return not is_hidden_source(file) and file.suffix in ("", *SOURCE_SUFFIXES)
 
@@ -97,6 +101,7 @@ def content_file_finder(subpath: str = "") -> str:
     path = walk_subpath(PROJECT_PATH / "content", subpath, suffixes)
 
     if path.is_dir():
+        flask.g.rpath.scan_dir(path, content_filter)
         path /= DIRECTORY_DESCRIPTION_FILE_NAME
         if not path.exists():
             flask.abort(404)
@@ -141,8 +146,12 @@ class Article:
 
         return cls(article_path, link, file_content, **meta_info)
 
-    def include(self, **kwargs) -> Markup:
-        template = flask.render_template_string(self.file_content, link=self.link, **kwargs)
+    def include(self, mode="preview", **kwargs) -> Markup:
+        template = flask.render_template_string(
+            self.file_content,
+            link=self.link,
+            article_mode=mode,
+        )
         return Markup(template)
 
 

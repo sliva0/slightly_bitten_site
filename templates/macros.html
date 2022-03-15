@@ -115,7 +115,7 @@
         {%- endif -%}
 
         <input
-            id="body-width-range" class="button" type="range" name="body_width"
+            id="body-width-range" class="button range" type="range"
             min="20" max="100" step="5" value="{{ g.body_width }}"
         >
     </form>
@@ -186,26 +186,22 @@
 
 
 
-{%- macro folder_file_list(source_mode=False) -%}
+{%- macro folder_file_list() -%}
 
 <div class="file-list">
-    {%- if source_mode -%}
-        <a class="button" href="{{ g.rpath.parent or '/' }}">
-            {{- icon("drive_file_move_rtl", FOLDER_EMOJI) -}} ..
-        </a>
-    {%- endif -%}
+    <a class="button" href="{{ g.rpath.parent or '/' }}">
+        {{- icon("drive_file_move_rtl", FOLDER_EMOJI) -}} ..
+    </a>
 
     {%- for file in g.rpath.files -%}
-        {%- set name = file.name if source_mode else file.stem -%}
-
-        <a class="button" href="{{ g.rpath.path }}/{{ name }}">
+        <a class="button" href="{{ g.rpath.path }}/{{ file.name }}">
             {%- if file.is_dir() -%}
                 {{ icon("folder", FOLDER_EMOJI) }}
             {%- else -%}
                 {{ icon("description", FILE_EMOJI) }}
             {%- endif -%}
 
-            {{- name -}}
+            {{- file.name -}}
         </a>
     {%- endfor -%}
 </div>
@@ -218,7 +214,7 @@
 
 <div class="preview-block">
     {%- for article in get_articles(articles_path) -%}
-        {{ article.include(article_mode="preview") }}
+        {{ article.include() }}
     {%- endfor -%}
 </div>
 

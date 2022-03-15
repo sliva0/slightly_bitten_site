@@ -16,6 +16,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 header, footer {
@@ -38,7 +39,7 @@ article {
     align-items: flex-start;
 }
 
-article>p, article>pre {
+p, h1, h2, h3, article>pre {
     margin: 0.5rem 0;
 }
 
@@ -91,6 +92,10 @@ hr {
 
 /* ADDITIONAL BLOCK PROPERTIES */
 
+.stretched {
+    align-self: stretch;
+}
+
 .centered {
     display: flex;
     align-self: stretch;
@@ -117,6 +122,14 @@ hr {
 .line-block {
     display: flex;
     align-items: center;
+}
+
+.centered-line-block {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .file-list {
@@ -226,11 +239,11 @@ hr {
     text-decoration: none;
 }
 
-.preview:hover, .button:hover:not(.slider) {
+.preview:hover, .button:hover:not(.slider, .range) {
     background: var(--hover);
 }
 
-.preview:active, .button:active:not(.slider) {
+.preview:active, .button:active:not(.slider, .range) {
     background: var(--active);
 }
 
@@ -283,7 +296,7 @@ input:checked+.slider::after {
     margin: 0.4rem;
 }
 
-#body-width-range {
+.range {
     font-size: 1.25rem;
     flex-grow: 1;
     padding: 0;
@@ -294,7 +307,7 @@ input:checked+.slider::after {
     background: var(--inactive);
 }
 
-#body-width-range::-webkit-slider-thumb {
+.range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 1em;
@@ -304,11 +317,11 @@ input:checked+.slider::after {
     cursor: pointer;
 }
 
-#body-width-range::-webkit-slider-thumb:hover {
+.range::-webkit-slider-thumb:hover {
     background: var(--slider-hover);
 }
 
-#body-width-range::-moz-slider-thumb {
+.range::-moz-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 1em;
@@ -318,7 +331,7 @@ input:checked+.slider::after {
     cursor: pointer;
 }
 
-#body-width-range::-moz-slider-thumb:hover {
+.range::-moz-slider-thumb:hover {
     background: var(--slider-hover);
 }
 
@@ -328,7 +341,7 @@ input:checked+.slider::after {
 .highlight-block {
     border-radius: 0.4rem;
     padding: 0.2rem;
-    margin: 0 1rem;
+    margin: 0.5rem;
 
     display: flex;
     max-width: fit-content;
