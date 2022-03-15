@@ -35,14 +35,14 @@ def is_hidden(file: Path) -> bool:
     return file.name.startswith("__") or file.name.startswith(".")
 
 
-def walk_subpath(path: Path, subpath: str, suffixes: tuple[str]) -> Path:
+def walk_subpath(path: Path, subpath: str, suffixes: tuple[str], hidden_func) -> Path:
     subpath_names = filter(bool, subpath.split("/"))
 
     for name in subpath_names:
         flask.g.rpath.add(name)
         file = path / name
 
-        if is_hidden(file):
+        if hidden_func(file):
             flask.abort(404)
 
         if not (path := test_all_suffixes(file, suffixes)):
@@ -113,7 +113,7 @@ def source_file_finder(subpath: str = "") -> str:
     flask.g.rpath.add("source")
     suffixes = SOURCE_SUFFIXES
 
-    path = walk_subpath(PROJECT_PATH, subpath, suffixes)
+    path = walk_subpath(PROJECT_PATH, subpath, suffixes, is_hidden_source)
 
     if path.is_dir():
         flask.g.rpath.scan_dir(path, source_filter)
