@@ -47,12 +47,12 @@ footer {
     justify-content: space-between;
 }
 
-pre {
-    padding: 0 1rem;
-}
-
 pre, code {
     font-family: 'JetBrains Mono', monospace;
+}
+
+pre {
+    padding: 0 1rem;
     font-size: 0.8rem;
 }
 
@@ -140,6 +140,10 @@ hr {
 #invert-theme-button::after {
     font-family: 'Material Icons', var(--common-font);
     content: "Aa";
+}
+
+label[for="body-width-range"] {
+    font-family: 'JetBrains Mono', monospace;
 }
 
 
