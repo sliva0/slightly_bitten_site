@@ -51,7 +51,7 @@
     font-size: 0;
 }
 
-.icon::after {
+.icon::after, .copy-button::after {
     font-size: 18px;
 }
 
@@ -65,10 +65,6 @@
 
 .button>.icon {
     margin-right: 0.2rem;
-}
-
-.copy-button {
-    font-size: 18px;
 }
 
 #invert-theme-button.light-mode::after {

@@ -45,6 +45,7 @@ p, h1, h2, h3 {
 
 pre, code {
     font-family: var(--mono-font);
+    font-size: 0.8rem;
 }
 
 main>pre {
