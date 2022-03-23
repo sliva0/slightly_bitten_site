@@ -6,7 +6,7 @@ from werkzeug.exceptions import HTTPException
 
 from flaskext.markdown import Markdown
 
-from src import cookie_parser, request_path, file_finders, highlight, constants
+from src import cookie_parser, request_path, file_finders, highlight
 
 PROJECT_PATH = Path(__file__).parent.parent
 
@@ -43,7 +43,6 @@ def init(app: flask.Flask):
         FOLDER_EMOJI='\U0001f4c2',
         FILE_EMOJI='\U0001f4c4',
         LICENSE_TEXT=load_license_text(),
-        TG_INSTANT_VIEW=constants.TG_INSTANT_VIEW,
         get_articles=file_finders.get_articles,
     )
 
