@@ -5,7 +5,7 @@
 {%- endmacro -%}
 
 <!DOCTYPE html>
-<html class="{{ g.theme }}">
+<html>
 
 <head>
     <title> sliva0.tk - {% block title -%} {{ g.rpath.page_name }} {%- endblock -%} </title>
@@ -33,17 +33,17 @@
     {%- block head -%} {%- endblock -%}
 </head>
 
-<body class="use-theme {{ get_theme_type() }}">
+<body class="theme-apply {{ g.theme }} {{ get_theme_mode() }}">
     <header>
         {{ m.icon_link_button("home", "Home", "/") }}
         {{ m.breadcrumbs() }}
         {{ m.icon_link_button("settings", "Settings", "/settings") }}
         {{ m.invert_theme_button() }}
     </header>
-    <article>
+    <main>
         {%- block content -%}
         {%- endblock -%}
-    </article>
+    </main>
     <footer>
         <a class="button" href="/license">
             <span class="svg-icon license-icon"></span> MIT License

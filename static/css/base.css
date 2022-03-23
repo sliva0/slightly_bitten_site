@@ -1,19 +1,18 @@
-* {
-    border-color: inherit;
+:root {
     --common-font: "Roboto", Helvetica, sans-serif;
+    --mono-font: 'JetBrains Mono', monospace;
 }
 
-html {
-    /* fix for gradient background */
-    min-height: 100%;
+* {
+    border-color: inherit;
 }
 
 body {
-    margin: 0 auto;
-    max-width: var(--body-width);
     font-family: var(--common-font);
-
+    max-width: var(--body-width);
+    margin: 0 auto;
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -28,9 +27,10 @@ header, footer {
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-article {
+main {
     margin: 0 1rem;
     flex-grow: 1;
 
@@ -39,19 +39,16 @@ article {
     align-items: flex-start;
 }
 
-p, h1, h2, h3, article>pre {
+p, h1, h2, h3 {
     margin: 0.5rem 0;
 }
 
-footer {
-    justify-content: space-between;
-}
-
 pre, code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono-font);
 }
 
-pre {
+main>pre {
+    margin: 0.5rem 0;
     padding: 0 1rem;
     font-size: 0.8rem;
 }
@@ -69,8 +66,7 @@ hr {
     align-self: stretch;
 }
 
-.use-theme, .use-theme.button {
-    /* second selector for priority over .button */
+.theme-apply, .theme-apply.button {
     color: var(--fg);
     background: var(--bg);
     border-color: var(--border);

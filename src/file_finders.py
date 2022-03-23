@@ -8,7 +8,7 @@ from jinja2 import Markup
 
 DIRECTORY_DESCRIPTION_FILE_NAME = ".about.html"
 
-CONTENT_SUFFIXES = (".html", )
+CONTENT_SUFFIXES = (".html", ".j2")
 TEXT_SOURCE_SUFFIXES = (".html", ".css", ".js", ".py", ".txt", "")
 SOURCE_SUFFIXES = TEXT_SOURCE_SUFFIXES + (".webm", ".png", ".svg")
 

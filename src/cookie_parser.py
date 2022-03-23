@@ -8,23 +8,20 @@ def get_unique_elements(_list: list) -> list:
     return list(dict.fromkeys(_list))
 
 
-BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 5))])
-
-
 def get_theme_names() -> list[str]:
     with open("./static/css/themes.css") as file:
         css_file = file.read()
 
-    themes = re.findall(r"\n\.(theme-[a-z\-]+)", css_file)
+    themes = re.findall(r"\n\.([a-z\-]+-theme)", css_file)
 
     return get_unique_elements(themes)
 
 
-def get_theme_type(inverted: bool = False) -> str:
-    return THEME_TYPES[bool(flask.g.type_light) ^ inverted]
+def get_theme_mode(inverted: bool = False) -> str:
+    return THEME_MODES[bool(flask.g.dark_mode) ^ inverted]
 
 
-def invert_cookie_bool(value: str) -> str:
+def to_cookie_bool(value: str) -> str:
     return BOOL_SET[bool(value)]
 
 
@@ -67,17 +64,19 @@ def process_cookies():
 
 
 THEME_NAMES = get_theme_names()
-THEME_TYPES = ("type-dark", "type-light")
+THEME_MODES = ("light-mode", "dark-mode")
+BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 5))])
+
 BOOL_SET = ("1", "")  # (True, False)
-BOOL_COOKIE_LIST = ("type_light", "use_js", "use_hl", "fonts", "extra_css")
+BOOL_COOKIE_LIST = ("dark_mode", "use_js", "use_hl", "fonts", "extra_css")
 
 
 def init(app: flask.Flask):
     app.before_request(process_cookies)
 
     app.jinja_env.globals.update(
-        get_theme_type=get_theme_type,
-        invert_bool=invert_cookie_bool,
+        get_theme_mode=get_theme_mode,
+        to_bool=to_cookie_bool,
         THEME_NAMES=THEME_NAMES,
-        THEME_TYPES=THEME_TYPES,
+        THEME_MODES=THEME_MODES,
     )

@@ -27,6 +27,12 @@ def load_license_text():
         return re.sub("(.)\n(.)", r"\1 \2", file.read())
 
 
+def add_redirect_rule(app: flask.Flask, from_path: str, to_path: str):
+    @app.route(from_path)
+    def _redirect():
+        return flask.redirect(to_path)
+
+
 def init(app: flask.Flask):
     highlight.init(app)
     cookie_parser.init(app)
@@ -42,6 +48,8 @@ def init(app: flask.Flask):
 
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
+
+    add_redirect_rule(app, '/favicon.ico', '/static/media/favicon.png')
 
     for path in ("/", "/<path:subpath>"):
         app.add_url_rule(path, view_func=file_finders.content_file_finder)

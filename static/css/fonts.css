@@ -67,11 +67,11 @@
     font-size: 18px;
 }
 
-#invert-theme-button.type-light::after {
+#invert-theme-button.light-mode::after {
     content: "light_mode";
 }
 
-#invert-theme-button.type-dark::after {
+#invert-theme-button.dark-mode::after {
     content: "dark_mode";
 }
 

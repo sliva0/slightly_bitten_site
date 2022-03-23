@@ -19,11 +19,9 @@
 -->
 {%- macro copy_button(name, link) -%}
 
-{%- if g.use_js -%}
 <div class="copy-button icon" onclick="CopyCode(event)" data-icon="content_copy" data-fb="Copy">
     <span class="copy-tooltip"><span></span></span>
 </div>
-{%- endif -%}
 
 {%- endmacro -%}
 
@@ -42,8 +40,8 @@
 
 
 {%- macro invert_theme_button(name, link) -%}
-{%- set theme_type = get_theme_type(inverted=True) -%}
-{%- set class = "button use-theme icon " + get_theme_type(inverted=True) -%}
+{%- set mode = get_theme_mode(inverted=True) -%}
+{%- set class = ("button", "theme-apply", "icon", g.theme, mode) | join(" ") -%}
 
 {%- if g.use_js -%}
 <div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)"></div>
@@ -51,7 +49,7 @@
 <a 
     id="invert-theme-button"
     class="{{ class }}"
-    href="{{ g.rpath.path }}?type_light={{ invert_bool(g.type_light) }}"
+    href="{{ g.rpath.path }}?dark_mode={{ to_bool(not g.dark_mode) }}"
 ></a>
 {%- endif -%}
 
@@ -59,16 +57,16 @@
 
 
 
-{%- macro set_theme_button(theme, type) -%}
-{%- set class = " ".join(("button", "use-theme", theme, type)) -%}
-{%- set type_light = invert_bool(type != "type-light") -%}
+{%- macro set_theme_button(theme, mode) -%}
+{%- set class = ("button", "theme-apply", theme, mode) | join(" ") -%}
+{%- set dark_mode = to_bool(mode == "dark_mode") -%}
 
 {%- if g.use_js -%}
-<div class="{{ class }}" onclick="setTheme('{{ theme }}', '{{ type }}')">Aa</div>
+<div class="{{ class }}" onclick="setTheme('{{ theme }}', '{{ mode }}')">Aa</div>
 {%- else -%}
 <a
     class="{{ class }}"
-    href="{{ g.rpath.path }}?theme={{ theme }}&type_light={{ type_light }}"
+    href="{{ g.rpath.path }}?theme={{ theme }}&dark_mode={{ dark_mode }}"
 >Aa</a>
 {%- endif -%}
 
@@ -93,38 +91,13 @@
     <input type="checkbox" {{ checked }}>
     <a
         class="button slider"
-        href="{{ g.rpath.path }}?{{ option }}={{ invert_bool(g[option]) }}"
+        href="{{ g.rpath.path }}?{{ option }}={{ to_bool(g[option]) }}"
     ></a>
 
 {%- endif -%}
 </label>
 
 {%- endmacro -%}
-
-
-
-{%- macro body_width_setting() -%}
-
-<hr>
-<div class="range-block">
-    <form action="" method="get" class="line-block">
-        {%- if g.use_js -%}
-            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
-        {%- else -%}
-            <input type="submit" value="Apply" class="button">
-        {%- endif -%}
-
-        <input
-            id="body-width-range" class="button range" type="range" name="body_width"
-            min="20" max="100" step="5" value="{{ g.body_width }}"
-        >
-    </form>
-    Max site body width <br>
-    (Determines the maximum width of the space occupied by the site on the screen)
-</div>
-
-{%- endmacro -%}
-
 
 
 
@@ -137,7 +110,7 @@
 {%- if g.use_hl -%}
 <div class="highlight-block">
     <pre>{{ get_linenos(content) }}</pre>
-    {{- copy_button() -}}
+    {{ copy_button() if g.use_js else "" }}
     <div class="highlight">
         <pre>{{ highlight_code(content, language, filename) }}</pre>
     </div>
@@ -163,22 +136,6 @@
         {%- else -%}
             {{ name }}
         {%- endif -%}
-    {%- endfor -%}
-</div>
-
-{%- endmacro -%}
-
-
-
-{%- macro theme_panel() -%}
-
-<div class="theme-panel">
-    {%- for theme in THEME_NAMES -%}
-    <div class="{{ theme }}">
-        {%- for type in THEME_TYPES[::-1] -%}
-            {{ set_theme_button(theme, type) }}
-        {%- endfor -%}
-    </div>
     {%- endfor -%}
 </div>
 

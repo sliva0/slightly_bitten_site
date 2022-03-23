@@ -1,6 +1,6 @@
 /* Color themes */
 
-.theme-common .type-light, .button.theme-common.type-light {
+.common-theme.light-mode {
     --fg: #222;
     --fg-hl: #48f;
     --bg: #eee;
@@ -12,7 +12,7 @@
     --active: #9df;
 }
 
-.theme-common .type-dark, .button.theme-common.type-dark {
+.common-theme.dark-mode {
     --fg: #ddd;
     --fg-hl: #88d;
     --bg: #333;
@@ -24,8 +24,7 @@
     --active: #77c;
 }
 
-
-.theme-plum .type-light, .button.theme-plum.type-light {
+.plum-theme.light-mode {
     --fg: hsl(232, 27%, 30%);
     --fg-hl: hsl(273, 40%, 50%);
     --bg: linear-gradient(hsl(220, 50%, 65%), hsl(273, 35%, 70%));
@@ -37,7 +36,7 @@
     --active: hsl(273, 29%, 65%);
 }
 
-.theme-plum .type-dark, .button.theme-plum.type-dark {
+.plum-theme.dark-mode {
     --fg: hsl(232, 30%, 80%);
     --fg-hl: hsl(228, 100%, 83%);
     --bg: linear-gradient(hsl(220, 40%, 40%), hsl(273, 25%, 40%));
@@ -50,7 +49,7 @@
 }
 
 
-.theme-darcula .type-light, .button.theme-darcula.type-light {
+.darcula-theme.light-mode {
     --fg: #40a1dd;
     --fg-hl: #7b22c3;
     --bg: #faf8e4;
@@ -62,7 +61,7 @@
     --active: #b9e085;
 }
 
-.theme-darcula .type-dark, .button.theme-darcula.type-dark {
+.darcula-theme.dark-mode {
     --fg: #A9B7C6;
     --fg-hl: #88d;
     --bg: #2B2B2B;
@@ -74,7 +73,7 @@
     --active: #6D9CBE;
 }
 
-.theme-mono .type-light, .button.theme-mono.type-light {
+.mono-theme.light-mode {
     --fg: #000;
     --fg-hl: #888;
     --bg: #fff;
@@ -86,7 +85,7 @@
     --active: #aaa;
 }
 
-.theme-mono .type-dark, .button.theme-mono.type-dark {
+.mono-theme.dark-mode {
     --fg: #fff;
     --fg-hl: #aaa;
     --bg: #000;

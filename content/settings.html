@@ -3,7 +3,15 @@
 
 {%- block content -%}
 
-{{ m.theme_panel() }}
+<div class="theme-panel">
+    {%- for theme in THEME_NAMES -%}
+    <div class="{{ theme }}">
+        {%- for mode in THEME_MODES -%}
+            {{ m.set_theme_button(theme, mode) }}
+        {%- endfor -%}
+    </div>
+    {%- endfor -%}
+</div>
 
 {%- call m.settings_option("use_js") -%}
     Javascript <br>
@@ -25,6 +33,23 @@
     (Connects an additional stylesheet with animations).
 {%- endcall -%}
 
-{{ m.body_width_setting() }}
+<hr>
+
+<div class="range-block">
+    <form action="" method="get" class="line-block">
+        {%- if g.use_js -%}
+            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
+        {%- else -%}
+            <input type="submit" value="Apply" class="button">
+        {%- endif -%}
+
+        <input
+            id="body-width-range" class="button range" type="range" name="body_width"
+            min="20" max="100" step="5" value="{{ g.body_width }}"
+        >
+    </form>
+    Max site body width <br>
+    (Determines the maximum width of the space occupied by the site on the screen)
+</div>
 
 {%- endblock -%}

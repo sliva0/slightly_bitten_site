@@ -1,7 +1,6 @@
-const THEME_TYPES = ["type-dark", "type-light"];
+const THEME_MODES = ["light-mode", "dark-mode"];
 
 const BODY_CLASSES = document.body.classList;
-const HTML_CLASSES = document.documentElement.classList;
 const INV_THEME_BUTTON_CLASSES = document.getElementById("invert-theme-button").classList;
 const CSS_RULES = document.getElementById("body_width-related").sheet.cssRules;
 
@@ -26,28 +25,41 @@ function setBooleanCookie(name, value) {
 
 
 function invertTheme() {
-    setBooleanCookie("type_light", BODY_CLASSES.contains(THEME_TYPES[0]));
+    setBooleanCookie("dark_mode", BODY_CLASSES.contains(THEME_MODES[0]));
 
-    THEME_TYPES.forEach(i => {
+    THEME_MODES.forEach(i => {
         BODY_CLASSES.toggle(i);
         INV_THEME_BUTTON_CLASSES.toggle(i);
     })
+}
+
+/**
+ * Delete all theme classes and set new one
+ * @param {DOMTokenList} classes 
+ * @param {string} themeName 
+ */
+function SetThemeClass(classes, themeName) {
+    classes.forEach(
+        i => {
+            if (i.endsWith("-theme")) { classes.remove(i); }
+        }
+    )
+    classes.add(themeName);
 }
 
 
 /**
  * Set color theme and type
  * @param {string} themeName
- * @param {string} themeType
+ * @param {string} themeMode
  */
-function setTheme(themeName, themeType) {
-    HTML_CLASSES.forEach(i => {
-        if (i.startsWith("theme-")) { HTML_CLASSES.remove(i); }
-    });
-    HTML_CLASSES.add(themeName);
-    setCookie("theme", themeName);
+function setTheme(themeName, themeMode) {
+    [BODY_CLASSES, INV_THEME_BUTTON_CLASSES].forEach(
+        classes => { SetThemeClass(classes, themeName); }
+    )
 
-    if (!BODY_CLASSES.contains(themeType)) { invertTheme(); }
+    setCookie("theme", themeName);
+    if (!BODY_CLASSES.contains(themeMode)) { invertTheme(); }
 }
 
 /**
