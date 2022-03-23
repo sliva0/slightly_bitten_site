@@ -6,9 +6,11 @@
 
 {%- extends parent -%}
 
-{%- block tg_iv -%}
-    INSTANT VIEW: {{ TG_INSTANT_VIEW.format(g.rpath.path) }}
+
+{%- block head -%}
+    <meta property="og:url" content="{{ TG_INSTANT_VIEW.format(g.rpath.path) }}">
 {%- endblock -%}
+
 
 {%- block content -%}
     <h1 id="title">{%- block title -%}{%- endblock -%}</h1>
