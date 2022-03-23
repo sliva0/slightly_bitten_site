@@ -54,6 +54,10 @@ main>pre {
     font-size: 0.8rem;
 }
 
+pre>code {
+    font-size: inherit;
+}
+
 code {
     font-size: 0.9rem;
 }

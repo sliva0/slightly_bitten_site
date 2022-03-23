@@ -112,12 +112,16 @@
     <pre>{{ get_linenos(content) }}</pre>
     {{ copy_button() if g.use_js else "" }}
     <div class="highlight">
-        <pre>{{ highlight_code(content, language, filename) }}</pre>
+        <pre data-language="{{ language }}">
+            {{-""-}}
+            <code>{{ highlight_code(content, language, filename) }}</code>
+            {{-""-}}
+        </pre>
     </div>
 </div>
 
 {%- else -%}
-<pre>{{ content }}</pre>
+<pre><code>{{ content }}</code></pre>
 {%- endif -%}
 
 {%- endmacro -%}
