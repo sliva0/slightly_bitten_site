@@ -165,9 +165,12 @@ label[for="body-width-range"] {
 /* ICON */
 
 .icon {
-    font-family: 'Material Icons', var(--common-font);
-
     display: inline-block;
+}
+
+.icon::after {
+    font-family: 'Material Icons';
+
     user-select: none;
     text-transform: none;
     text-decoration: none;
