@@ -6,11 +6,7 @@ from mimetypes import guess_type
 import flask
 from jinja2 import Markup
 
-DIRECTORY_DESCRIPTION_FILE_NAME = ".about.html"
-
-CONTENT_SUFFIXES = (".html", ".j2")
-TEXT_SOURCE_SUFFIXES = (".html", ".css", ".js", ".py", ".txt", "")
-SOURCE_SUFFIXES = TEXT_SOURCE_SUFFIXES + (".webm", ".png", ".svg")
+import src.constants as const
 
 PROJECT_PATH = Path(__file__).parent.parent
 
@@ -73,7 +69,7 @@ def load_content_file_template(path: Path) -> str:
 
 
 def load_source_file_template(path: Path) -> str:
-    if path.suffix in TEXT_SOURCE_SUFFIXES:
+    if path.suffix in const.TEXT_SOURCE_SUFFIXES:
         with open(path) as file:
             source = file.read()
 
@@ -88,21 +84,21 @@ def is_hidden_source(file: Path) -> bool:
 
 
 def content_filter(file: Path) -> bool:
-    return not is_hidden(file) and file.suffix in CONTENT_SUFFIXES
+    return not is_hidden(file) and file.suffix in const.CONTENT_SUFFIXES
 
 
 def source_filter(file: Path) -> bool:
-    return not is_hidden_source(file) and file.suffix in ("", *SOURCE_SUFFIXES)
+    return not is_hidden_source(file) and file.suffix in ("", *const.SOURCE_SUFFIXES)
 
 
 def content_file_finder(subpath: str = "") -> str:
-    suffixes = CONTENT_SUFFIXES
+    suffixes = const.CONTENT_SUFFIXES
 
     path = walk_subpath(PROJECT_PATH / "content", subpath, suffixes)
 
     if path.is_dir():
         flask.g.rpath.scan_dir(path, content_filter)
-        path /= DIRECTORY_DESCRIPTION_FILE_NAME
+        path /= const.DIR_DESCR_FILENAME
         if not path.exists():
             flask.abort(404)
 
@@ -111,7 +107,7 @@ def content_file_finder(subpath: str = "") -> str:
 
 def source_file_finder(subpath: str = "") -> str:
     flask.g.rpath.add("source")
-    suffixes = SOURCE_SUFFIXES
+    suffixes = const.SOURCE_SUFFIXES
 
     path = walk_subpath(PROJECT_PATH, subpath, suffixes, is_hidden_source)
 
@@ -156,7 +152,7 @@ class Article:
 
 
 def get_articles(subpath: str = "/articles") -> list[Article]:
-    suffixes = CONTENT_SUFFIXES
+    suffixes = const.CONTENT_SUFFIXES
     root = PROJECT_PATH / "content"
     dir_path = walk_subpath(root, subpath, suffixes)
     article_list: list[Article] = []
