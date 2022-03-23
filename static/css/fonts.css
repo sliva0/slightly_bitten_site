@@ -48,10 +48,14 @@
 }
 
 .icon {
+    font-size: 0;
+}
+
+.icon::after {
     font-size: 18px;
 }
 
-.file-list .icon {
+.file-list .icon::after {
     font-size: 24px;
 }
 

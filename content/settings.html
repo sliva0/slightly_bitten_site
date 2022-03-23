@@ -37,14 +37,14 @@
 
 <div class="range-block">
     <form action="" method="get" class="line-block">
-        {%- if g.use_js -%}
-            <label for="body-width-range" class="frame">{{ g.body_width }}</label>
-        {%- else -%}
+        <label for="body-width-range" class="frame">{{ g.body_width }}</label>
+        
+        {%- if not g.use_js -%}
             <input type="submit" value="Apply" class="button">
         {%- endif -%}
 
         <input
-            id="body-width-range" class="button range" type="range" name="body_width"
+            id="body-width-range" class="frame range" type="range" name="body_width"
             min="20" max="100" step="5" value="{{ g.body_width }}"
         >
     </form>

@@ -8,7 +8,7 @@
 
 
 {%- macro icon_link_button(icon, fb_text, link) -%}
-<a class="icon button" href="{{ link }}" data-icon="{{ icon }}" data-fb="{{ fb_text }}"></a>
+<a class="icon button" href="{{ link }}" data-icon="{{ icon }}">{{ fb_text }}</a>
 {%- endmacro -%}
 
 
@@ -19,8 +19,8 @@
 -->
 {%- macro copy_button(name, link) -%}
 
-<div class="copy-button icon" onclick="CopyCode(event)" data-icon="content_copy" data-fb="Copy">
-    <span class="copy-tooltip"><span></span></span>
+<div class="copy-button icon" onclick="CopyCode(event)" data-icon="content_copy">
+    Copy <span class="copy-tooltip"><span></span></span>
 </div>
 
 {%- endmacro -%}
@@ -34,7 +34,7 @@
 
 
 {%- macro icon(name, fallback) -%}
-<span class="icon" data-icon="{{ name }}" data-fb="{{ fallback }}"></span>
+<span class="icon" data-icon="{{ name }}">{{ fallback }}</span>
 {%- endmacro -%}
 
 
@@ -44,13 +44,13 @@
 {%- set class = ("button", "theme-apply", "icon", g.theme, mode) | join(" ") -%}
 
 {%- if g.use_js -%}
-<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)"></div>
+<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
 {%- else -%}
 <a 
     id="invert-theme-button"
     class="{{ class }}"
     href="{{ g.rpath.path }}?dark_mode={{ to_bool(not g.dark_mode) }}"
-></a>
+>Aa</a>
 {%- endif -%}
 
 {%- endmacro -%}
@@ -85,12 +85,12 @@
     <input type="checkbox" {{ checked }}
         onchange="switchOption(event, '{{ option }}')"
     >
-    <div class="button slider"></div>
+    <div class="frame slider"></div>
 
 {%- else -%}
     <input type="checkbox" {{ checked }}>
     <a
-        class="button slider"
+        class="frame slider"
         href="{{ g.rpath.path }}?{{ option }}={{ to_bool(g[option]) }}"
     ></a>
 

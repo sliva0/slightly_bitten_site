@@ -103,18 +103,6 @@ hr {
     width: 75%
 }
 
-.breadcrumbs {
-    flex-grow: 1;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-.theme-panel {
-    display: flex;
-    align-self: stretch;
-    justify-content: space-around;
-}
-
 .line-block {
     display: flex;
     align-items: center;
@@ -133,9 +121,20 @@ hr {
     min-width: 25%;
 }
 
+.breadcrumbs {
+    flex-grow: 1;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.theme-panel {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-around;
+}
+
 #invert-theme-button::after {
     font-family: 'Material Icons', var(--common-font);
-    content: "Aa";
 }
 
 label[for="body-width-range"] {
@@ -178,11 +177,7 @@ label[for="body-width-range"] {
     -webkit-font-smoothing: antialiased;
 }
 
-.icon[data-fb]::after {
-    content: attr(data-fb);
-}
-
-.button>.icon[data-fb], .button>.svg-icon {
+.button>.icon:not(:empty), .button>.svg-icon {
     margin-right: 0.2rem;
 }
 
@@ -193,8 +188,8 @@ label[for="body-width-range"] {
 .svg-icon {
     height: 19px;
     width: 19px;
-    mask-size: 100%;
     background: currentColor;
+    mask-size: 100%;
     -webkit-mask-size: 100%;
 }
 
@@ -239,11 +234,11 @@ label[for="body-width-range"] {
     text-decoration: none;
 }
 
-.preview:hover, .button:hover:not(.slider, .range) {
+.preview:hover, .button:hover {
     background: var(--hover);
 }
 
-.preview:active, .button:active:not(.slider, .range) {
+.preview:active, .button:active {
     background: var(--active);
 }
 
