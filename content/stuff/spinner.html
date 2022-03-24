@@ -78,6 +78,11 @@
         from { filter: hue-rotate(0deg); }
         to { filter: hue-rotate(360deg); }
     }
+
+    .var_setting {
+        min-width: 8rem;
+        text-align: center;
+    }
 </style>
 {%- endblock -%}
 
@@ -86,7 +91,7 @@
 {%- macro var_setting(name, var_name, unit, min, max, step, value) -%}
 
 <div class="stretched line-block">
-    <div class="frame" style="min-width: 8rem; text-align: center">
+    <div class="frame var_setting">
         {{ name }}: <label for="{{ var_name }}"> {{- value -}} </label>
     </div>
 

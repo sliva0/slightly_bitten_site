@@ -27,6 +27,13 @@ class RequestPath:
         return self.join_link(self._path)
 
     @property
+    def raw_path(self):
+        if self._path[0] == "source":
+            return self.join_link(["raw"] + self._path[1:])
+
+        return self.join_link(["raw", "content"] + self._path)
+
+    @property
     def parent(self):
         return self.join_link(self._path[:-1])
 

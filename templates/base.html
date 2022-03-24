@@ -37,6 +37,7 @@
     <header>
         {{ m.icon_link_button("home", "Home", "/") }}
         {{ m.breadcrumbs() }}
+        {%- block header_buttons -%} {%- endblock -%}
         {{ m.icon_link_button("settings", "Settings", "/settings") }}
         {{ m.invert_theme_button() }}
     </header>

@@ -53,7 +53,7 @@ def guess_type_and_load_media(path: Path, file_link: str) -> str:
         mime_type = "invalid/invalid"
 
     return flask.render_template(
-        "content/media.html",
+        "source/media.html",
         tag=mime_type.split("/")[0],
         file_link=file_link,
         mime_type=mime_type,
@@ -92,9 +92,7 @@ def source_filter(file: Path) -> bool:
 
 
 def content_file_finder(subpath: str = "") -> str:
-    suffixes = const.CONTENT_SUFFIXES
-
-    path = walk_subpath(PROJECT_PATH / "content", subpath, suffixes)
+    path = walk_subpath(PROJECT_PATH / "content", subpath, const.CONTENT_SUFFIXES)
 
     if path.is_dir():
         flask.g.rpath.scan_dir(path, content_filter)
@@ -107,15 +105,31 @@ def content_file_finder(subpath: str = "") -> str:
 
 def source_file_finder(subpath: str = "") -> str:
     flask.g.rpath.add("source")
-    suffixes = const.SOURCE_SUFFIXES
-
-    path = walk_subpath(PROJECT_PATH, subpath, suffixes, is_hidden_source)
+    path = walk_subpath(PROJECT_PATH, subpath, const.SOURCE_SUFFIXES, is_hidden_source)
 
     if path.is_dir():
         flask.g.rpath.scan_dir(path, source_filter)
         return flask.render_template("source/folder.html")
     else:
         return load_source_file_template(path)
+
+
+def raw_file_finder(subpath: str) -> str:
+    flask.g.rpath.add("raw")
+    path = walk_subpath(PROJECT_PATH, subpath, const.SOURCE_SUFFIXES, is_hidden_source)
+
+    if not path.is_file():
+        flask.abort(404)
+
+    mimetype = None
+    if path.suffix in const.TEXT_SOURCE_SUFFIXES:
+        mimetype = "text/plain"
+
+    return flask.send_from_directory(
+        PROJECT_PATH,
+        path.relative_to(PROJECT_PATH),
+        mimetype=mimetype,
+    )
 
 
 @dataclass()

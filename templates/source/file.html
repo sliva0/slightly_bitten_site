@@ -17,6 +17,12 @@
 </style>
 {%- endblock -%}
 
+
+{%- block header_buttons -%}
+    {{ m.raw_link_buttons() }}
+{%- endblock -%}
+
+
 {%- block content -%}
 
 {%- call m.highlight(filename=filename) -%}

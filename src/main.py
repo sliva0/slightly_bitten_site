@@ -57,5 +57,7 @@ def init(app: flask.Flask):
     for path in ("/source/", "/source/<path:subpath>"):
         app.add_url_rule(path, view_func=file_finders.source_file_finder)
 
+    app.add_url_rule("/raw/<path:subpath>", view_func=file_finders.raw_file_finder)
+
     app.register_error_handler(404, error404_handler)
     app.register_error_handler(HTTPException, error_handler)

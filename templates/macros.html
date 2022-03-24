@@ -1,14 +1,10 @@
 <!-- BUTTONS -->
 
 
-{%- macro link_button(text, link) -%}
-<a class="button" href="{{ link }}">{{ text }}</a>
-{%- endmacro -%}
-
-
-
-{%- macro icon_link_button(icon, fb_text, link) -%}
-<a class="icon button" href="{{ link }}" data-icon="{{ icon }}">{{ fb_text }}</a>
+{%- macro icon_link_button(icon, fb_text, link, args="") -%}
+<a class="icon button" href="{{ link }}" data-icon="{{ icon }}" title="{{ fb_text }}" {{ args }}>
+    {{- fb_text -}}
+</a>
 {%- endmacro -%}
 
 
@@ -43,14 +39,14 @@
 {%- set mode = get_theme_mode(inverted=True) -%}
 {%- set class = ("button", "theme-apply", "icon", g.theme, mode) | join(" ") -%}
 
+{%- macro args() -%}
+    id="invert-theme-button" class="{{ class }}" title="Invert theme"
+{%- endmacro -%}
+
 {%- if g.use_js -%}
-<div id="invert-theme-button" class="{{ class }}" onclick="invertTheme(event)">Aa</div>
+<div {{ args() }} onclick="invertTheme(event)">Aa</div>
 {%- else -%}
-<a 
-    id="invert-theme-button"
-    class="{{ class }}"
-    href="{{ g.rpath.path }}?dark_mode={{ to_bool(not g.dark_mode) }}"
->Aa</a>
+<a {{ args() }} href="{{ g.rpath.path }}?dark_mode={{ to_bool(not g.dark_mode) }}">Aa</a>
 {%- endif -%}
 
 {%- endmacro -%}
@@ -178,5 +174,14 @@
         {{ article.include() }}
     {%- endfor -%}
 </div>
+
+{%- endmacro -%}
+
+
+
+{%- macro raw_link_buttons() -%}
+
+{{ icon_link_button("file_download", "Download", g.rpath.raw_path, "download") }}
+{{ icon_link_button("link", "Direct link", g.rpath.raw_path) }}
 
 {%- endmacro -%}

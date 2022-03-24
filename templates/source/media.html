@@ -11,6 +11,11 @@
 {%- endif -%}
 
 
+{%- block header_buttons -%}
+    {{ m.raw_link_buttons() }}
+{%- endblock -%}
+
+
 {%- block content -%}
 {%- set err = "This image type is not supported by your browser or by site file display mechanism." -%}
 
