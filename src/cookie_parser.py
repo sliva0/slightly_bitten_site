@@ -28,7 +28,6 @@ def is_valid_value(value, possible_values: list[str]) -> bool:
 def set_cookie_value_after_this_request(name: str, value: str):
     @flask.after_this_request
     def set_cookie_value(response):
-        print(dict(flask.request.form))
         response.set_cookie(name, value)
         return response
 
