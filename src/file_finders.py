@@ -154,7 +154,7 @@ class Article:
 
         meta_info = cls._load_meta_block(file_content)
 
-        return cls(article_path, link, file_content, **meta_info)
+        return cls(article_path, str(link), file_content, **meta_info)
 
     def include(self, mode="preview", **kwargs) -> Markup:
         template = flask.render_template_string(
@@ -172,8 +172,16 @@ def get_articles(subpath: str = "/articles") -> list[Article]:
     article_list: list[Article] = []
 
     for file in dir_path.iterdir():
-        if file.is_file() and not is_hidden(file) and file.suffix in suffixes:
-            article = Article.parse(file, str(file.relative_to(root)))
-            article_list.append(article)
+        if is_hidden(file):
+            continue
+
+        if file.is_file() and file.suffix in suffixes:
+            article = Article.parse(file, file.relative_to(root))
+        elif (about := file / const.DIR_DESCR_FILENAME).exists():
+            article = Article.parse(about, file.relative_to(root))
+        else:
+            continue
+
+        article_list.append(article)
 
     return sorted(article_list)
