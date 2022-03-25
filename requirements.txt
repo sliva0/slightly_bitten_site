@@ -1,6 +1,7 @@
-flask
-Flask-Markdown
+Flask==2.0.3
+Flask-Markdown==0.3
+Pygments==2.11.2
 
-pygments
+gunicorn==20.1.0
 
 # git+git://github.com/kakawait/pygments-darcula@master # Source for highlight.css
