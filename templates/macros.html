@@ -35,8 +35,8 @@
 
 
 
-{%- macro invert_theme_button(name, link) -%}
-{%- set mode = get_theme_mode(inverted=True) -%}
+{%- macro invert_theme_button() -%}
+{%- set mode = THEME_MODES[not g.dark_mode] -%}
 {%- set class = ("button", "theme-apply", "icon", g.theme, mode) | join(" ") -%}
 
 {%- macro args() -%}
@@ -46,7 +46,11 @@
 {%- if g.use_js -%}
 <div {{ args() }} onclick="invertTheme(event)">Aa</div>
 {%- else -%}
-<a {{ args() }} href="{{ g.rpath.path }}?dark_mode={{ to_bool(not g.dark_mode) }}">Aa</a>
+<form action="" method="post">
+    <input type="hidden" name="dark_mode" value="{{ to_bool_str(not g.dark_mode) }}">
+    <button type="submit" {{ args() }}>Aa</button>
+</form>
+
 {%- endif -%}
 
 {%- endmacro -%}
@@ -55,15 +59,16 @@
 
 {%- macro set_theme_button(theme, mode) -%}
 {%- set class = ("button", "theme-apply", theme, mode) | join(" ") -%}
-{%- set dark_mode = to_bool(mode == "dark_mode") -%}
+{%- set dark_mode = to_bool_str(THEME_MODES.index(mode)) -%}
 
 {%- if g.use_js -%}
 <div class="{{ class }}" onclick="setTheme('{{ theme }}', '{{ mode }}')">Aa</div>
 {%- else -%}
-<a
-    class="{{ class }}"
-    href="{{ g.rpath.path }}?theme={{ theme }}&dark_mode={{ dark_mode }}"
->Aa</a>
+<form action="" method="post">
+    <input type="hidden" name="theme" value="{{ theme }}">
+    <input type="hidden" name="dark_mode" value="{{ dark_mode }}">
+    <button type="submit" class="{{ class }}">Aa</button>
+</form>
 {%- endif -%}
 
 {%- endmacro -%}
@@ -76,22 +81,19 @@
 {%- macro switch(option) -%}
 {%- set checked = "checked" if g[option] else "" -%}
 
-<label class="switch">
 {%- if g.use_js -%}
-    <input type="checkbox" {{ checked }}
-        onchange="switchOption(event, '{{ option }}')"
-    >
+<label class="switch">
+    <input type="checkbox" {{ checked }} onchange="switchOption(event, '{{ option }}')">
     <div class="frame slider"></div>
+</label>
 
 {%- else -%}
-    <input type="checkbox" {{ checked }}>
-    <a
-        class="frame slider"
-        href="{{ g.rpath.path }}?{{ option }}={{ to_bool(g[option]) }}"
-    ></a>
-
+<form action="" method="post" class="switch">
+    <input type="hidden" name="{{ option }}" value="{{ to_bool_str(not g[option]) }}">
+    <input id="{{option}}" type="checkbox" {{ checked }}>
+    <button class="frame slider"></button>
+</form>
 {%- endif -%}
-</label>
 
 {%- endmacro -%}
 
@@ -108,11 +110,9 @@
     <pre>{{ get_linenos(content) }}</pre>
     {{ copy_button() if g.use_js else "" }}
     <div class="highlight">
-        <pre data-language="{{ language }}">
-            {{-""-}}
-            <code>{{ highlight_code(content, language, filename) }}</code>
-            {{-""-}}
-        </pre>
+        <pre data-language="{{ language }}"><code>
+            {{- highlight_code(content, language, filename) -}}
+        </code></pre>
     </div>
 </div>
 

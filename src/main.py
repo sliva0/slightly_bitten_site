@@ -52,10 +52,17 @@ def init(app: flask.Flask):
     add_redirect_rule(app, '/favicon.ico', '/static/media/favicon.png')
 
     for path in ("/", "/<path:subpath>"):
-        app.add_url_rule(path, view_func=file_finders.content_file_finder)
+        app.add_url_rule(
+            path,
+            methods=["GET", "POST"],
+            view_func=file_finders.content_file_finder,
+        )
 
     for path in ("/source/", "/source/<path:subpath>"):
-        app.add_url_rule(path, view_func=file_finders.source_file_finder)
+        app.add_url_rule(
+            path,
+            view_func=file_finders.source_file_finder,
+        )
 
     app.add_url_rule("/raw/<path:subpath>", view_func=file_finders.raw_file_finder)
 

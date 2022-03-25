@@ -71,6 +71,12 @@ hr {
     align-self: stretch;
 }
 
+button {
+    box-sizing: initial;
+    font-family: var(--common-font);
+    font-size: 1em;
+}
+
 .theme-apply, .theme-apply.button {
     color: var(--fg);
     background: var(--bg);

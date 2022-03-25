@@ -17,12 +17,8 @@ def get_theme_names() -> list[str]:
     return get_unique_elements(themes)
 
 
-def get_theme_mode(inverted: bool = False) -> str:
-    return THEME_MODES[bool(flask.g.dark_mode) ^ inverted]
-
-
-def to_cookie_bool(value: str) -> str:
-    return BOOL_SET[bool(value)]
+def to_bool_str(value: str) -> str:
+    return BOOL_SET[not bool(value)]  # True -> "1", False -> ""
 
 
 def is_valid_value(value, possible_values: list[str]) -> bool:
@@ -32,6 +28,7 @@ def is_valid_value(value, possible_values: list[str]) -> bool:
 def set_cookie_value_after_this_request(name: str, value: str):
     @flask.after_this_request
     def set_cookie_value(response):
+        print(dict(flask.request.form))
         response.set_cookie(name, value)
         return response
 
@@ -62,6 +59,8 @@ def process_cookies():
     for cookie_name in BOOL_COOKIE_LIST:
         flask.g.setdefault(cookie_name, get_cookie_value(cookie_name, BOOL_SET))
 
+    flask.g.mode = THEME_MODES[bool(flask.g.dark_mode)]
+
 
 THEME_NAMES = get_theme_names()
 THEME_MODES = ("light-mode", "dark-mode")
@@ -75,8 +74,7 @@ def init(app: flask.Flask):
     app.before_request(process_cookies)
 
     app.jinja_env.globals.update(
-        get_theme_mode=get_theme_mode,
-        to_bool=to_cookie_bool,
+        to_bool_str=to_bool_str,
         THEME_NAMES=THEME_NAMES,
         THEME_MODES=THEME_MODES,
     )

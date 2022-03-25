@@ -33,7 +33,7 @@
     {%- block head -%} {%- endblock -%}
 </head>
 
-<body class="theme-apply {{ g.theme }} {{ get_theme_mode() }}">
+<body class="theme-apply {{ g.theme }} {{ g.mode }}">
     <header>
         {{ m.icon_link_button("home", "Home", "/") }}
         {{ m.breadcrumbs() }}
