@@ -4,9 +4,7 @@ from pathlib import Path
 import flask
 from werkzeug.exceptions import HTTPException
 
-from flaskext.markdown import Markdown
-
-from src import cookie_parser, request_path, file_finders, highlight
+from src import cookie_parser, request_path, file_finders, markdown_parser
 
 PROJECT_PATH = Path(__file__).parent.parent
 
@@ -34,10 +32,9 @@ def add_redirect_rule(app: flask.Flask, from_path: str, to_path: str):
 
 
 def init(app: flask.Flask):
-    highlight.init(app)
+    markdown_parser.init(app)
     cookie_parser.init(app)
     request_path.init(app)
-    Markdown(app)
 
     app.jinja_env.globals.update(
         FOLDER_EMOJI='\U0001f4c2',

@@ -102,28 +102,6 @@
 <!-- COMPLEX PAGE ELEMENTS -->
 
 
-{%- macro highlight(language=None, filename=None) -%}
-{%- set content = caller() -%}
-
-{%- if g.use_hl -%}
-<div class="highlight-block">
-    <pre>{{ get_linenos(content) }}</pre>
-    {{ copy_button() if g.use_js else "" }}
-    <div class="highlight">
-        <pre data-language="{{ language }}"><code>
-            {{- highlight_code(content, language, filename) -}}
-        </code></pre>
-    </div>
-</div>
-
-{%- else -%}
-<pre><code>{{ content }}</code></pre>
-{%- endif -%}
-
-{%- endmacro -%}
-
-
-
 {%- macro breadcrumbs() -%}
 
 <div class="breadcrumbs">

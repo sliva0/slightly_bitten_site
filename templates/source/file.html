@@ -24,9 +24,5 @@
 
 
 {%- block content -%}
-
-{%- call m.highlight(filename=filename) -%}
-{{ source }}
-{%- endcall -%}
-
+{% include "source/code.html" %}
 {%- endblock -%}

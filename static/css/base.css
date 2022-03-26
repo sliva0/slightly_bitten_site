@@ -1,6 +1,6 @@
 :root {
     --common-font: "Roboto", Helvetica, sans-serif;
-    --mono-font: 'JetBrains Mono', monospace;
+    --mono-font: "JetBrains Mono", monospace;
 }
 
 * {
@@ -81,6 +81,23 @@ button {
     color: var(--fg);
     background: var(--bg);
     border-color: var(--border);
+}
+
+
+/* TABLES */
+
+table {
+    border-collapse: collapse;
+    border-color: var(--fg);
+}
+
+th {
+    font-weight: bold;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 1px;
 }
 
 
