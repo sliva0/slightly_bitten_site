@@ -86,22 +86,37 @@ button {
 
 /* TABLES */
 
+.table-box {
+    overflow-x: auto;
+    align-self: center;
+    width: max-content;
+    max-width: 100vw;
+}
+
 table {
     border-collapse: collapse;
     border-color: var(--fg);
+    width: max-content;
+    margin: auto;
 }
 
 th {
     font-weight: bold;
 }
 
+th:empty {
+    border: none;
+}
+
 th, td {
     border-style: solid;
     border-width: 1px;
+    padding: 0.3em;
+    text-align: center;
 }
 
 
-/* SCROOLBAR */
+/* SCROLLBAR */
 
 ::-webkit-scrollbar {
     width: 0.6rem;
@@ -391,6 +406,7 @@ input:checked+.slider::after {
 .highlight-block>pre {
     cursor: default;
     user-select: none;
+    text-align: end;
 }
 
 .highlight {
