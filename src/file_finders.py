@@ -75,7 +75,7 @@ def load_source_file_template(path: Path) -> str:
 
         return flask.render_template("source/file.html", source=source, filename=path.name)
 
-    file_link = "/" + str(path.relative_to(PROJECT_PATH))
+    file_link = "/raw/" + str(path.relative_to(PROJECT_PATH))
     return guess_type_and_load_media(path, file_link)
 
 
