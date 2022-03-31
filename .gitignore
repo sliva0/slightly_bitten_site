@@ -1,3 +1,10 @@
-.vscode/
-__pycache__/
+.vscode
+__pycache__
 *.sock
+
+/content/
+
+!/content/license.html
+!/content/settings.html
+!/content/.about.html
+!/content/articles/.about.html
