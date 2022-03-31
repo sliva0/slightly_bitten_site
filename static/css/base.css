@@ -66,6 +66,10 @@ a {
     color: var(--fg-hl);
 }
 
+span[title]:hover {
+    text-decoration: underline dotted;
+}
+
 hr {
     margin-inline: 0;
     align-self: stretch;
