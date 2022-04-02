@@ -124,7 +124,7 @@ th, td {
 
 ::-webkit-scrollbar {
     width: 0.6rem;
-    height: 0.4rem;
+    height: 0.2rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -172,6 +172,10 @@ th, td {
     flex-grow: 1;
     overflow-x: auto;
     white-space: nowrap;
+    padding: 0.1rem 0;
+
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .theme-panel {

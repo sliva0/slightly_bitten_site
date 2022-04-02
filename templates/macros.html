@@ -104,7 +104,7 @@
 
 {%- macro breadcrumbs() -%}
 
-<div class="breadcrumbs">
+<div class="breadcrumbs"><span>
     {%- for name, link in g.rpath.breadcrumbs_links -%}
         {{- " / " -}}
         {%- if not loop.last -%}
@@ -115,7 +115,7 @@
             {{ name }}
         {%- endif -%}
     {%- endfor -%}
-</div>
+</span></div>
 
 {%- endmacro -%}
 
