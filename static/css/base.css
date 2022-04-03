@@ -176,6 +176,7 @@ th, td {
 
     display: flex;
     flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 
 .theme-panel {
@@ -206,6 +207,7 @@ label[for="body-width-range"] {
 .preview {
     padding: 0.5rem;
     border-radius: 0.5rem;
+    width: 100%;
 }
 
 .preview>* {
