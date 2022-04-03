@@ -21,10 +21,6 @@ def to_bool_str(value: str) -> str:
     return BOOL_SET[not bool(value)]  # True -> "1", False -> ""
 
 
-def is_valid_value(value, possible_values: list[str]) -> bool:
-    return value is not None and value in possible_values
-
-
 def set_cookie_value_after_this_request(name: str, value: str):
     @flask.after_this_request
     def set_cookie_value(response):
@@ -39,16 +35,16 @@ def get_cookie_value(name: str, possible_values: list[str]) -> str:
     if value is None:
         value = flask.request.form.get(name)
 
-    if is_valid_value(value, possible_values):
+    if value is not None and value in possible_values:
         set_cookie_value_after_this_request(name, value)
         return value
 
     value = flask.request.cookies.get(name)
-    if is_valid_value(value, possible_values):
+    if value is not None and value in possible_values:
         return value
-    else:
-        set_cookie_value_after_this_request(name, possible_values[0])
-        return possible_values[0]
+
+    set_cookie_value_after_this_request(name, possible_values[0])
+    return possible_values[0]
 
 
 def process_cookies():
@@ -65,7 +61,7 @@ THEME_NAMES = get_theme_names()
 THEME_MODES = ("light-mode", "dark-mode")
 BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 5))])
 
-BOOL_SET = ("1", "")  # (True, False)
+BOOL_SET = ["1", ""]  # [True, False]
 BOOL_COOKIE_LIST = ("dark_mode", "use_js", "use_hl", "fonts", "extra_css")
 
 

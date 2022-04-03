@@ -63,5 +63,5 @@ def init(app: flask.Flask):
 
     app.add_url_rule("/raw/<path:subpath>", view_func=file_finders.raw_file_finder)
 
-    app.register_error_handler(404, error404_handler)
-    app.register_error_handler(HTTPException, error_handler)
+    app.register_error_handler(404, error404_handler)  # type: ignore
+    app.register_error_handler(HTTPException, error_handler)  # type: ignore

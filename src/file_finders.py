@@ -4,14 +4,14 @@ from pathlib import Path
 from mimetypes import guess_type
 
 import flask
-from jinja2 import Markup
+from markupsafe import Markup
 
 import src.constants as const
 
 PROJECT_PATH = Path(__file__).parent.parent
 
 
-def test_all_suffixes(path: Path, suffixes: tuple[str]) -> Path | None:
+def test_all_suffixes(path: Path, suffixes: list[str]) -> Path | None:
     if path.suffix:  # if suffix is present
         if path.suffix in suffixes and path.exists():  # check its validity
             return path
@@ -31,7 +31,7 @@ def is_hidden(file: Path) -> bool:
     return file.name.startswith("__") or file.name.startswith(".")
 
 
-def walk_subpath(path: Path, subpath: str, suffixes: tuple[str], hidden_func=is_hidden) -> Path:
+def walk_subpath(path: Path, subpath: str, suffixes: list[str], hidden_func=is_hidden) -> Path:
     subpath_names = filter(bool, subpath.split("/"))
 
     for name in subpath_names:
@@ -41,8 +41,11 @@ def walk_subpath(path: Path, subpath: str, suffixes: tuple[str], hidden_func=is_
         if hidden_func(file):
             flask.abort(404)
 
-        if not (path := test_all_suffixes(file, suffixes)):
+        file = test_all_suffixes(file, suffixes)
+        if not file:
             flask.abort(404)
+        
+        path = file
 
     return path
 
@@ -114,7 +117,7 @@ def source_file_finder(subpath: str = "") -> str:
         return load_source_file_template(path)
 
 
-def raw_file_finder(subpath: str) -> str:
+def raw_file_finder(subpath: str):
     flask.g.rpath.add("raw")
     path = walk_subpath(PROJECT_PATH, subpath, const.SOURCE_SUFFIXES, is_hidden_source)
 
@@ -148,7 +151,7 @@ class Article:
         return json.loads(flask.render_template_string(article, article_mode="meta"))
 
     @classmethod
-    def parse(cls, article_path: Path, link: str) -> "Article":
+    def parse(cls, article_path: Path, link: Path | str) -> "Article":
         with article_path.open() as file:
             file_content = file.read()
 

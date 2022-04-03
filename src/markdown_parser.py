@@ -1,7 +1,7 @@
 import copy
 
 import flask
-from jinja2.ext import Markup
+from markupsafe import Markup
 
 from pygments import highlight
 from pygments.lexers import guess_lexer_for_filename, get_lexer_by_name, guess_lexer
@@ -51,6 +51,8 @@ class CodeHilite(codehilite.CodeHilite):
 
 
 class TableWrapTreeprocessor(Treeprocessor):
+    classes: list[str]
+
     def run(self, root):
         for block in tuple(root.iter("table")):
             table = copy.copy(block)
