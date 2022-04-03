@@ -187,4 +187,4 @@ def get_articles(subpath: str = "/articles") -> list[Article]:
 
         article_list.append(article)
 
-    return sorted(article_list)
+    return sorted(article_list, reverse=True)
