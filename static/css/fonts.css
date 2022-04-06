@@ -64,7 +64,7 @@
 }
 
 .button>.icon {
-    margin-right: 0.2rem;
+    margin-right: 0.25rem;
 }
 
 #invert-theme-button.light-mode::after {

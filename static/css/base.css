@@ -234,7 +234,7 @@ label[for="body-width-range"] {
 }
 
 .button>.icon:not(:empty), .button>.svg-icon {
-    margin-right: 0.2rem;
+    margin-right: 0.25rem;
 }
 
 
