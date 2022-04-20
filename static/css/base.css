@@ -242,8 +242,8 @@ label[for="body-width-range"] {
 /* SVG ICONS */
 
 .svg-icon {
-    height: 19px;
-    width: 19px;
+    height: 1.2rem;
+    width: 1.2rem;
     background: currentColor;
     mask-size: 100%;
     -webkit-mask-size: 100%;

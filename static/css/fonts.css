@@ -52,11 +52,11 @@
 }
 
 .icon::after, .copy-button::after {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .file-list .icon::after {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .icon[data-icon]::after {
