@@ -143,7 +143,7 @@ class Article:
     date: str = "YYYY.MM.DD"
     number: int = 0
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: "Article") -> bool:
         return (self.date, self.number) < (other.date, other.number)
 
     @staticmethod
