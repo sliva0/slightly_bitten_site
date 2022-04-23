@@ -135,7 +135,7 @@ def raw_file_finder(subpath: str):
     )
 
 
-@dataclass()
+@dataclass
 class Article:
     path: Path
     link: str
@@ -157,9 +157,9 @@ class Article:
 
         meta_info = cls._load_meta_block(file_content)
 
-        return cls(article_path, str(link), file_content, **meta_info)
+        return cls(article_path, "/" + str(link), file_content, **meta_info)
 
-    def include(self, mode="preview", **kwargs) -> Markup:
+    def include(self, mode="preview") -> Markup:
         template = flask.render_template_string(
             self.file_content,
             link=self.link,
