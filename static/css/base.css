@@ -41,6 +41,7 @@ main {
 
 p, h1, h2, h3 {
     margin: 0.5rem 0;
+    align-self: normal;
 }
 
 pre, code {
@@ -60,6 +61,7 @@ pre>code {
 
 code {
     font-size: 0.9rem;
+    white-space: break-spaces;
 }
 
 a {
@@ -73,6 +75,15 @@ span[title]:hover {
 hr {
     margin-inline: 0;
     align-self: stretch;
+}
+
+main img {
+    margin: 0.5rem;
+}
+
+main img + em {
+    text-align: center;
+    display: block;
 }
 
 button {
@@ -468,13 +479,19 @@ input:checked+.slider::after {
 
     background: var(--button);
     color: var(--text);
+    opacity: 0;
 }
 
-.copy-button:hover {
+.highlight-block:hover>.copy-button {
+    opacity: 0.5;
+}
+
+.highlight-block:hover>.copy-button:hover {
     box-shadow: 0 0 0 0.1rem;
 
     background: var(--button-hover);
     border-color: var(--hl-fg);
+    opacity: 1;
 }
 
 .copy-button:active {

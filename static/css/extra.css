@@ -31,7 +31,7 @@ body {
 
 .copy-button {
     transition-duration: 0.2s;
-    transition-property: background, box-shadow;
+    transition-property: background, box-shadow, opacity;
 }
 
 .copy-tooltip {
