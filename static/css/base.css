@@ -61,7 +61,7 @@ pre>code {
 
 code {
     font-size: 0.9rem;
-    white-space: break-spaces;
+    white-space: pre;
 }
 
 a {
@@ -78,7 +78,8 @@ hr {
 }
 
 main img {
-    margin: 0.5rem;
+    margin: 0.5rem auto;
+    display: block;
 }
 
 main img + em {
