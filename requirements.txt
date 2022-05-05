@@ -4,4 +4,5 @@ Pygments==2.11.2
 
 gunicorn==20.1.0
 
-# git+git://github.com/kakawait/pygments-darcula@master # Source for highlight.css
+# Source for highlight.css
+# git+git://github.com/kakawait/pygments-darcula@master
