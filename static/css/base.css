@@ -39,9 +39,12 @@ main {
     align-items: flex-start;
 }
 
+p {
+    align-self: normal;
+}
+
 p, h1, h2, h3 {
     margin: 0.5rem 0;
-    align-self: normal;
 }
 
 pre, code {
@@ -65,7 +68,11 @@ code {
 }
 
 a {
-    color: var(--fg-hl);
+    color: var(--link);
+}
+
+a:visited {
+    color: var(--link-fg-override, var(--visited));
 }
 
 span[title]:hover {
@@ -300,6 +307,8 @@ label[for="body-width-range"] {
     cursor: default;
     user-select: none;
     text-decoration: none;
+
+    --link-fg-override: var(--fg);
 }
 
 .preview:hover, .button:hover {
@@ -384,7 +393,7 @@ input:checked+.slider::after {
     background: var(--slider-hover);
 }
 
-.range::-moz-slider-thumb {
+.range::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 1em;
@@ -394,7 +403,7 @@ input:checked+.slider::after {
     cursor: pointer;
 }
 
-.range::-moz-slider-thumb:hover {
+.range::-moz-range-thumb:hover {
     background: var(--slider-hover);
 }
 

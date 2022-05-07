@@ -10,6 +10,8 @@
     --slider-hover: #555;
     --inactive: #888;
     --active: #9df;
+    --link: #36a;
+    --visited: #86a;
 }
 
 .common-theme.dark-mode {
@@ -22,6 +24,8 @@
     --slider-hover: #aaa;
     --inactive: #222;
     --active: #77c;
+    --link: #5ad;
+    --visited: #aad;
 }
 
 .plum-theme.light-mode {
@@ -34,6 +38,8 @@
     --slider-hover: hsl(220, 40%, 40%);
     --inactive: hsl(220, 50%, 65%);
     --active: hsl(273, 29%, 65%);
+    --link: hsl(220, 40%, 40%);
+    --visited: hsl(270, 40%, 40%);
 }
 
 .plum-theme.dark-mode {
@@ -46,11 +52,13 @@
     --slider-hover: hsl(220, 50%, 60%);
     --inactive: hsl(220, 50%, 70%);
     --active: hsl(273, 29%, 70%);
+    --link: hsl(228, 100%, 75%);
+    --visited: hsl(270, 100%, 75%);
 }
 
 
 .darcula-theme.light-mode {
-    --fg: #40a1dd;
+    --fg: #4080aa;
     --fg-hl: #7b22c3;
     --bg: #faf8e4;
     --border: #d3cbb7;
@@ -59,6 +67,8 @@
     --slider-hover: hsl(240, 40%, 75%);
     --inactive: #bbc4c4;
     --active: #b9e085;
+    --link: #6080ff;
+    --visited: #a080ff;
 }
 
 .darcula-theme.dark-mode {
@@ -71,6 +81,8 @@
     --slider-hover: #666;
     --inactive: #E1A170;
     --active: #6D9CBE;
+    --link: #5ad;
+    --visited: #aad;
 }
 
 .mono-theme.light-mode {
@@ -83,6 +95,8 @@
     --slider-hover: #333;
     --inactive: #555;
     --active: #aaa;
+    --link: #666;
+    --visited: #333;
 }
 
 .mono-theme.dark-mode {
@@ -95,4 +109,6 @@
     --slider-hover: #ddd;
     --inactive: #555;
     --active: #aaa;
+    --link: #bbb;
+    --visited: #777;
 }
