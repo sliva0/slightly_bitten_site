@@ -26,7 +26,7 @@ def get_lexer(code: str, language: str | None, filename: str):
     if language:
         return get_lexer_by_name(language)
 
-    if filename.endswith(".html"):
+    if filename.endswith((".html", ".j2")):
         return HtmlDjangoLexer()
 
     if filename:
