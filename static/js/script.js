@@ -10,7 +10,7 @@ const CSS_RULES = document.getElementById("body_width-related").sheet.cssRules;
  * @param {string} value Cookie value
  */
 function setCookie(name, value) {
-    document.cookie = `${name}=${value}; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT`;
+    document.cookie = `${name}=${value}; path=/; samesite=lax; expires=Tue, 19 Jan 2038 03:14:07 GMT`;
 }
 
 
