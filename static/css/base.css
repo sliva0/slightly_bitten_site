@@ -303,7 +303,8 @@ label[for="body-width-range"] {
     color: inherit;
     background: inherit;
     font-size: 1em;
-
+    
+    cursor: pointer;
     user-select: none;
     text-decoration: none;
 
