@@ -7,6 +7,10 @@ import flask
 
 @dataclass
 class RequestPath:
+    """
+    Dataclass representing path to current page.
+    Used in breadcrumbs and relative link generation.
+    """
     _path: list[str] = field(default_factory=list)
     files: list[Path] = field(default_factory=list)
     is_not_found: bool = False

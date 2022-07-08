@@ -12,6 +12,9 @@ PROJECT_PATH = Path(__file__).parent.parent
 
 
 def test_all_suffixes(path: Path, suffixes: list[str]) -> Path | None:
+    """
+    Tests different options of file suffix and check its validity.
+    """
     if path.suffix:  # if suffix is present
         if path.suffix in suffixes and path.exists():  # check its validity
             return path
@@ -32,6 +35,9 @@ def is_hidden(file: Path) -> bool:
 
 
 def walk_subpath(path: Path, subpath: str, suffixes: list[str], hidden_func=is_hidden) -> Path:
+    """
+    Iterates over directory names in path to find file.
+    """
     subpath_names = filter(bool, subpath.split("/"))
 
     for name in subpath_names:
@@ -51,6 +57,9 @@ def walk_subpath(path: Path, subpath: str, suffixes: list[str], hidden_func=is_h
 
 
 def guess_type_and_load_media(path: Path, file_link: str) -> str:
+    """
+    Loads media template for any media file.
+    """
     mime_type, _ = guess_type(path)
     if not mime_type:
         mime_type = "invalid/invalid"
@@ -72,6 +81,9 @@ def load_content_file_template(path: Path) -> str:
 
 
 def load_source_file_template(path: Path) -> str:
+    """
+    Loads source (text or media) file template.
+    """
     if path.suffix in const.TEXT_SOURCE_SUFFIXES:
         with open(path) as file:
             source = file.read()
@@ -95,6 +107,9 @@ def source_filter(file: Path) -> bool:
 
 
 def content_file_finder(subpath: str = "") -> str:
+    """
+    Finds and loads content file template.
+    """
     path = walk_subpath(PROJECT_PATH / "content", subpath, const.CONTENT_SUFFIXES)
 
     if path.is_dir():
@@ -107,6 +122,9 @@ def content_file_finder(subpath: str = "") -> str:
 
 
 def source_file_finder(subpath: str = "") -> str:
+    """
+    Finds and loads source file template.
+    """
     flask.g.rpath.add("source")
     path = walk_subpath(PROJECT_PATH, subpath, const.SOURCE_SUFFIXES, is_hidden_source)
 
@@ -118,6 +136,9 @@ def source_file_finder(subpath: str = "") -> str:
 
 
 def raw_file_finder(subpath: str):
+    """
+    Find and loads raw files directly from directories.
+    """
     flask.g.rpath.add("raw")
     path = walk_subpath(PROJECT_PATH, subpath, const.SOURCE_SUFFIXES, is_hidden_source)
 
@@ -137,6 +158,9 @@ def raw_file_finder(subpath: str):
 
 @dataclass
 class Article:
+    """
+    Dataclass representing meta information about the article.
+    """
     path: Path
     link: str
     file_content: str
@@ -169,6 +193,9 @@ class Article:
 
 
 def get_articles(subpath: str = "/articles") -> list[Article]:
+    """
+    Finds all articles in directory and loads information about it.
+    """
     suffixes = const.CONTENT_SUFFIXES
     root = PROJECT_PATH / "content"
     dir_path = walk_subpath(root, subpath, suffixes)

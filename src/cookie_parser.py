@@ -4,7 +4,9 @@ import flask
 
 
 def get_unique_elements(_list: list) -> list:
-    """get unique elements of list without changing order"""
+    """
+    Get unique elements of list without changing order.
+    """
     return list(dict.fromkeys(_list))
 
 
@@ -22,32 +24,39 @@ def to_bool_str(value: str) -> str:
 
 
 def set_cookie_value_after_this_request(name: str, value: str):
+
     @flask.after_this_request
-    def set_cookie_value(response: flask.Response):
+    def set_cookie_value(response):
         response.set_cookie(name, value, samesite='Lax', expires=1 << 32 - 1)
         return response
 
 
 def get_cookie_value(name: str, possible_values: list[str]) -> str:
-    """first possible value - default"""
+    """
+    Get cookie value by name.
+    First possible value - default.
+    """
 
-    value = flask.request.args.get(name)  # try to get cookie value from link args or form data
+    value = flask.request.args.get(name)  # try to get value from link args
     if value is None:
-        value = flask.request.form.get(name)
+        value = flask.request.form.get(name)  # or from form
 
-    if value is not None and value in possible_values:
+    if value in possible_values:  # valid value was found
         set_cookie_value_after_this_request(name, value)
         return value
 
     value = flask.request.cookies.get(name)
-    if value is not None and value in possible_values:
+    if value in possible_values:  # valid value present in cookies
         return value
 
     set_cookie_value_after_this_request(name, possible_values[0])
-    return possible_values[0]
+    return possible_values[0]  #  default value
 
 
 def process_cookies():
+    """
+    Set parsed cookie values into `flask.g`.
+    """
     flask.g.theme = get_cookie_value("theme", THEME_NAMES)
     flask.g.body_width = get_cookie_value("body_width", BODY_WIDTHS)
 

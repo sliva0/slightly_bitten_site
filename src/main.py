@@ -22,10 +22,12 @@ def error_handler(error):
 
 def load_license_text():
     with (PROJECT_PATH / "LICENSE.txt").open() as file:
+        # regexp to replace all single line breaks with spaces
         return re.sub("(.)\n(.)", r"\1 \2", file.read())
 
 
 def add_redirect_rule(app: flask.Flask, from_path: str, to_path: str):
+
     @app.route(from_path)
     def _redirect():
         return flask.redirect(to_path)
