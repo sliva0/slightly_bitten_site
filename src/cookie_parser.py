@@ -37,10 +37,7 @@ def get_cookie_value(name: str, possible_values: list[str]) -> str:
     First possible value - default.
     """
 
-    value = flask.request.args.get(name)  # try to get value from link args
-    if value is None:
-        value = flask.request.form.get(name)  # or from form
-
+    value = flask.request.values.get(name)  # try to get value from args or form
     if value in possible_values:  # valid value was found
         set_cookie_value_after_this_request(name, value)
         return value
