@@ -12,53 +12,68 @@ from pygments.formatters import HtmlFormatter
 
 from flaskext.markdown import Markdown
 
-from markdown.extensions import codehilite, Extension
+from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
+
+from pymdownx.highlight import HighlightExtension, Highlight
 
 FORMATTER = HtmlFormatter(nowrap=True)
 
 
-def get_linenos(code: str):
-    """
-    Generate line numbers for code block.
-    """
-    return Markup("\n".join(map(str, range(1, code.rstrip().count("\n") + 2))))
+class TemplateHighlight(Highlight):
+
+    @staticmethod
+    def get_linenos(code: str):
+        """
+        Generate line numbers for code block.
+        """
+        return Markup("\n".join(map(str, range(1, code.count("\n") + 2))))
+
+    @staticmethod
+    def _get_lexer(code: str, language: str | None, filename: str):
+        """
+        Choose the best suitable lexer depending on present information about code.
+        """
+        if language:
+            return get_lexer_by_name(language)
+
+        if filename.endswith((".html", ".j2")):
+            return HtmlDjangoLexer()
+
+        if filename:
+            return guess_lexer_for_filename(filename, code)
+
+        return guess_lexer(code)
+
+    @classmethod
+    def highlight_code(cls,
+                       code: str,
+                       language: str | None = None,
+                       filename: str | None = None):
+        """
+        Highlight block of code.
+        This function is used in `source/code.html` template.
+        """
+        try:
+            lexer = cls._get_lexer(code, language, filename or "")
+        except ClassNotFound:
+            lexer = TextLexer()
+
+        return Markup(
+            highlight(Markup(code.rstrip()).unescape(), lexer, FORMATTER))
+
+    def highlight(self, src, language, *_args, **_kwargs):
+        return flask.render_template(
+            "source/code.html",
+            source=src,
+            language=language,
+        )
 
 
-def get_lexer(code: str, language: str | None, filename: str):
-    """
-    Choose the best suitable lexer depending on present information about code.
-    """
-    if language:
-        return get_lexer_by_name(language)
+class TemplateHighlightExtension(HighlightExtension):
 
-    if filename.endswith((".html", ".j2")):
-        return HtmlDjangoLexer()
-
-    if filename:
-        return guess_lexer_for_filename(filename, code)
-
-    return guess_lexer(code)
-
-
-def highlight_code(code: str, language: str | None = None, filename: str | None = None):
-    """
-    Highlight block of code.
-    This function is used in `source/code.html` template.
-    """
-    try:
-        lexer = get_lexer(code, language, filename or "")
-    except ClassNotFound:
-        lexer = TextLexer()
-
-    return Markup(highlight(Markup(code.rstrip()).unescape(), lexer, FORMATTER))
-
-
-class CodeHilite(codehilite.CodeHilite):
-
-    def hilite(self, shebang=True):
-        self.src = self.src.strip('\n')
-        return flask.render_template("source/code.html", source=self.src, language=self.lang)
+    def get_pymdownx_highlighter(self):
+        return TemplateHighlight
 
 
 class TableWrapTreeprocessor(Treeprocessor):
@@ -94,16 +109,15 @@ class TableWrapExtension(Extension):
 
 
 def init(app):
-    # This is the easiest way that I found to change the html wrapper of a block of code
-    # when the fenced_code extension is enabled.
-    # FencedBlockPreprocessor always uses CodeHilite class directly from library,
-    # ignoring the fact that the passed code highlighting extension can be a sub class.
-    codehilite.CodeHilite = CodeHilite
-
-    tw_extension = TableWrapExtension(["table-box"])
-    Markdown(app, extensions=['fenced_code', 'codehilite', 'tables', tw_extension])
-
-    app.jinja_env.globals.update(
-        get_linenos=get_linenos,
-        highlight_code=highlight_code,
+    Markdown(
+        app,
+        extensions=[
+            'pymdownx.superfences',
+            TemplateHighlightExtension(),
+            'tables',
+            TableWrapExtension(["table-box"]),
+        ],
+        extension_configs={},
     )
+
+    app.jinja_env.globals.update(highlighter=TemplateHighlight)

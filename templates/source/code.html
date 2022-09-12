@@ -4,11 +4,11 @@
 {%- if g.use_hl -%}
 
 <div class="highlight-block">
-    <pre>{{ get_linenos(source) }}</pre>
+    <pre>{{ highlighter.get_linenos(source) }}</pre>
     {{ m.copy_button() if g.use_js else "" }}
     <div class="highlight">
         <pre data-language="{{ language }}"><code>
-            {{- highlight_code(source, language, filename) -}}
+            {{- highlighter.highlight_code(source, language, filename) -}}
         </code></pre>
     </div>
 </div>
