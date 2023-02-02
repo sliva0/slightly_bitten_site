@@ -28,12 +28,14 @@
             text-align: center;
         }
     </style>
+
     <defs>
         <linearGradient id="fill" x1="320" y1="80" x2="320" y2="560" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="var(--fill-up)" />
             <stop offset="1" stop-color="var(--fill-down)" />
         </linearGradient>
-        <linearGradient id="text-fill" x1="0" y1="-120" x2="0" y2="80" gradientUnits="userSpaceOnUse">
+
+        <linearGradient id="text-fill" x1="0" y1="200" x2="0" y2="400" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="var(--text-up)" />
             <stop offset="1" stop-color="var(--text-down)" />
         </linearGradient>
@@ -42,12 +44,9 @@
     <!-- <rect width="640" height="640" fill="#3b4167" /> -->
     <circle cx="320" cy="320" r="320" fill="var(--bg)" />
     <circle fill="url(#fill)" cx="320" cy="320" r="240" id="circle-bg" />
-    <g transform="translate(320, 310)">
-        <text fill="url(#text-fill)" x="-160">.</text>
-        <text fill="url(#text-fill)" x="20">mk</text>
-        <!-- <circle fill="red" cy="-120" r="5" /> -->
-        <!-- <circle fill="red" cy="90" r="5" /> -->
-    </g>
 
-
+    <text fill="url(#text-fill)" x="160" y="310">.</text>
+    <text fill="url(#text-fill)" x="340" y="310">mk</text>
+    <!-- <circle fill="red" cx="320" cy="200" r="5" /> -->
+    <!-- <circle fill="red" cx="320" cy="400" r="5" /> -->
 </svg>
