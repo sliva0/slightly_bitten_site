@@ -1,18 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="32px" height="32px">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed');
+
+        :root {
+            --bg: #3b4167;
+            --fill-up: #6080c0;
+            --fill-down: #8058a0;
+            --stroke: #6858a0;
+
+            --text-up: #fac;
+            --text-down: #f67;
+        }
+
+        #circle-bg {
+            stroke: var(--stroke);
+            stroke-miterlimit: 10;
+            stroke-width: 20px;
+        }
+
+        text {
+            alignment-baseline: central;
+            text-anchor: middle;
+            font-size: 200pt;
+            font-family: "Roboto Condensed";
+            font-weight: 500;
+            font-size: 256;
+            text-align: center;
+        }
+    </style>
     <defs>
-        <linearGradient id="gr1" x1="320" y1="80" x2="320" y2="560" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#6080c0" />
-            <stop offset="1" stop-color="#8058a0" />
+        <linearGradient id="fill" x1="320" y1="80" x2="320" y2="560" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="var(--fill-up)" />
+            <stop offset="1" stop-color="var(--fill-down)" />
         </linearGradient>
-        <linearGradient id="gr2" x1="0" y1="207" x2="0" y2="398" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#6bf" />
-            <stop offset="1" stop-color="#88f" />
+        <linearGradient id="text-fill" x1="0" y1="-120" x2="0" y2="80" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="var(--text-up)" />
+            <stop offset="1" stop-color="var(--text-down)" />
         </linearGradient>
     </defs>
-    <!-- <rect fill="#3b4167" width="640" height="640" /> -->
-    <circle fill="#3b4167" cx="320" cy="320" r="320" />
-    <circle fill="url(#gr1)" style="stroke:#6858a0;stroke-miterlimit:10;stroke-width:20px" cx="320" cy="320" r="240" />
-    <path fill="url(#gr2)" d="M279.79,395.65q-14.6,0-22-7.55t-7.42-21.38V285.31H229.61V262.53h11.26q6.91,0,9.6-3.07t2.69-10V226.18h25.09v36.35h27.9v22.78h-27.9v87.55H304.1v22.79Z" />
-    <path fill="url(#gr2)" d="M336.36,206.21h27.9V322.43h1.28L384,298.62l32-36.09h32.52L401.89,314l52.23,81.67H420.84l-38.15-63.49-18.43,20v43.52h-27.9Z" />
-    <path fill="url(#gr2)" d="M205.7,398.72q-9.48,0-14.08-5A17.63,17.63,0,0,1,187,381.31v-3.84a17.59,17.59,0,0,1,4.61-12.41q4.6-5,14.08-5t14.08,5a17.59,17.59,0,0,1,4.61,12.41v3.84a17.63,17.63,0,0,1-4.61,12.42Q215.18,398.73,205.7,398.72Z" />
+
+    <!-- <rect width="640" height="640" fill="#3b4167" /> -->
+    <circle cx="320" cy="320" r="320" fill="var(--bg)" />
+    <circle fill="url(#fill)" cx="320" cy="320" r="240" id="circle-bg" />
+    <g transform="translate(320, 310)">
+        <text fill="url(#text-fill)" x="-160">.</text>
+        <text fill="url(#text-fill)" x="20">mk</text>
+        <!-- <circle fill="red" cy="-120" r="5" /> -->
+        <!-- <circle fill="red" cy="90" r="5" /> -->
+    </g>
+
+
 </svg>
