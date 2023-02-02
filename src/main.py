@@ -41,6 +41,7 @@ def init(app: flask.Flask):
     app.jinja_env.globals.update(
         FOLDER_EMOJI='\U0001f4c2',
         FILE_EMOJI='\U0001f4c4',
+        HOSTNAME="sliva0.mk",
         LICENSE_TEXT=load_license_text(),
         get_articles=file_finders.get_articles,
     )
