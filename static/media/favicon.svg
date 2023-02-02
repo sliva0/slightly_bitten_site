@@ -19,12 +19,10 @@
         }
 
         text {
-            alignment-baseline: central;
             text-anchor: middle;
             font-size: 200pt;
             font-family: "Roboto Condensed";
             font-weight: 500;
-            font-size: 256;
             text-align: center;
         }
     </style>
@@ -45,8 +43,8 @@
     <circle cx="320" cy="320" r="320" fill="var(--bg)" />
     <circle fill="url(#fill)" cx="320" cy="320" r="240" id="circle-bg" />
 
-    <text fill="url(#text-fill)" x="160" y="310">.</text>
-    <text fill="url(#text-fill)" x="340" y="310">mk</text>
+    <text fill="url(#text-fill)" x="160" y="400">.</text>
+    <text fill="url(#text-fill)" x="340" y="400">mk</text>
     <!-- <circle fill="red" cx="320" cy="200" r="5" /> -->
     <!-- <circle fill="red" cx="320" cy="400" r="5" /> -->
 </svg>
