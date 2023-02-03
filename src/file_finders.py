@@ -50,7 +50,7 @@ def walk_subpath(path: Path, subpath: str, suffixes: list[str], hidden_func=is_h
         file = test_all_suffixes(file, suffixes)
         if not file:
             flask.abort(404)
-        
+
         path = file
 
     return path

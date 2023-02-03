@@ -26,7 +26,7 @@ def to_bool_str(value: str) -> str:
 def set_cookie_value_after_this_request(name: str, value: str):
 
     @flask.after_this_request
-    def set_cookie_value(response):
+    def _set_cookie_value(response):
         response.set_cookie(name, value, samesite='Lax', expires=1 << 32 - 1)
         return response
 
