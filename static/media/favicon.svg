@@ -1,15 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="32px" height="32px">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed');
-
         :root {
             --bg: #3b4167;
             --fill-up: #6080c0;
             --fill-down: #8058a0;
             --stroke: #6858a0;
 
-            --text-up: #fac;
-            --text-down: #f67;
+            --text-up: #ddf;
+            --text-down: #aaf;
         }
 
         #circle-bg {
@@ -18,12 +16,15 @@
             stroke-width: 20px;
         }
 
-        text {
-            text-anchor: middle;
-            font-size: 200pt;
-            font-family: "Roboto Condensed";
-            font-weight: 500;
-            text-align: center;
+        g {
+            fill: none;
+            stroke: url(#text-fill);
+            stroke-width: 20;
+        }
+
+        g>rect {
+            stroke: none;
+            fill: url(#text-fill);
         }
     </style>
 
@@ -33,7 +34,7 @@
             <stop offset="1" stop-color="var(--fill-down)" />
         </linearGradient>
 
-        <linearGradient id="text-fill" x1="0" y1="200" x2="0" y2="400" gradientUnits="userSpaceOnUse">
+        <linearGradient id="text-fill" x1="0" y1="-200" x2="0" y2="0" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="var(--text-up)" />
             <stop offset="1" stop-color="var(--text-down)" />
         </linearGradient>
@@ -43,8 +44,22 @@
     <circle cx="320" cy="320" r="320" fill="var(--bg)" />
     <circle fill="url(#fill)" cx="320" cy="320" r="240" id="circle-bg" />
 
-    <text fill="url(#text-fill)" x="160" y="400">.</text>
-    <text fill="url(#text-fill)" x="340" y="400">mk</text>
-    <!-- <circle fill="red" cx="320" cy="200" r="5" /> -->
-    <!-- <circle fill="red" cx="320" cy="400" r="5" /> -->
+    <g transform="translate(320, 320) translate(-120, 90) scale(1.2)">
+        <rect x="-10" y="-155" width="20" height="20" />
+        <path d="
+            M 0 0
+            l 0 -125
+            m 0 45
+            c 0 -40 50 -40 50 0
+            l 0 80
+            l 0 -80
+            c 0 -40 50 -40 50 0
+            l 0 80
+        " />
+        <g transform="translate(150, 0)">
+            <line x1="0" y1="0" x2="0" y2="-155" />
+            <line x1="0" y1="0" x2="0" y2="-65" transform="translate(50, 0) skewX(30)" />
+            <line x1="0" y1="-120" x2="0" y2="-55" transform="translate(-20, 0) skewX(-30)" />
+        </g>
+    </g>
 </svg>
