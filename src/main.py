@@ -5,6 +5,7 @@ import flask
 from werkzeug.exceptions import HTTPException
 
 from src import cookie_parser, request_path, file_finders, markdown_parser
+from src.code_highlight import create_missing_code_style_files
 
 PROJECT_PATH = Path(__file__).parent.parent
 
@@ -34,6 +35,7 @@ def add_redirect_rule(app: flask.Flask, from_path: str, to_path: str):
 
 
 def init(app: flask.Flask):
+    create_missing_code_style_files() 
     markdown_parser.init(app)
     cookie_parser.init(app)
     request_path.init(app)
@@ -64,7 +66,10 @@ def init(app: flask.Flask):
             view_func=file_finders.source_file_finder,
         )
 
-    app.add_url_rule("/raw/<path:subpath>", view_func=file_finders.raw_file_finder)
+    app.add_url_rule(
+        "/raw/<path:subpath>",
+        view_func=file_finders.raw_file_finder,
+    )
 
     app.register_error_handler(404, error404_handler)
     app.register_error_handler(HTTPException, error_handler)

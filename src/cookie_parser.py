@@ -1,6 +1,9 @@
+from pathlib import Path
 import re
 
 import flask
+
+from src import constants as const
 
 
 def get_unique_elements(_list: list) -> list:
@@ -17,6 +20,13 @@ def get_theme_names() -> list[str]:
     themes = re.findall(r"\n\.([a-z\-]+-theme)", css_file)
 
     return get_unique_elements(themes)
+
+
+def get_code_style_names() -> list[str]:
+    styles = const.PYGMENTS_BUILTIN_STYLES.copy()
+    styles.extend(path.stem for path in const.CODE_STYLES_DIR.iterdir())
+
+    return get_unique_elements(styles)
 
 
 def to_bool_str(value: str) -> str:
@@ -37,7 +47,7 @@ def get_cookie_value(name: str, possible_values: list[str]) -> str:
     First possible value - default.
     """
 
-    value = flask.request.values.get(name)  # try to get value from args or form
+    value = flask.request.values.get(name)  # try to get value from args/form
     if value in possible_values:  # valid value was found
         set_cookie_value_after_this_request(name, value)
         return value
@@ -55,15 +65,20 @@ def process_cookies():
     Set parsed cookie values into `flask.g`.
     """
     flask.g.theme = get_cookie_value("theme", THEME_NAMES)
+    flask.g.code_style = get_cookie_value("code_style", CODE_STYLES)
     flask.g.body_width = get_cookie_value("body_width", BODY_WIDTHS)
 
     for cookie_name in BOOL_COOKIE_LIST:
-        flask.g.setdefault(cookie_name, get_cookie_value(cookie_name, BOOL_SET))
+        flask.g.setdefault(
+            cookie_name,
+            get_cookie_value(cookie_name, BOOL_SET),
+        )
 
     flask.g.mode = THEME_MODES[bool(flask.g.dark_mode)]
 
 
 THEME_NAMES = get_theme_names()
+CODE_STYLES = get_code_style_names()
 THEME_MODES = ("light-mode", "dark-mode")
 BODY_WIDTHS = get_unique_elements(["40", *map(str, range(20, 101, 5))])
 

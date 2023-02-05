@@ -11,6 +11,8 @@ from pymdownx import highlight as hlt
 
 from pygments.formatters import HtmlFormatter
 
+from src import constants as const
+
 FORMATTER = HtmlFormatter(nowrap=True)
 
 
@@ -68,3 +70,14 @@ class TemplateHighlightExtension(hlt.HighlightExtension):
 
     def get_pymdownx_highlighter(self):
         return TemplateHighlight
+
+
+def create_missing_code_style_files():
+    for style in const.PYGMENTS_BUILTIN_STYLES:
+        style_file = (const.CODE_STYLES_DIR / style).with_suffix(".css")
+        if not style_file.exists():
+            formatter = HtmlFormatter(style=style)
+            bg_defs = formatter.get_background_style_defs(".highlight")
+            token_defs = formatter.get_token_style_defs(".highlight")
+            with style_file.open("w") as file:
+                file.write("\n".join(bg_defs + token_defs))

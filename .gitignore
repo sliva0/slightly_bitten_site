@@ -2,6 +2,12 @@
 __pycache__
 *.sock
 
+
+/static/css/code_styles/
+
+!/static/css/code_styles/darcula.css
+
+
 /content/
 
 !/content/license.html
